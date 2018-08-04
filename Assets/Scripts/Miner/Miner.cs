@@ -44,6 +44,12 @@ public class Miner : MonoBehaviour {
         taskList.Add(task);
     }
 
+    public void AddTaskNow(Task task)
+    {
+        taskList.Insert(0, task);
+        pathToTarget = null;
+    }
+
     private void DoNextTask()
     {
         if(taskList.Count > 0)

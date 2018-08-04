@@ -3005,6 +3005,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a65099389deb344898a768762ac195c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallMenuPrefab: {fileID: 114443582327223814, guid: 24435799051cceb479e7e8cfb083e60c,
+    type: 2}
 --- !u!1001 &1501861457
 Prefab:
   m_ObjectHideFlags: 0

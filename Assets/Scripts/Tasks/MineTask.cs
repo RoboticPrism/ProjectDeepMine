@@ -9,5 +9,6 @@ public class MineTask : Task {
     public MineTask(Wall targetWall)
     {
         this.targetWall = targetWall;
+        targetWall.task = this;
     }
 }

@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Linq;
 
 
 // A wall in a room, lights itself accordingly
 public class Wall : MonoBehaviour {
-
+    public string displayName;
     public Tilemap tileMap;
     public float destroyTime = 100f;
-    public SpriteRenderer wallShadow;
+    public SpriteRenderer spriteRenderer;
     public BoxCollider2D boxCollider;
+    public MineTask task;
+
     List<Vector2> neighborDirections = new List<Vector2> {
         Vector2.up,
         Vector2.right,
@@ -23,15 +26,31 @@ public class Wall : MonoBehaviour {
     };
     List<bool> hasNeighbors = new List<bool> { false, false, false, false, false, false, false, false };
 
+    public Sprite unknownSprite = null;
+    public Sprite innerCornerSprite;
+    public Sprite wallSprite;
+    public Sprite outerCornerSprite;
+    public Sprite pillarSprite;
+
+    Dictionary<List<bool>, Sprite> wallTypes;
+
     public bool isAlive = true;
 
 	// Use this for initialization
 	void Start () {
+        wallTypes = new Dictionary<List<bool>, Sprite>
+        {
+            { new List<bool> { true, true, true, true }, unknownSprite },
+            { new List<bool> { true, false, true, false }, wallSprite },
+            { new List<bool> { true, true, true, false }, wallSprite },
+            { new List<bool> { false, true, true, false }, innerCornerSprite },
+            { new List<bool> { false, false, false, false }, pillarSprite },
+        };
         tileMap = FindObjectOfType<Tilemap>();
         boxCollider = this.GetComponent<BoxCollider2D>();
         CheckNeighbors();
         UpdateShading();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -77,16 +96,40 @@ public class Wall : MonoBehaviour {
 
     public void UpdateShading()
     {
-        // TODO: make shading more variable than on/off
+        // Uncomment this when I have a solid plan for the art direction
+        /*
+        List<bool> basicDirections = hasNeighbors.GetRange(0, 4);
+        int spriteRotation = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            Debug.Log(basicDirections[0]+""+ basicDirections[1]+""+ basicDirections[2]+""+ basicDirections[3]);
+            foreach (List<bool> b in wallTypes.Keys)
+            {
+                Debug.Log("ba"+basicDirections[0] + "" + basicDirections[1] + "" + basicDirections[2] + "" + basicDirections[3]);
+                Debug.Log("b"+b[0] + "" + b[1] + "" + b[2] + "" + b[3]);
+                if (b.SequenceEqual(basicDirections))
+                {
+                    Debug.Log("match");
+                    this.transform.rotation = Quaternion.Euler(0, 0, spriteRotation);
+                    this.spriteRenderer.sprite = wallTypes[b];
+                    break;
+                }
+            }
+            i++;
+            // rotate the check 90 degrees
+            spriteRotation = i * 90;
+            bool temp = basicDirections[basicDirections.Count - 1];
+            basicDirections.RemoveAt(basicDirections.Count - 1);
+            basicDirections.Insert(0, temp);
+        }
+        */
         if (IsSurrounded())
         {
-            wallShadow.gameObject.SetActive(true);
-            boxCollider.enabled = false;
+            spriteRenderer.sprite = unknownSprite;
         }
         else
         {
-            wallShadow.gameObject.SetActive(false);
-            boxCollider.enabled = true;
+            spriteRenderer.sprite = wallSprite;
         }
     }
 
@@ -133,6 +176,10 @@ public class Wall : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        FindObjectOfType<MinerManager>().AddWallToQueue(this);
+        UIHoverListener uhl = FindObjectOfType<UIHoverListener>();
+        if (!IsSurrounded() && (uhl == null || !uhl.isUIOverride))
+        {
+            FindObjectOfType<MinerManager>().CreateWallMenu(this);
+        }
     }
 }
