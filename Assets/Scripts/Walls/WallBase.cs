@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 // Base class that all wall pieces extend from
-public abstract class WallBase : MonoBehaviour {
+public abstract class WallBase : ClickableTileBase {
 
-    public string displayName;
-    public Tilemap tileMap;
     public SpriteRenderer spriteRenderer;
     public BoxCollider2D boxCollider;
 
@@ -36,7 +34,8 @@ public abstract class WallBase : MonoBehaviour {
     public bool isAlive = true;
 
     // Use this for initialization
-    protected virtual void Start () {
+    protected override void Start () {
+        base.Start();
         wallTypes = new Dictionary<List<bool>, Sprite>
         {
             { new List<bool> { true, true, true, true }, unknownSprite },
@@ -47,19 +46,20 @@ public abstract class WallBase : MonoBehaviour {
         };
         tileMap = FindObjectOfType<TilemapManager>().wallTilemap;
         boxCollider = this.GetComponent<BoxCollider2D>();
+        clickable = false;
         CheckNeighbors();
         UpdateShading();
     }
 	
 	// Update is called once per frame
-	protected virtual void Update () {
-		
+	protected override void Update () {
+        base.Update();
 	}
 
     // FixedUpdate is called once per tick
-    protected virtual void FixedUpdate()
+    protected override void FixedUpdate()
     {
-
+        base.FixedUpdate();
     }
 
     // Check all neighbors and establish and remember what is around this block
@@ -84,6 +84,7 @@ public abstract class WallBase : MonoBehaviour {
 
             i++;
         }
+        clickable = !IsSurrounded(false);
     }
 
     // Updates the shading on the block relative to its neighbors
@@ -167,15 +168,5 @@ public abstract class WallBase : MonoBehaviour {
         isAlive = false;
         UpdateNeighbors();
         Destroy(this.gameObject);
-    }
-
-    // On mouse down, pop menu
-    private void OnMouseDown()
-    {
-        UIHoverListener uhl = FindObjectOfType<UIHoverListener>();
-        if (!IsSurrounded(false) && (uhl == null || !uhl.isUIOverride))
-        {
-            FindObjectOfType<MinerManager>().CreateWallMenu(this);
-        }
     }
 }

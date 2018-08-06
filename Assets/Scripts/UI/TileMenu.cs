@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WallMenu : MonoBehaviour {
+public class TileMenu : MonoBehaviour {
 
-    WallBase selectedWall;
-    public WallMenuOption menuOptionPrefab;
+    ClickableTileBase selectedTile;
+    public TileMenuOption menuOptionPrefab;
     MinerManager minerManager;
     public Canvas canvas;
     public Transform optionArea;
@@ -40,11 +40,11 @@ public class WallMenu : MonoBehaviour {
         }
     }
 
-    public void CreateMenu(WallBase selectedWall)
+    public void CreateMenu(ClickableTileBase selectedTile)
     {
-        this.selectedWall = selectedWall;
-        this.title.text = selectedWall.displayName;
-        MineableWall mineableWall = selectedWall.GetComponent<MineableWall>();
+        this.selectedTile = selectedTile;
+        this.title.text = selectedTile.displayName;
+        MineableWall mineableWall = selectedTile.GetComponent<MineableWall>();
         if (mineableWall)
         {
             if (mineableWall.task == null)
@@ -68,7 +68,7 @@ public class WallMenu : MonoBehaviour {
         int i = 0;
         foreach (options option in optionsToRender)
         {
-            WallMenuOption menuOption = Instantiate(menuOptionPrefab, optionArea);
+            TileMenuOption menuOption = Instantiate(menuOptionPrefab, optionArea);
             menuOption.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, (-i * menuOption.height) - 1.5f);
             if (option == options.MINE)
             {
@@ -92,13 +92,13 @@ public class WallMenu : MonoBehaviour {
 
     void MineAction()
     {
-        minerManager.AddWallToQueue(selectedWall.GetComponent<MineableWall>());
+        minerManager.AddWallToQueue(selectedTile.GetComponent<MineableWall>());
         DestroySelf();
     }
 
     void MineNowAction()
     {
-        minerManager.AddWallToQueueNow(selectedWall.GetComponent<MineableWall>());
+        minerManager.AddWallToQueueNow(selectedTile.GetComponent<MineableWall>());
         DestroySelf();
     }
 

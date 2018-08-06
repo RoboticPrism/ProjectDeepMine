@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WallMenuOption : MonoBehaviour {
+public class TileMenuOption : MonoBehaviour {
 
     public Text text;
     public Button button;

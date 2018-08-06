@@ -5,7 +5,7 @@ using UnityEngine;
 public class MinerManager : MonoBehaviour {
 
     List<Miner> minerList = new List<Miner>();
-    public WallMenu wallMenuPrefab;
+    public TileMenu tileMenuPrefab;
 
     // Use this for initialization
     void Start() {
@@ -28,10 +28,10 @@ public class MinerManager : MonoBehaviour {
         minerList.Remove(miner);
     }
 
-    public void CreateWallMenu(WallBase wall)
+    public void CreateTileMenu(ClickableTileBase tile)
     {
-        WallMenu wallMenu = Instantiate(wallMenuPrefab, wall.transform.position, Quaternion.Euler(Vector3.zero));
-        wallMenu.CreateMenu(wall);
+        TileMenu tileMenu = Instantiate(tileMenuPrefab, tile.transform.position, Quaternion.Euler(Vector3.zero));
+        tileMenu.CreateMenu(tile);
     }
 
     public void AddWallToQueue(MineableWall wall)
