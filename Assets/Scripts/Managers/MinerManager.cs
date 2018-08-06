@@ -28,20 +28,20 @@ public class MinerManager : MonoBehaviour {
         minerList.Remove(miner);
     }
 
-    public void CreateWallMenu(Wall wall)
+    public void CreateWallMenu(WallBase wall)
     {
         WallMenu wallMenu = Instantiate(wallMenuPrefab, wall.transform.position, Quaternion.Euler(Vector3.zero));
         wallMenu.CreateMenu(wall);
     }
 
-    public void AddWallToQueue(Wall wall)
+    public void AddWallToQueue(MineableWall wall)
     {
         // TODO: multiple worker scheduling
         Debug.Log("added wall");
         minerList[0].AddTask(new MineTask(wall));
     }
 
-    public void AddWallToQueueNow(Wall wall)
+    public void AddWallToQueueNow(MineableWall wall)
     {
         // TODO: multiple worker scheduling
         Debug.Log("added wall urgently");

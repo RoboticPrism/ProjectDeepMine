@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4567400471051940}
-  - component: {fileID: 212296770356454828}
   - component: {fileID: 114556190366289544}
+  - component: {fileID: 212296770356454828}
   m_Layer: 0
   m_Name: HiddenRoom
   m_TagString: Untagged
@@ -52,7 +52,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93db16641334c0542b6be1431c72366a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: 
   tileMap: {fileID: 0}
+  spriteRenderer: {fileID: 212296770356454828}
+  boxCollider: {fileID: 0}
+  unknownSprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}
+  innerCornerSprite: {fileID: 0}
+  wallSprite: {fileID: 0}
+  outerCornerSprite: {fileID: 0}
+  pillarSprite: {fileID: 0}
+  blocksLighting: 1
   isAlive: 1
 --- !u!212 &212296770356454828
 SpriteRenderer:

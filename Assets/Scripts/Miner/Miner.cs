@@ -25,7 +25,7 @@ public class Miner : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        tileMap = FindObjectOfType<Tilemap>();
+        tileMap = FindObjectOfType<TilemapManager>().wallTilemap;
         FindObjectOfType<MinerManager>().AddMiner(this);
 	}
 	
@@ -39,11 +39,13 @@ public class Miner : MonoBehaviour {
         DoNextTask();
     }
 
+    // adds a task to the end of the queue
     public void AddTask(Task task)
     {
         taskList.Add(task);
     }
 
+    // adds a task to the front of the queue, interrupting any current tasks
     public void AddTaskNow(Task task)
     {
         taskList.Insert(0, task);
@@ -100,7 +102,7 @@ public class Miner : MonoBehaviour {
         // break wall
         else
         {
-            mineTask.targetWall.Destroy();
+            mineTask.targetWall.DestroySelf();
             taskList.Remove(mineTask);
         }
     }

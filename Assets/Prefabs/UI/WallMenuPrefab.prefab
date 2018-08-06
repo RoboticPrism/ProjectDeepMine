@@ -206,8 +206,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuOptionPrefab: {fileID: 114303668383994186, guid: 4ab4be49d26284249a584bcfef35b38b,
     type: 2}
+  canvas: {fileID: 223045692929472422}
   optionArea: {fileID: 224874139850695766}
   title: {fileID: 114750037758385158}
+  panelWidth: 4
   optionsToRender: 
 --- !u!114 &114449412041467872
 MonoBehaviour:

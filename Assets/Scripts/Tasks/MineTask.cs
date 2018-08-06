@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MineTask : Task {
 
-    public Wall targetWall;
+    public MineableWall targetWall;
 
-    public MineTask(Wall targetWall)
+    public MineTask(MineableWall targetWall)
     {
         this.targetWall = targetWall;
         targetWall.task = this;

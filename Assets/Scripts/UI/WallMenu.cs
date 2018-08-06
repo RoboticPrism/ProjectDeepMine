@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WallMenu : MonoBehaviour {
 
-    Wall selectedWall;
+    WallBase selectedWall;
     public WallMenuOption menuOptionPrefab;
     MinerManager minerManager;
     public Canvas canvas;
@@ -40,13 +40,14 @@ public class WallMenu : MonoBehaviour {
         }
     }
 
-    public void CreateMenu(Wall selectedWall)
+    public void CreateMenu(WallBase selectedWall)
     {
         this.selectedWall = selectedWall;
         this.title.text = selectedWall.displayName;
-        if (selectedWall)
+        MineableWall mineableWall = selectedWall.GetComponent<MineableWall>();
+        if (mineableWall)
         {
-            if (selectedWall.task == null)
+            if (mineableWall.task == null)
             {
                 optionsToRender.Add(options.MINE);
                 optionsToRender.Add(options.MINE_NOW);
@@ -91,13 +92,13 @@ public class WallMenu : MonoBehaviour {
 
     void MineAction()
     {
-        minerManager.AddWallToQueue(selectedWall);
+        minerManager.AddWallToQueue(selectedWall.GetComponent<MineableWall>());
         DestroySelf();
     }
 
     void MineNowAction()
     {
-        minerManager.AddWallToQueueNow(selectedWall);
+        minerManager.AddWallToQueueNow(selectedWall.GetComponent<MineableWall>());
         DestroySelf();
     }
 

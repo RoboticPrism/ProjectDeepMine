@@ -71,7 +71,7 @@ public class AStar {
                 }
                 GameObject neighborObj = tilemap.GetInstantiatedObject(currentNeighbor);
                 // check for wall at the target location
-                if (neighborObj && neighborObj.GetComponent<Wall>() && currentNeighbor != target)
+                if (neighborObj && neighborObj.GetComponent<WallBase>() && currentNeighbor != target)
                 {
                     continue;
                 }
@@ -96,7 +96,7 @@ public class AStar {
                 Vector3Int currentNeighbor = current + new Vector3Int(direction.x, direction.y, 0);
                 GameObject neighborObj = tilemap.GetInstantiatedObject(currentNeighbor);
                 // check for a wall at target location
-                if (neighborObj && neighborObj.GetComponent<Wall>())
+                if (neighborObj && neighborObj.GetComponent<WallBase>())
                 {
                     continue;
                 }
@@ -107,7 +107,7 @@ public class AStar {
                 {
                     Vector3Int checkPoint = current + new Vector3Int(check.x, check.y, 0);
                     GameObject checkObj = tilemap.GetInstantiatedObject(checkPoint);
-                    if (checkObj && checkObj.GetComponent<Wall>())
+                    if (checkObj && checkObj.GetComponent<WallBase>())
                     {
                         blocked = true;
                         break;

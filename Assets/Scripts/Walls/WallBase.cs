@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Linq;
 
+// Base class that all wall pieces extend from
+public abstract class WallBase : MonoBehaviour {
 
-// A wall in a room, lights itself accordingly
-public class Wall : MonoBehaviour {
     public string displayName;
     public Tilemap tileMap;
-    public float destroyTime = 100f;
     public SpriteRenderer spriteRenderer;
     public BoxCollider2D boxCollider;
-    public MineTask task;
 
     List<Vector2> neighborDirections = new List<Vector2> {
         Vector2.up,
@@ -34,10 +31,12 @@ public class Wall : MonoBehaviour {
 
     Dictionary<List<bool>, Sprite> wallTypes;
 
+    public bool blocksLighting = true;
+
     public bool isAlive = true;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    protected virtual void Start () {
         wallTypes = new Dictionary<List<bool>, Sprite>
         {
             { new List<bool> { true, true, true, true }, unknownSprite },
@@ -46,46 +45,39 @@ public class Wall : MonoBehaviour {
             { new List<bool> { false, true, true, false }, innerCornerSprite },
             { new List<bool> { false, false, false, false }, pillarSprite },
         };
-        tileMap = FindObjectOfType<Tilemap>();
+        tileMap = FindObjectOfType<TilemapManager>().wallTilemap;
         boxCollider = this.GetComponent<BoxCollider2D>();
         CheckNeighbors();
         UpdateShading();
     }
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		
 	}
 
-    public void MineWall(float mineSpeed)
+    // FixedUpdate is called once per tick
+    protected virtual void FixedUpdate()
     {
-        this.destroyTime -= mineSpeed;
+
     }
 
-    public void CheckNeighbors()
+    // Check all neighbors and establish and remember what is around this block
+    public virtual void CheckNeighbors()
     {
         int i = 0;
         foreach (Vector2 direction in neighborDirections)
         {
             Vector3Int cell = tileMap.WorldToCell(this.transform.position + (Vector3)direction);
             GameObject cellObj = tileMap.GetInstantiatedObject(cell);
-            if (cellObj)
+            if (cellObj && 
+                cellObj.GetComponent<WallBase>() && 
+                cellObj.GetComponent<WallBase>().isAlive &&
+                cellObj.GetComponent<WallBase>().blocksLighting)
             {
-                Wall neighborWall = cellObj.GetComponent<Wall>();
-                HiddenRoom neighborHidden = cellObj.GetComponent<HiddenRoom>();
-                if (neighborWall && neighborWall.isAlive)
-                {
-                    hasNeighbors[i] = true;
-                }
-                else if (neighborHidden && neighborHidden.isAlive)
-                {
-                    hasNeighbors[i] = true;
-                }
-                else
-                {
-                    hasNeighbors[i] = false;
-                }
-            } else
+                hasNeighbors[i] = true;
+            }
+            else
             {
                 hasNeighbors[i] = false;
             }
@@ -94,7 +86,8 @@ public class Wall : MonoBehaviour {
         }
     }
 
-    public void UpdateShading()
+    // Updates the shading on the block relative to its neighbors
+    public virtual void UpdateShading()
     {
         // Uncomment this when I have a solid plan for the art direction
         /*
@@ -123,7 +116,7 @@ public class Wall : MonoBehaviour {
             basicDirections.Insert(0, temp);
         }
         */
-        if (IsSurrounded())
+        if (IsSurrounded(true))
         {
             spriteRenderer.sprite = unknownSprite;
         }
@@ -133,17 +126,24 @@ public class Wall : MonoBehaviour {
         }
     }
 
-    public bool IsSurrounded()
+    // Returns true if surrounded from all angles
+    public virtual bool IsSurrounded(bool includeDiagonals)
     {
+        List<bool> checkList = hasNeighbors;
+        if (!includeDiagonals)
+        {
+            checkList = hasNeighbors.GetRange(0, 4);
+        }
         bool ret = true;
-        foreach (bool b in hasNeighbors)
+        foreach (bool b in checkList)
         {
             ret = ret && b;
         }
         return ret;
     }
 
-    public void UpdateNeighbors()
+    // Tells all neighbors to check their surroundings and update their shading
+    public virtual void UpdateNeighbors()
     {
         foreach (Vector2 direction in neighborDirections)
         {
@@ -151,33 +151,29 @@ public class Wall : MonoBehaviour {
             GameObject cellObj = tileMap.GetInstantiatedObject(cell);
             if (cellObj)
             {
-                Wall neighborWall = cellObj.GetComponent<Wall>();
-                HiddenRoom neighborHidden = cellObj.GetComponent<HiddenRoom>();
+                WallBase neighborWall = cellObj.GetComponent<WallBase>();
                 if (neighborWall && neighborWall.isAlive)
                 {
                     neighborWall.CheckNeighbors();
                     neighborWall.UpdateShading();
                 }
-                else if (neighborHidden && neighborHidden.isAlive)
-                {
-                    neighborHidden.CheckNeighbors();
-                    neighborHidden.UpdateShading();
-                }
             }
         }
     }
 
-    public void Destroy()
+    // Destroys this wall and updates its neighbors
+    public virtual void DestroySelf()
     {
         isAlive = false;
         UpdateNeighbors();
         Destroy(this.gameObject);
     }
 
+    // On mouse down, pop menu
     private void OnMouseDown()
     {
         UIHoverListener uhl = FindObjectOfType<UIHoverListener>();
-        if (!IsSurrounded() && (uhl == null || !uhl.isUIOverride))
+        if (!IsSurrounded(false) && (uhl == null || !uhl.isUIOverride))
         {
             FindObjectOfType<MinerManager>().CreateWallMenu(this);
         }

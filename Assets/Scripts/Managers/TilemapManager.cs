@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class WallGrid : MonoBehaviour {
+public class TilemapManager : MonoBehaviour {
 
-    List<List<Wall>> grid = new List<List<Wall>>();
+    public Tilemap wallTilemap;
+    public Tilemap floorTilemap;
 
 	// Use this for initialization
 	void Start () {
