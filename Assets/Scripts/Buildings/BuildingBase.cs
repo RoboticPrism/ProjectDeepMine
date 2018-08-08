@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class BuildingBase : ClickableTileBase {
 
+    public WallTile tileType;
+
     public int life = 100;
     public int lifeMax = 100;
     public int brokenLimit = 50;
@@ -117,5 +119,17 @@ public abstract class BuildingBase : ClickableTileBase {
     public void DestroySelf()
     {
         Destroy(this.gameObject);
+    }
+
+    public virtual bool CanBuildHere(FloorBase floorTile, WallBase wallTile)
+    {
+        if(wallTile)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

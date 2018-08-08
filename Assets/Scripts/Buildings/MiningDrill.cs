@@ -19,4 +19,15 @@ public class MiningDrill : BuildingBase {
     {
         base.FixedUpdate();
     }
+
+    public override bool CanBuildHere(FloorBase floorTile, WallBase wallTile)
+    {
+        if(wallTile == null && floorTile && floorTile.resourceType != FloorBase.resourceTypes.NONE)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
 }

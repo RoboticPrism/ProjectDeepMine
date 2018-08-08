@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d30ab45cfa87bd41ac03705c084b1ee, type: 3}
-  m_Name: HiddenRoomTile
+  m_Name: MiningDrillTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 052ed19fa670cf7418845d5c6fc91e00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -30,7 +30,9 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 1785513990241132, guid: 8a0a4068e99f95042a6fb20a113bdb21,
+  m_InstancedGameObject: {fileID: 1079215909892644, guid: 35ccc6432eb08fd41ba280629c6a90ca,
     type: 2}
   m_Flags: 1
   m_ColliderType: 1
+  PrefabLocalOffset: 0.5
+  prefabZOffset: 0

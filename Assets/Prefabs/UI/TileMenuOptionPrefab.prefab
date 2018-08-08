@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114479671446330728}
   - component: {fileID: 114817434106407328}
   m_Layer: 5
-  m_Name: WallMenuOptionPrefab
+  m_Name: TileMenuOptionPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 114577187414499950}
   button: {fileID: 114817434106407328}
+  height: 1
 --- !u!114 &114479671446330728
 MonoBehaviour:
   m_ObjectHideFlags: 1

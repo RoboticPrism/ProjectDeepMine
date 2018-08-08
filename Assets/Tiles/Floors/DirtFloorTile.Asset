@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0eeeabce6a7c1e47b3e72129e0e2a1d, type: 3}
   m_Name: DirtFloorTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 770a7600f7674a1408a4be22f073376d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 018680f15b5db284d9626dd893162da1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -30,6 +30,9 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 1568773169328620, guid: 0285e9ec4f0d38741a1c5e4525069955,
+    type: 2}
   m_Flags: 1
   m_ColliderType: 1
+  PrefabLocalOffset: 0.5
+  prefabZOffset: 1
