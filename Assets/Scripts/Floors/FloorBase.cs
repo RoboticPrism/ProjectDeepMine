@@ -5,6 +5,7 @@ using UnityEngine;
 public class FloorBase : MonoBehaviour {
 
     public int resourceCount = 0;
+    public int resourcesPerHaul = 5;
     public bool buildable = true;
 
     public enum resourceTypes { NONE, ORE };
@@ -19,4 +20,22 @@ public class FloorBase : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public int MineResources()
+    {
+        if (resourceCount > resourcesPerHaul)
+        {
+            resourceCount -= resourcesPerHaul;
+            return resourcesPerHaul;
+        }
+        else if (resourceCount > 0)
+        {
+            int remainingResources = resourcesPerHaul - resourceCount;
+            resourceCount = 0;
+            return remainingResources;
+        } else
+        {
+            return 0;
+        }
+    }
 }
