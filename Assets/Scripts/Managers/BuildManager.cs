@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildManager : MonoBehaviour {
+public class BuildManager : ClickableTileBase {
     
     public BuildingBlueprint blueprintPrefab;
     public BuildingBlueprint instantiatedBlueprint;
@@ -12,13 +12,14 @@ public class BuildManager : MonoBehaviour {
     public Button menuItemPrefab;
 
 	// Use this for initialization
-	void Start () {
-		
+	protected override void Start () {
+        base.Start();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	    if(Input.GetMouseButtonDown(0))
+	protected override void Update () {
+        base.Update();
+        if (Input.GetMouseButtonDown(0))
         {
             TryBuild();
         }	

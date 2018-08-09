@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class BuildingBlueprint : MonoBehaviour {
     
     TilemapManager tilemapManager;
+    MinerManager minerManager;
     public BuildingBase buildingType;
 
     public Sprite MiningDrillBlueprint;
@@ -18,6 +19,7 @@ public class BuildingBlueprint : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         tilemapManager = FindObjectOfType<TilemapManager>();
+        minerManager = FindObjectOfType<MinerManager>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
 	}
 	
@@ -47,6 +49,8 @@ public class BuildingBlueprint : MonoBehaviour {
             if (Input.GetMouseButtonDown(0))
             {
                 tilemapManager.wallTilemap.SetTile(wallPosition, buildingType.tileType);
+                BuildingBase newBuilding = tilemapManager.wallTilemap.GetInstantiatedObject(wallPosition).GetComponent<BuildingBase>();
+                minerManager.AddBuildingToQueue(newBuilding);
                 DestroySelf();
             }
         }

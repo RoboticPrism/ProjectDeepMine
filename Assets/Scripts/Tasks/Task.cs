@@ -7,4 +7,9 @@ public class Task {
     {
 
     }
+
+    public virtual Vector3 TargetLocation()
+    {
+        return Vector3.zero;
+    }
 }

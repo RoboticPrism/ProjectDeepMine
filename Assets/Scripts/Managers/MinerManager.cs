@@ -28,23 +28,39 @@ public class MinerManager : MonoBehaviour {
         minerList.Remove(miner);
     }
 
+    Miner NextAvailableMiner()
+    {
+        // TODO: add multi worker scheduling
+        return minerList[0];
+    }
+
     public void CreateTileMenu(ClickableTileBase tile)
     {
         TileMenu tileMenu = Instantiate(tileMenuPrefab, tile.transform.position, Quaternion.Euler(Vector3.zero));
         tileMenu.CreateMenu(tile);
     }
 
+    // Adds a new wall to be mined to the end of the queue
     public void AddWallToQueue(MineableWall wall)
     {
-        // TODO: multiple worker scheduling
-        Debug.Log("added wall");
-        minerList[0].AddTask(new MineTask(wall));
+        NextAvailableMiner().AddTask(new MineTask(wall));
     }
 
+    // Adds a new wall to be mined to the front of the queue
     public void AddWallToQueueNow(MineableWall wall)
     {
-        // TODO: multiple worker scheduling
-        Debug.Log("added wall urgently");
-        minerList[0].AddTaskNow(new MineTask(wall));
+        NextAvailableMiner().AddTaskNow(new MineTask(wall));
+    }
+
+    // Adds a new building to be constructed to the end of the queue
+    public void AddBuildingToQueue(BuildingBase buildingBase)
+    {
+        NextAvailableMiner().AddTask(new BuildTask(buildingBase));
+    }
+
+    // Adds a new building to be constructed to the front of the queue
+    public void AddBuildingToQueueNow(BuildingBase buildingBase)
+    {
+        NextAvailableMiner().AddTaskNow(new BuildTask(buildingBase));
     }
 }

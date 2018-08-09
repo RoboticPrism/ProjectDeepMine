@@ -6,6 +6,8 @@ using UnityEngine.Tilemaps;
 public class Miner : MonoBehaviour {
     public float moveSpeed = 0.1f;
     public float mineSpeed = 1f;
+    public float buildSpeed = 1f;
+    Task currentTask;
     List<Task> taskList = new List<Task>();
 
     List<Vector3Int> pathToTarget = null;
@@ -54,43 +56,53 @@ public class Miner : MonoBehaviour {
 
     private void DoNextTask()
     {
-        if(taskList.Count > 0)
+        if(taskList.Count > 0 && currentTask == null)
         {
-            Task nextTask = taskList[0];
-            if ((MineTask)nextTask != null)
+            SelectTask(taskList[0]);
+        }
+        else if (currentTask != null)
+        {
+            if (currentTask is MineTask)
             {
-                DoMineTask((MineTask)nextTask);
+                DoMineTask((MineTask)currentTask);
+            }
+            else if (currentTask is BuildTask)
+            {
+                DoBuildTask((BuildTask)currentTask);
             }
         }
     }
 
-    // Handles pathfinding towards a location
-    private void MoveTowards(Vector2 targetLocation)
+    public void SelectTask(Task newTask)
     {
-        // generate new path
-        if (pathToTarget == null || pathToTarget.Count == 0)
+        currentTask = newTask;
+        MakePath(newTask.TargetLocation());
+    }
+
+    public void MakePath(Vector2 targetLocation)
+    {
+        pathToTarget = new AStar(tileMap.WorldToCell(this.transform.position), tileMap.WorldToCell(targetLocation), tileMap).Generate();
+        // we dont want to move into the target, just next to it
+        pathToTarget.RemoveAt(pathToTarget.Count - 1);
+    }
+
+    //  Handles pathfinding a long the current route to a location
+    private void MoveTowards(Vector2 targetLocation)
+    {  
+        if(Vector3.Distance(this.transform.position, pathToTarget[0]) > 0.1)
         {
-            pathToTarget = new AStar(tileMap.WorldToCell(this.transform.position), tileMap.WorldToCell(targetLocation), tileMap).Generate();
+            this.transform.position =  Vector2.MoveTowards(this.transform.position, new Vector2(pathToTarget[0].x, pathToTarget[0].y), moveSpeed);
+        } else
+        {
+            pathToTarget.RemoveAt(0);
         }
-        // follow path
-        else if (pathToTarget.Count > 0)
-        {    
-            if(Vector3.Distance(this.transform.position, pathToTarget[0]) > 0.1)
-            {
-                this.transform.position =  Vector2.MoveTowards(this.transform.position, new Vector2(pathToTarget[0].x, pathToTarget[0].y), moveSpeed);
-            } else
-            {
-                pathToTarget.RemoveAt(0);
-            }
-        }
-        
     }
 
     // Handles moving towards and mining a wall
     private void DoMineTask(MineTask mineTask)
     {
         // move to wall
-        if (Vector2.Distance(this.transform.position, mineTask.targetWall.transform.position) > 1)
+        if (pathToTarget != null && pathToTarget.Count > 0)
         {
             MoveTowards(mineTask.targetWall.transform.position);
         }
@@ -104,6 +116,30 @@ public class Miner : MonoBehaviour {
         {
             mineTask.targetWall.DestroySelf();
             taskList.Remove(mineTask);
+            currentTask = null;
+            pathToTarget = null;
+        }
+    }
+
+    // Handles moving towards and building a building
+    public void DoBuildTask(BuildTask buildTask)
+    {
+        // move to wall
+        if (pathToTarget != null && pathToTarget.Count > 0)
+        {
+            MoveTowards(buildTask.targetBuilding.transform.position);
+        }
+        // drill wall
+        else if (buildTask.targetBuilding.buildAmount < buildTask.targetBuilding.buildMax)
+        {
+            buildTask.targetBuilding.AddConstruction(buildSpeed);
+        }
+        // break wall
+        else
+        {
+            taskList.Remove(buildTask);
+            currentTask = null;
+            pathToTarget = null;
         }
     }
 }

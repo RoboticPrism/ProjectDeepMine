@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildTask : MonoBehaviour {
+public class BuildTask : Task {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public BuildingBase targetBuilding;
+
+	public BuildTask(BuildingBase targetBuilding)
+    {
+        this.targetBuilding = targetBuilding;
+        targetBuilding.targetTask = this;
+    }
+
+    public override Vector3 TargetLocation()
+    {
+        return targetBuilding.transform.position;
+    }
 }

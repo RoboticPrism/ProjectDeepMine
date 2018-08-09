@@ -1,12 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class MiningDrill : BuildingBase {
+
+    ResourceManager resourceManager;
+    Tilemap floorTilemap;
+    FloorBase floorBase;
 
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
+        floorTilemap = FindObjectOfType<TilemapManager>().floorTilemap;
+        resourceManager = FindObjectOfType<ResourceManager>();
 	}
 	
 	// Update is called once per frame

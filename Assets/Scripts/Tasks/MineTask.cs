@@ -11,4 +11,9 @@ public class MineTask : Task {
         this.targetWall = targetWall;
         targetWall.task = this;
     }
+
+    public override Vector3 TargetLocation()
+    {
+        return targetWall.transform.position;
+    }
 }

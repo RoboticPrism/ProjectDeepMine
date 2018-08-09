@@ -6,19 +6,20 @@ public abstract class BuildingBase : ClickableTileBase {
 
     public WallTile tileType;
 
-    public int life = 100;
-    public int lifeMax = 100;
-    public int brokenLimit = 50;
+    public float life = 100;
+    public float lifeMax = 100;
+    public float brokenLimit = 50;
     public bool broken = false;
 
-    public int buildAmount = 0;
-    public int buildMax = 100;
+    public float buildAmount = 0;
+    public float buildMax = 100;
     public bool built = false;
 
     public int oreCost = 1;
     public int powerCost = 1;
 
     ResourceManager resourceManager;
+    public BuildTask targetTask;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -38,7 +39,7 @@ public abstract class BuildingBase : ClickableTileBase {
         
     }
 
-    public void AddConstruction(int addAmount)
+    public void AddConstruction(float addAmount)
     {
         buildAmount += addAmount;
         // Update build state
