@@ -17,7 +17,16 @@ public class TileMenu : MonoBehaviour {
     {
         MINE,
         MINE_NOW,
-        INCREASE_PRIORITY
+        INCREASE_MINING_PRIORITY,
+        BUILD,
+        BUILD_NOW,
+        INCREASE_BUILD_PRIORITY,
+        REPAIR,
+        REPAIR_NOW,
+        INCREASE_REPAIR_PRIORITY,
+        DECONSTRUCT,
+        DECONSTRUCT_NOW,
+        INCREASE_DECONSTRUCT_PRIORITY
     }
 
     public List<options> optionsToRender = new List<options>();
@@ -45,6 +54,7 @@ public class TileMenu : MonoBehaviour {
         this.selectedTile = selectedTile;
         this.title.text = selectedTile.displayName;
         MineableWall mineableWall = selectedTile.GetComponent<MineableWall>();
+        BuildingBase buildingBase = selectedTile.GetComponent<BuildingBase>();
         if (mineableWall)
         {
             if (mineableWall.task == null)
@@ -54,10 +64,51 @@ public class TileMenu : MonoBehaviour {
             }
             else
             {
-                optionsToRender.Add(options.INCREASE_PRIORITY);
+                optionsToRender.Add(options.INCREASE_MINING_PRIORITY);
             }
             RenderOptions();
-        } else
+        }
+        else if (buildingBase)
+        {
+            if (!buildingBase.built)
+            {
+                if(buildingBase.buildTask == null)
+                {
+                    optionsToRender.Add(options.BUILD);
+                    optionsToRender.Add(options.BUILD_NOW);
+                }
+                else
+                {
+                    optionsToRender.Add(options.INCREASE_BUILD_PRIORITY);
+                }
+            }
+            else
+            {
+                if (buildingBase.deconstructTask == null)
+                {
+                    optionsToRender.Add(options.DECONSTRUCT);
+                    optionsToRender.Add(options.DECONSTRUCT_NOW);
+                }
+                else
+                {
+                    optionsToRender.Add(options.INCREASE_DECONSTRUCT_PRIORITY);
+                }
+            }
+            if(buildingBase.life < buildingBase.lifeMax)
+            {
+                if (buildingBase.repairTask == null)
+                {
+                    optionsToRender.Add(options.REPAIR);
+                    optionsToRender.Add(options.REPAIR_NOW);
+                }
+                else
+                {
+                    optionsToRender.Add(options.INCREASE_REPAIR_PRIORITY);
+                }
+            }
+            RenderOptions();
+        }
+        else
         {
             DestroySelf();
         }
@@ -80,10 +131,55 @@ public class TileMenu : MonoBehaviour {
                 menuOption.SetName("Mine Now");
                 menuOption.SetAction(MineNowAction);
             }
-            else if (option == options.INCREASE_PRIORITY)
+            else if (option == options.INCREASE_MINING_PRIORITY)
             {
                 menuOption.SetName("Increase Priority");
-                menuOption.SetAction(IncreasePriorityAction);
+                menuOption.SetAction(IncreaseMiningPriorityAction);
+            }
+            else if (option == options.BUILD)
+            {
+                menuOption.SetName("Build");
+                menuOption.SetAction(BuildAction);
+            }
+            else if (option == options.BUILD_NOW)
+            {
+                menuOption.SetName("Build Now");
+                menuOption.SetAction(BuildNowAction);
+            }
+            else if (option == options.INCREASE_BUILD_PRIORITY)
+            {
+                menuOption.SetName("Increase Build Priority");
+                menuOption.SetAction(IncreaseBuildPriorityAction);
+            }
+            else if (option == options.REPAIR)
+            {
+                menuOption.SetName("Repair");
+                menuOption.SetAction(RepairAction);
+            }
+            else if (option == options.REPAIR_NOW)
+            {
+                menuOption.SetName("Repair Now");
+                menuOption.SetAction(RepairNowAction);
+            }
+            else if (option == options.INCREASE_REPAIR_PRIORITY)
+            {
+                menuOption.SetName("Increase Repair Priority");
+                menuOption.SetAction(IncreaseRepairPriorityAction);
+            }
+            else if (option == options.DECONSTRUCT)
+            {
+                menuOption.SetName("Deconstruct");
+                menuOption.SetAction(DeconstructAction);
+            }
+            else if (option == options.DECONSTRUCT_NOW)
+            {
+                menuOption.SetName("Deconstruct Now");
+                menuOption.SetAction(DeconstructNowAction);
+            }
+            else if (option == options.INCREASE_DECONSTRUCT_PRIORITY)
+            {
+                menuOption.SetName("Increase Decostruction Priority");
+                menuOption.SetAction(IncreaseDeconstructPriorityAction);
             }
             i++;
         }
@@ -102,7 +198,61 @@ public class TileMenu : MonoBehaviour {
         DestroySelf();
     }
 
-    void IncreasePriorityAction()
+    void IncreaseMiningPriorityAction()
+    {
+
+        DestroySelf();
+    }
+
+    void BuildAction()
+    {
+        minerManager.AddBuildingToQueue(selectedTile.GetComponent<BuildingBase>());
+        DestroySelf();
+    }
+
+    void BuildNowAction()
+    {
+        minerManager.AddBuildingToQueueNow(selectedTile.GetComponent<BuildingBase>());
+        DestroySelf();
+    }
+
+    void IncreaseBuildPriorityAction()
+    {
+
+        DestroySelf();
+    }
+
+    void RepairAction()
+    {
+        minerManager.AddBuildingRepairToQueue(selectedTile.GetComponent<BuildingBase>());
+        DestroySelf();
+    }
+
+    void RepairNowAction()
+    {
+        minerManager.AddBuildingRepairToQueueNow(selectedTile.GetComponent<BuildingBase>());
+        DestroySelf();
+    }
+
+    void IncreaseRepairPriorityAction()
+    {
+
+        DestroySelf();
+    }
+
+    void DeconstructAction()
+    {
+        minerManager.AddBuildingDeconstructToQueue(selectedTile.GetComponent<BuildingBase>());
+        DestroySelf();
+    }
+
+    void DeconstructNowAction()
+    {
+        minerManager.AddBuildingDeconstructToQueueNow(selectedTile.GetComponent<BuildingBase>());
+        DestroySelf();
+    }
+
+    void IncreaseDeconstructPriorityAction()
     {
 
         DestroySelf();

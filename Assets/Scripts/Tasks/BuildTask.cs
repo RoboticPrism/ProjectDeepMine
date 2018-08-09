@@ -9,7 +9,7 @@ public class BuildTask : Task {
 	public BuildTask(BuildingBase targetBuilding)
     {
         this.targetBuilding = targetBuilding;
-        targetBuilding.targetTask = this;
+        targetBuilding.buildTask = this;
     }
 
     public override Vector3 TargetLocation()

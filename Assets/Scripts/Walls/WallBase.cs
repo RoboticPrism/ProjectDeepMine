@@ -167,6 +167,7 @@ public abstract class WallBase : ClickableTileBase {
     {
         isAlive = false;
         UpdateNeighbors();
-        Destroy(this.gameObject);
+        Vector3Int tileLoc = tileMap.WorldToCell(this.transform.position);
+        tileMap.SetTile(tileLoc, null);
     }
 }

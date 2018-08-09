@@ -70,6 +70,14 @@ public class Miner : MonoBehaviour {
             {
                 DoBuildTask((BuildTask)currentTask);
             }
+            else if (currentTask is RepairTask)
+            {
+                DoRepairTask((RepairTask)currentTask);
+            }
+            else if (currentTask is DeconstructTask)
+            {
+                DoDeconstructTask((DeconstructTask)currentTask);
+            }
         }
     }
 
@@ -124,20 +132,64 @@ public class Miner : MonoBehaviour {
     // Handles moving towards and building a building
     public void DoBuildTask(BuildTask buildTask)
     {
-        // move to wall
+        // move to building
         if (pathToTarget != null && pathToTarget.Count > 0)
         {
             MoveTowards(buildTask.targetBuilding.transform.position);
         }
-        // drill wall
+        // build building
         else if (buildTask.targetBuilding.buildAmount < buildTask.targetBuilding.buildMax)
         {
             buildTask.targetBuilding.AddConstruction(buildSpeed);
         }
-        // break wall
+        // end task
         else
         {
             taskList.Remove(buildTask);
+            currentTask = null;
+            pathToTarget = null;
+        }
+    }
+
+    // Handles moving towards a building and then repairing it
+    public void DoRepairTask(RepairTask repairTask)
+    {
+        // move to building
+        if (pathToTarget != null && pathToTarget.Count > 0)
+        {
+            MoveTowards(repairTask.targetBuilding.transform.position);
+        }
+        // fix up building
+        else if (repairTask.targetBuilding.life < repairTask.targetBuilding.lifeMax)
+        {
+            repairTask.targetBuilding.AddLife((int)buildSpeed);
+        }
+        // end task
+        else
+        {
+            taskList.Remove(repairTask);
+            currentTask = null;
+            pathToTarget = null;
+        }
+    }
+
+    // Handles moving towards a building and then deconstructing it
+    public void DoDeconstructTask(DeconstructTask deconstructTask)
+    {
+        // move to building
+        if (pathToTarget != null && pathToTarget.Count > 0)
+        {
+            MoveTowards(deconstructTask.targetBuilding.transform.position);
+        }
+        // tear down building
+        else if (deconstructTask.targetBuilding.buildAmount >= 0)
+        {
+            deconstructTask.targetBuilding.AddConstruction(-buildSpeed);
+        }
+        // sell building
+        else
+        {
+            taskList.Remove(deconstructTask);
             currentTask = null;
             pathToTarget = null;
         }

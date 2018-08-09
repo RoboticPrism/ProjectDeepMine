@@ -12,7 +12,7 @@ public class ClickableTileBase : MonoBehaviour {
 
     // Use this for initialization
     protected virtual void Start () {
-		
+        tileMap = FindObjectOfType<TilemapManager>().wallTilemap;
 	}
 	
 	// Update is called once per frame

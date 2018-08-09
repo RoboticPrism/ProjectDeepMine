@@ -19,7 +19,9 @@ public abstract class BuildingBase : ClickableTileBase {
     public int powerCost = 1;
 
     ResourceManager resourceManager;
-    public BuildTask targetTask;
+    public BuildTask buildTask;
+    public RepairTask repairTask;
+    public DeconstructTask deconstructTask;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -36,7 +38,6 @@ public abstract class BuildingBase : ClickableTileBase {
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        
     }
 
     public void AddConstruction(float addAmount)
@@ -45,7 +46,6 @@ public abstract class BuildingBase : ClickableTileBase {
         // Update build state
         if (buildAmount >= buildMax && !built)
         {
-
             OnBuilt();
         }
         else if (buildAmount < buildMax && built)
@@ -55,6 +55,7 @@ public abstract class BuildingBase : ClickableTileBase {
         }
         else if (buildAmount < 0)
         {
+            Debug.Log("sell");
             OnSell();
         }
     }
@@ -119,7 +120,8 @@ public abstract class BuildingBase : ClickableTileBase {
 
     public void DestroySelf()
     {
-        Destroy(this.gameObject);
+        Vector3Int tileLoc = tileMap.WorldToCell(this.transform.position);
+        tileMap.SetTile(tileLoc, null);
     }
 
     public virtual bool CanBuildHere(FloorBase floorTile, WallBase wallTile)
