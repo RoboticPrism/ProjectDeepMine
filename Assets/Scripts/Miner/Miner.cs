@@ -48,6 +48,12 @@ public class Miner : MonoBehaviour {
         task.SetTaskOwner(this);
     }
 
+    public void RemoveTask(Task task)
+    {
+        task.SetTaskOwner(null);
+        taskList.Remove(task);
+    }
+
     // adds a task to the front of the queue, interrupting any current tasks
     public void AddTaskNow(Task task)
     {
@@ -59,7 +65,7 @@ public class Miner : MonoBehaviour {
     // removes a task from further down the queue and places it on top of the queue
     public void PrioritizeTask(Task task)
     {
-        taskList.Remove(task);
+        RemoveTask(task);
         AddTaskNow(task);
         SelectTask(task);
     }
@@ -99,7 +105,7 @@ public class Miner : MonoBehaviour {
             MakePath(newTask.TargetLocation());
         } else
         {
-            taskList.Remove(newTask);
+            RemoveTask(newTask);
         }
     }
 
@@ -161,7 +167,7 @@ public class Miner : MonoBehaviour {
         // end task
         else
         {
-            taskList.Remove(buildTask);
+            RemoveTask(buildTask);
             currentTask = null;
             pathToTarget = null;
         }
@@ -183,7 +189,7 @@ public class Miner : MonoBehaviour {
         // end task
         else
         {
-            taskList.Remove(repairTask);
+            RemoveTask(repairTask);
             currentTask = null;
             pathToTarget = null;
         }
@@ -205,7 +211,7 @@ public class Miner : MonoBehaviour {
         // sell building
         else
         {
-            taskList.Remove(deconstructTask);
+            RemoveTask(deconstructTask);
             currentTask = null;
             pathToTarget = null;
         }
