@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class MiningDrill : BuildingBase {
-
-    ResourceManager resourceManager;
+    
     Tilemap floorTilemap;
     FloorBase floorBase;
     public float mineSpeed = 1f;

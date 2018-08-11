@@ -6,14 +6,23 @@ public class BuildTask : Task {
 
     public BuildingBase targetBuilding;
 
-	public BuildTask(BuildingBase targetBuilding)
-    {
-        this.targetBuilding = targetBuilding;
-        targetBuilding.buildTask = this;
+    public BuildTask(string taskName, BuildingBase target, priotities priority) : base(taskName, target, priority) {
+        this.targetBuilding = target;
     }
 
-    public override Vector3 TargetLocation()
+    // returns true if the current task is feasible
+    public override bool TaskAvailable()
     {
-        return targetBuilding.transform.position;
+        // can't schedule a build task if the building is already built
+        if (!targetBuilding.built)
+        {
+            return base.TaskAvailable();
+        }
+        else
+        {
+            return false;
+        }
+        
     }
+
 }

@@ -6,14 +6,13 @@ public class MineTask : Task {
 
     public MineableWall targetWall;
 
-    public MineTask(MineableWall targetWall)
-    {
-        this.targetWall = targetWall;
-        targetWall.task = this;
+    public MineTask(string taskName, MineableWall target, priotities priority) : base(taskName, target, priority) {
+        this.targetWall = target;
     }
 
-    public override Vector3 TargetLocation()
-    {
-        return targetWall.transform.position;
+    // returns true if the current task is feasible
+    public override bool TaskAvailable()
+    {        
+        return base.TaskAvailable();
     }
 }

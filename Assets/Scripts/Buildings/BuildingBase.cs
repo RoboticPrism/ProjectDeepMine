@@ -18,14 +18,23 @@ public abstract class BuildingBase : ClickableTileBase {
     public int oreCost = 1;
     public int powerCost = 1;
 
-    ResourceManager resourceManager;
-    public BuildTask buildTask;
-    public RepairTask repairTask;
-    public DeconstructTask deconstructTask;
+    protected ResourceManager resourceManager;
 
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
+        potentialTasks = new List<Task>
+        {
+            new BuildTask("Schedule Build", this, Task.priotities.QUEUE),
+            new BuildTask("Build Now", this, Task.priotities.QUEUE_NOW),
+            new BuildTask("Prioritize Build", this, Task.priotities.REQUEUE_NOW),
+            new RepairTask("Schedule Repair", this, Task.priotities.QUEUE),
+            new RepairTask("Repair Now", this, Task.priotities.QUEUE_NOW),
+            new RepairTask("Prioritize Repair", this, Task.priotities.REQUEUE_NOW),
+            new DeconstructTask("Schedule Deconstruct", this, Task.priotities.QUEUE),
+            new DeconstructTask("Deconstruct Now", this, Task.priotities.QUEUE_NOW),
+            new DeconstructTask("Prioritize Deconstruct", this, Task.priotities.REQUEUE_NOW),
+        };
         resourceManager = FindObjectOfType<ResourceManager>();
 	}
 	

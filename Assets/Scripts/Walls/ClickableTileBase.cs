@@ -9,6 +9,9 @@ public class ClickableTileBase : MonoBehaviour {
     public string displayName;
     public Tilemap tileMap;
     public bool clickable = true;
+    public List<Task> potentialTasks = new List<Task>();
+    public Task currentTask;
+    public Miner taskOwner;
 
     // Use this for initialization
     protected virtual void Start () {

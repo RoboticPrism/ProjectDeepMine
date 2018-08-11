@@ -40,51 +40,19 @@ public class MinerManager : MonoBehaviour {
         tileMenu.CreateMenu(tile);
     }
 
-    // Adds a new wall to be mined to the end of the queue
-    public void AddWallToQueue(MineableWall wall)
+    public void AddTaskToQueue(Task task)
     {
-        NextAvailableMiner().AddTask(new MineTask(wall));
-    }
-
-    // Adds a new wall to be mined to the front of the queue
-    public void AddWallToQueueNow(MineableWall wall)
-    {
-        NextAvailableMiner().AddTaskNow(new MineTask(wall));
-    }
-
-    // Adds a new building to be constructed to the end of the queue
-    public void AddBuildingToQueue(BuildingBase buildingBase)
-    {
-        NextAvailableMiner().AddTask(new BuildTask(buildingBase));
-    }
-
-    // Adds a new building to be constructed to the front of the queue
-    public void AddBuildingToQueueNow(BuildingBase buildingBase)
-    {
-        NextAvailableMiner().AddTaskNow(new BuildTask(buildingBase));
-    }
-
-    // Adds a new building to be repaired to the end of the queue
-    public void AddBuildingRepairToQueue(BuildingBase buildingBase)
-    {
-        NextAvailableMiner().AddTask(new RepairTask(buildingBase));
-    }
-
-    // Adds a new building to be repaired to the front of the queue
-    public void AddBuildingRepairToQueueNow(BuildingBase buildingBase)
-    {
-        NextAvailableMiner().AddTaskNow(new RepairTask(buildingBase));
-    }
-
-    // Adds a new building to be deconstructed to the end of the queue
-    public void AddBuildingDeconstructToQueue(BuildingBase buildingBase)
-    {
-        NextAvailableMiner().AddTask(new DeconstructTask(buildingBase));
-    }
-
-    // Adds a new building to be deconstructed to the front of the queue
-    public void AddBuildingDeconstructToQueueNow(BuildingBase buildingBase)
-    {
-        NextAvailableMiner().AddTaskNow(new DeconstructTask(buildingBase));
+        if (task.priority == Task.priotities.QUEUE)
+        {
+            NextAvailableMiner().AddTask(task);
+        }
+        else if (task.priority == Task.priotities.QUEUE_NOW)
+        {
+            NextAvailableMiner().AddTaskNow(task);
+        }
+        else
+        {
+            NextAvailableMiner().PrioritizeTask(task);
+        }
     }
 }

@@ -7,7 +7,7 @@ public class TileMenuOption : MonoBehaviour {
 
     public Text text;
     public Button button;
-    public delegate void Action();
+    public delegate void Action(Task task);
     public int height = 1;
 
 	// Use this for initialization
@@ -25,8 +25,8 @@ public class TileMenuOption : MonoBehaviour {
         this.text.text = name;
     }
 
-    public void SetAction(Action action)
+    public void SetAction(Action action, Task task)
     {
-        this.button.onClick.AddListener(delegate { action(); });
+        this.button.onClick.AddListener(delegate { action(task); });
     }
 }

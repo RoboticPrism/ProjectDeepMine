@@ -50,7 +50,7 @@ public class BuildingBlueprint : MonoBehaviour {
             {
                 tilemapManager.wallTilemap.SetTile(wallPosition, buildingType.tileType);
                 BuildingBase newBuilding = tilemapManager.wallTilemap.GetInstantiatedObject(wallPosition).GetComponent<BuildingBase>();
-                minerManager.AddBuildingToQueue(newBuilding);
+                minerManager.AddTaskToQueue(new BuildTask("", newBuilding, Task.priotities.QUEUE));
                 DestroySelf();
             }
         }

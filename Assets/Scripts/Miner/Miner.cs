@@ -45,13 +45,23 @@ public class Miner : MonoBehaviour {
     public void AddTask(Task task)
     {
         taskList.Add(task);
+        task.SetTaskOwner(this);
     }
 
     // adds a task to the front of the queue, interrupting any current tasks
     public void AddTaskNow(Task task)
     {
         taskList.Insert(0, task);
-        pathToTarget = null;
+        task.SetTaskOwner(this);
+        SelectTask(task);
+    }
+
+    // removes a task from further down the queue and places it on top of the queue
+    public void PrioritizeTask(Task task)
+    {
+        taskList.Remove(task);
+        AddTaskNow(task);
+        SelectTask(task);
     }
 
     private void DoNextTask()
@@ -83,8 +93,14 @@ public class Miner : MonoBehaviour {
 
     public void SelectTask(Task newTask)
     {
-        currentTask = newTask;
-        MakePath(newTask.TargetLocation());
+        if (newTask.target)
+        {
+            currentTask = newTask;
+            MakePath(newTask.TargetLocation());
+        } else
+        {
+            taskList.Remove(newTask);
+        }
     }
 
     public void MakePath(Vector2 targetLocation)
@@ -112,7 +128,7 @@ public class Miner : MonoBehaviour {
         // move to wall
         if (pathToTarget != null && pathToTarget.Count > 0)
         {
-            MoveTowards(mineTask.targetWall.transform.position);
+            MoveTowards(mineTask.TargetLocation());
         }
         // drill wall
         else if (mineTask.targetWall.destroyTime > 0)
@@ -135,7 +151,7 @@ public class Miner : MonoBehaviour {
         // move to building
         if (pathToTarget != null && pathToTarget.Count > 0)
         {
-            MoveTowards(buildTask.targetBuilding.transform.position);
+            MoveTowards(buildTask.TargetLocation());
         }
         // build building
         else if (buildTask.targetBuilding.buildAmount < buildTask.targetBuilding.buildMax)
@@ -157,7 +173,7 @@ public class Miner : MonoBehaviour {
         // move to building
         if (pathToTarget != null && pathToTarget.Count > 0)
         {
-            MoveTowards(repairTask.targetBuilding.transform.position);
+            MoveTowards(repairTask.TargetLocation());
         }
         // fix up building
         else if (repairTask.targetBuilding.life < repairTask.targetBuilding.lifeMax)
@@ -179,7 +195,7 @@ public class Miner : MonoBehaviour {
         // move to building
         if (pathToTarget != null && pathToTarget.Count > 0)
         {
-            MoveTowards(deconstructTask.targetBuilding.transform.position);
+            MoveTowards(deconstructTask.TargetLocation());
         }
         // tear down building
         else if (deconstructTask.targetBuilding.buildAmount >= 0)
