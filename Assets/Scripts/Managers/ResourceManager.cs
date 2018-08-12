@@ -43,7 +43,7 @@ public class ResourceManager : MonoBehaviour {
 
     public void AddPower(int newPower)
     {
-        powerCount = newPower;
+        powerCount += newPower;
         powerText.text = powerCount + " / " + powerAvailable;
     }
 
@@ -55,7 +55,7 @@ public class ResourceManager : MonoBehaviour {
 
     public void AddPowerAvailable(int newPower)
     {
-        powerAvailable = newPower;
+        powerAvailable += newPower;
         powerText.text = powerCount + " / " + powerAvailable;
     }
 }

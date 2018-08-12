@@ -58,6 +58,10 @@ public class BuildingBlueprint : MonoBehaviour {
         {
             spriteRenderer.color = noBuildColor;
         }
+        if(Input.GetMouseButtonDown(1))
+        {
+            DestroySelf();
+        }
     }
 
     public void SetupBlueprint(BuildingBase building)

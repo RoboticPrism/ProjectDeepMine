@@ -76,53 +76,57 @@ public abstract class BuildingBase : ClickableTileBase {
         {
             life = lifeMax;
         }
-        // Update broken state
-        if (life >= brokenLimit && broken)
+        // a half built building can't stop working
+        if (built)
         {
-            OnFix();
-        }
-        else if (life < brokenLimit && !broken)
-        {
-            OnBreak();
+            // Update broken state
+            if (life >= brokenLimit && broken)
+            {
+                OnFix();
+            }
+            else if (life < brokenLimit && !broken)
+            {
+                OnBreak();
+            }
         }
     }
 
     // Called when a building has first been put down but is not constructed yet
-    public void OnCreate()
+    public virtual void OnCreate()
     {
         resourceManager.AddOre(-oreCost);
         resourceManager.AddPower(-powerCost);
     }
 
-    // Called when a building is done being constructed
-    public void OnBuilt()
-    {
-        built = true;
-        
-    }
-
-    // Called when a building begins being deconstructed
-    public void OnDeconstruct()
-    {
-        built = false;
-    }
-
     // Called when a building is entirely deconstructed and then sold
-    public void OnSell()
+    public virtual void OnSell()
     {
         resourceManager.AddOre(oreCost);
         resourceManager.AddPower(powerCost);
         DestroySelf();
     }
 
+    // Called when a building is done being constructed
+    public virtual void OnBuilt()
+    {
+        built = true;
+        
+    }
+
+    // Called when a building begins being deconstructed
+    public virtual void OnDeconstruct()
+    {
+        built = false;
+    }
+
     // Called when a building has been damaged enough to no longer function
-    public void OnBreak()
+    public virtual void OnBreak()
     {
         broken = true;
     }
 
     // Called when a building has been fixed enough to function
-    public void OnFix()
+    public virtual void OnFix()
     {
         broken = false;
     }
