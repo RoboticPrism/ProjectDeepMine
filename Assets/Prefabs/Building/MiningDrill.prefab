@@ -81,6 +81,7 @@ MonoBehaviour:
   displayName: Mining Drill
   tileMap: {fileID: 0}
   clickable: 1
+  taskOwner: {fileID: 0}
   tileType: {fileID: 11400000, guid: e3ba5b9538aa89e499e2d04a7e7cc0af, type: 2}
   life: 100
   lifeMax: 100
@@ -89,7 +90,7 @@ MonoBehaviour:
   buildAmount: 0
   buildMax: 100
   built: 0
-  oreCost: 1
+  oreCost: 20
   powerCost: 1
   mineSpeed: 1
   miningNeeded: 100

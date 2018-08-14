@@ -36,6 +36,7 @@ public abstract class BuildingBase : ClickableTileBase {
             new DeconstructTask("Prioritize Deconstruct", this, Task.priotities.REQUEUE_NOW),
         };
         resourceManager = FindObjectOfType<ResourceManager>();
+        OnCreate();
 	}
 	
 	// Update is called once per frame
@@ -95,14 +96,14 @@ public abstract class BuildingBase : ClickableTileBase {
     public virtual void OnCreate()
     {
         resourceManager.AddOre(-oreCost);
-        resourceManager.AddPower(-powerCost);
+        resourceManager.AddPower(powerCost);
     }
 
     // Called when a building is entirely deconstructed and then sold
     public virtual void OnSell()
     {
         resourceManager.AddOre(oreCost);
-        resourceManager.AddPower(powerCost);
+        resourceManager.AddPower(-powerCost);
         DestroySelf();
     }
 

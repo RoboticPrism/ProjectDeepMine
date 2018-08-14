@@ -7,9 +7,11 @@ public class MinerManager : MonoBehaviour {
     List<Miner> minerList = new List<Miner>();
     public TileMenu tileMenuPrefab;
 
+    public static MinerManager instance;
+
     // Use this for initialization
     void Start() {
-
+        instance = this;
     }
 
     // Update is called once per frame

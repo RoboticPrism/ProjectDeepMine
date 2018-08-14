@@ -13,8 +13,11 @@ public class BuildManager : MonoBehaviour {
 
     public List<BuildingBase> buildings;
 
+    public static BuildManager instance;
+
 	// Use this for initialization
 	protected void Start () {
+        instance = this;
         CreateMenuItems();
 	}
 	
