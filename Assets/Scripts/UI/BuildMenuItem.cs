@@ -23,7 +23,7 @@ public class BuildMenuItem : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         resourceUpdateListener = new UnityAction(UpdateAvailability);
-        ResourceManager.StartListening("ResourcesChanged", resourceUpdateListener);
+        EventManager.StartListening("ResourcesChanged", resourceUpdateListener);
         UpdateAvailability();
 	}
 	

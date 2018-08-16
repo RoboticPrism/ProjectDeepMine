@@ -20,27 +20,27 @@ public class PowerPlant : BuildingBase {
     public override void OnBuilt()
     {
         base.OnBuilt();
-        resourceManager.AddPowerMax(powerProvided);
+        ResourceManager.instance.AddPowerMax(powerProvided);
     }
 
     // Called when a building begins being deconstructed
     public override void OnDeconstruct()
     {
         base.OnDeconstruct();
-        resourceManager.AddPowerMax(-powerProvided);
+        ResourceManager.instance.AddPowerMax(-powerProvided);
     }
 
     // Called when a building has been damaged enough to no longer function
     public override void OnBreak()
     {
         base.OnBreak();
-        resourceManager.AddPowerMax(-powerProvided);
+        ResourceManager.instance.AddPowerMax(-powerProvided);
     }
 
     // Called when a building has been fixed enough to function
     public override void OnFix()
     {
         base.OnFix();
-        resourceManager.AddPowerMax(powerProvided);
+        ResourceManager.instance.AddPowerMax(powerProvided);
     }
 }

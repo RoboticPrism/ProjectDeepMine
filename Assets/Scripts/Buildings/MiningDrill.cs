@@ -17,7 +17,6 @@ public class MiningDrill : BuildingBase {
         floorTilemap = FindObjectOfType<TilemapManager>().floorTilemap;
         Vector3Int tileLoc = floorTilemap.WorldToCell(this.transform.position);
         floorBase = floorTilemap.GetInstantiatedObject(tileLoc).GetComponent<FloorBase>();
-        resourceManager = FindObjectOfType<ResourceManager>();
 	}
 	
 	// Update is called once per frame
@@ -35,7 +34,7 @@ public class MiningDrill : BuildingBase {
             {
                 currentMining = 0;
                 if (floorBase.resourceType == FloorBase.resourceTypes.ORE) {
-                    resourceManager.AddOre(floorBase.MineResources());
+                    ResourceManager.instance.AddOre(floorBase.MineResources());
                 }
             }
             else

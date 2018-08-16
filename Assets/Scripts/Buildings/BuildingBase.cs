@@ -18,8 +18,6 @@ public abstract class BuildingBase : ClickableTileBase {
     public int oreCost = 1;
     public int powerCost = 1;
 
-    protected ResourceManager resourceManager;
-
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
@@ -35,7 +33,6 @@ public abstract class BuildingBase : ClickableTileBase {
             new DeconstructTask("Deconstruct Now", this, Task.priotities.QUEUE_NOW),
             new DeconstructTask("Prioritize Deconstruct", this, Task.priotities.REQUEUE_NOW),
         };
-        resourceManager = FindObjectOfType<ResourceManager>();
         OnCreate();
 	}
 	
@@ -95,15 +92,15 @@ public abstract class BuildingBase : ClickableTileBase {
     // Called when a building has first been put down but is not constructed yet
     public virtual void OnCreate()
     {
-        resourceManager.AddOre(-oreCost);
-        resourceManager.AddPower(powerCost);
+        ResourceManager.instance.AddOre(-oreCost);
+        ResourceManager.instance.AddPower(powerCost);
     }
 
     // Called when a building is entirely deconstructed and then sold
     public virtual void OnSell()
     {
-        resourceManager.AddOre(oreCost);
-        resourceManager.AddPower(-powerCost);
+        ResourceManager.instance.AddOre(oreCost);
+        ResourceManager.instance.AddPower(-powerCost);
         DestroySelf();
     }
 

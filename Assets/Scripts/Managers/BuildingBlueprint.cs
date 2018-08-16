@@ -6,8 +6,6 @@ using UnityEngine.Tilemaps;
 
 public class BuildingBlueprint : MonoBehaviour {
     
-    TilemapManager tilemapManager;
-    MinerManager minerManager;
     public BuildingBase buildingType;
 
     public Sprite MiningDrillBlueprint;
@@ -18,8 +16,6 @@ public class BuildingBlueprint : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        tilemapManager = FindObjectOfType<TilemapManager>();
-        minerManager = FindObjectOfType<MinerManager>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
 	}
 	
@@ -29,16 +25,16 @@ public class BuildingBlueprint : MonoBehaviour {
         worldPoint = new Vector3(Mathf.Floor(worldPoint.x), Mathf.Floor(worldPoint.y), -1);
         this.transform.position = worldPoint + new Vector3(0.5f, 0.5f, 0);
 
-        Vector3Int floorPosition = tilemapManager.floorTilemap.WorldToCell(worldPoint);
-        GameObject floorObj = tilemapManager.floorTilemap.GetInstantiatedObject(floorPosition);
+        Vector3Int floorPosition = TilemapManager.instance.floorTilemap.WorldToCell(worldPoint);
+        GameObject floorObj = TilemapManager.instance.floorTilemap.GetInstantiatedObject(floorPosition);
         FloorBase floor = null;
         if (floorObj)
         {
             floor = floorObj.GetComponent<FloorBase>();
         }
 
-        Vector3Int wallPosition = tilemapManager.floorTilemap.WorldToCell(worldPoint);
-        GameObject wallObj = tilemapManager.floorTilemap.GetInstantiatedObject(wallPosition);
+        Vector3Int wallPosition = TilemapManager.instance.floorTilemap.WorldToCell(worldPoint);
+        GameObject wallObj = TilemapManager.instance.floorTilemap.GetInstantiatedObject(wallPosition);
         WallBase wall = null;
         if (wallObj) {
             wall = wallObj.GetComponent<WallBase>();
@@ -48,9 +44,9 @@ public class BuildingBlueprint : MonoBehaviour {
             spriteRenderer.color = buildColor;
             if (Input.GetMouseButtonDown(0))
             {
-                tilemapManager.wallTilemap.SetTile(wallPosition, buildingType.tileType);
-                BuildingBase newBuilding = tilemapManager.wallTilemap.GetInstantiatedObject(wallPosition).GetComponent<BuildingBase>();
-                minerManager.AddTaskToQueue(new BuildTask("", newBuilding, Task.priotities.QUEUE));
+                TilemapManager.instance.wallTilemap.SetTile(wallPosition, buildingType.tileType);
+                BuildingBase newBuilding = TilemapManager.instance.wallTilemap.GetInstantiatedObject(wallPosition).GetComponent<BuildingBase>();
+                MinerManager.instance.AddTaskToQueue(new BuildTask("", newBuilding, Task.priotities.QUEUE));
                 DestroySelf();
             }
         }

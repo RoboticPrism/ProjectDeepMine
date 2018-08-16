@@ -15,8 +15,6 @@ public class ResourceManager : MonoBehaviour {
 
     public static ResourceManager instance;
 
-    private Dictionary<string, UnityEvent> eventDictionary  = new Dictionary<string, UnityEvent>();
-
     // Use this for initialization
     void Start () {
         instance = this;
@@ -33,80 +31,46 @@ public class ResourceManager : MonoBehaviour {
     {
         oreCount = newOreCount;
         oreText.text = oreCount.ToString();
-        TriggerEvent("ResourcesChanged");
+        EventManager.TriggerEvent("ResourcesChanged");
     }
 
     public void AddOre(int newOre)
     {
         oreCount += newOre;
         oreText.text = oreCount.ToString();
-        TriggerEvent("ResourcesChanged");
+        EventManager.TriggerEvent("ResourcesChanged");
     }
 
     public void SetPower(int newPowerCount)
     {
         powerCount = newPowerCount;
         powerText.text = powerCount + " / " + powerMax;
-        TriggerEvent("ResourcesChanged");
+        EventManager.TriggerEvent("ResourcesChanged");
     }
 
     public void AddPower(int newPower)
     {
         powerCount += newPower;
         powerText.text = powerCount + " / " + powerMax;
-        TriggerEvent("ResourcesChanged");
+        EventManager.TriggerEvent("ResourcesChanged");
     }
 
     public void SetPowerMax(int newPowerCount)
     {
         powerMax = newPowerCount;
         powerText.text = powerCount + " / " + powerMax;
-        TriggerEvent("ResourcesChanged");
+        EventManager.TriggerEvent("ResourcesChanged");
     }
 
     public void AddPowerMax(int newPower)
     {
         powerMax += newPower;
         powerText.text = powerCount + " / " + powerMax;
-        TriggerEvent("ResourcesChanged");
+        EventManager.TriggerEvent("ResourcesChanged");
     }
 
     public int PowerAvailable()
     {
         return powerMax - powerCount;
-    }
-
-    public static void StartListening(string eventName, UnityAction listener)
-    {
-        UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
-        {
-            thisEvent.AddListener(listener);
-        }
-        else
-        {
-            thisEvent = new UnityEvent();
-            thisEvent.AddListener(listener);
-            instance.eventDictionary.Add(eventName, thisEvent);
-        }
-    }
-
-    public static void StopListening(string eventName, UnityAction listener)
-    {
-        if (instance == null) return;
-        UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
-        {
-            thisEvent.RemoveListener(listener);
-        }
-    }
-
-    public static void TriggerEvent(string eventName)
-    {
-        UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
-        {
-            thisEvent.Invoke();
-        }
     }
 }
