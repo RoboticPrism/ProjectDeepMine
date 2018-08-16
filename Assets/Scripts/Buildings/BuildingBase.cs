@@ -131,8 +131,8 @@ public abstract class BuildingBase : ClickableTileBase {
 
     public void DestroySelf()
     {
-        Vector3Int tileLoc = tileMap.WorldToCell(this.transform.position);
-        tileMap.SetTile(tileLoc, null);
+        Vector3Int tileLoc = TilemapManager.instance.wallTilemap.WorldToCell(this.transform.position);
+        TilemapManager.instance.wallTilemap.SetTile(tileLoc, null);
     }
 
     public virtual bool CanBuildHere(FloorBase floorTile, WallBase wallTile)

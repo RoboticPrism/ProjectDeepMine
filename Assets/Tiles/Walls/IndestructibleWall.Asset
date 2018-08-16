@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d30ab45cfa87bd41ac03705c084b1ee, type: 3}
-  m_Name: HiddenRoomTile
+  m_Name: IndestructibleWall
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.42745098}
+  m_Sprite: {fileID: 21300000, guid: 491bb58c11a0eeb43b763cb32df61ebe, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 1785513990241132, guid: 8a0a4068e99f95042a6fb20a113bdb21,
+  m_InstancedGameObject: {fileID: 1345919295657736, guid: d3ee77a64bc800f41ad1f53a484e4808,
     type: 2}
   m_Flags: 1
   m_ColliderType: 1

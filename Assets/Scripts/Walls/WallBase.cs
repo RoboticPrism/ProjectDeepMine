@@ -44,7 +44,7 @@ public abstract class WallBase : ClickableTileBase {
             { new List<bool> { false, true, true, false }, innerCornerSprite },
             { new List<bool> { false, false, false, false }, pillarSprite },
         };
-        tileMap = FindObjectOfType<TilemapManager>().wallTilemap;
+        TilemapManager.instance.wallTilemap = FindObjectOfType<TilemapManager>().wallTilemap;
         boxCollider = this.GetComponent<BoxCollider2D>();
         clickable = false;
         CheckNeighbors();
@@ -68,8 +68,8 @@ public abstract class WallBase : ClickableTileBase {
         int i = 0;
         foreach (Vector2 direction in neighborDirections)
         {
-            Vector3Int cell = tileMap.WorldToCell(this.transform.position + (Vector3)direction);
-            GameObject cellObj = tileMap.GetInstantiatedObject(cell);
+            Vector3Int cell = TilemapManager.instance.wallTilemap.WorldToCell(this.transform.position + (Vector3)direction);
+            GameObject cellObj = TilemapManager.instance.wallTilemap.GetInstantiatedObject(cell);
             if (cellObj && 
                 cellObj.GetComponent<WallBase>() && 
                 cellObj.GetComponent<WallBase>().isAlive &&
@@ -148,8 +148,8 @@ public abstract class WallBase : ClickableTileBase {
     {
         foreach (Vector2 direction in neighborDirections)
         {
-            Vector3Int cell = tileMap.WorldToCell(this.transform.position + (Vector3)direction);
-            GameObject cellObj = tileMap.GetInstantiatedObject(cell);
+            Vector3Int cell = TilemapManager.instance.wallTilemap.WorldToCell(this.transform.position + (Vector3)direction);
+            GameObject cellObj = TilemapManager.instance.wallTilemap.GetInstantiatedObject(cell);
             if (cellObj)
             {
                 WallBase neighborWall = cellObj.GetComponent<WallBase>();
@@ -168,7 +168,7 @@ public abstract class WallBase : ClickableTileBase {
         EventManager.TriggerEvent("WallDestroyed", this.transform.position);
         isAlive = false;
         UpdateNeighbors();
-        Vector3Int tileLoc = tileMap.WorldToCell(this.transform.position);
-        tileMap.SetTile(tileLoc, null);
+        Vector3Int tileLoc = TilemapManager.instance.wallTilemap.WorldToCell(this.transform.position);
+        TilemapManager.instance.wallTilemap.SetTile(tileLoc, null);
     }
 }
