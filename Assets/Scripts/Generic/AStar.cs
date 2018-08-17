@@ -43,7 +43,7 @@ public class AStar {
         this.tilemap = tilemap;
     }
 
-    public List<Vector3Int> Generate ()
+    public List<Vector3Int> Generate()
     {
         List<Vector3Int> closedList = new List<Vector3Int>();
         PriorityQueue<Vector3Int> queue = new PriorityQueue<Vector3Int>();
@@ -51,13 +51,13 @@ public class AStar {
 
         gScore[start] = 0f;
 
-        while(queue.Count > 0)
+        while (queue.Count > 0)
         {
             Vector3Int current = queue.Dequeue();
             closedList.Add(current);
 
 
-            if(current == target)
+            if (current == target)
             {
                 break;
             }
@@ -83,7 +83,7 @@ public class AStar {
                     cameFrom.Add(currentNeighbor, current);
                     queue.Enqueue(currentNeighbor, score + Vector3.Distance(currentNeighbor, target));
                 }
-                else if(score < gScore[currentNeighbor])
+                else if (score < gScore[currentNeighbor])
                 {
                     gScore[currentNeighbor] = score;
                     cameFrom[currentNeighbor] = current;
@@ -103,7 +103,7 @@ public class AStar {
                 // check if the diagonal movement is blocked by a wall
                 bool blocked = false;
                 List<Vector2Int> checkDirections = diagonalChecks[direction];
-                foreach(Vector2Int check in checkDirections)
+                foreach (Vector2Int check in checkDirections)
                 {
                     Vector3Int checkPoint = current + new Vector3Int(check.x, check.y, 0);
                     GameObject checkObj = tilemap.GetInstantiatedObject(checkPoint);
@@ -142,9 +142,13 @@ public class AStar {
         while (nextPath != start)
         {
             path.Insert(0, nextPath);
-            nextPath = cameFrom[nextPath];
+            if (cameFrom.ContainsKey(nextPath))
+            {
+                nextPath = cameFrom[nextPath];
+            } else {
+                return new List<Vector3Int>(); 
+            }
         }
-        //path.RemoveAt(path.Count - 1);
         return path;
     }
 }

@@ -11,11 +11,11 @@ public class CameraManager : MonoBehaviour {
     public Vector2 bottomLeft;
     public int borderPadding = 0;
 
-    UnityAction<Vector3> wallDestroyedListener;
+    UnityAction<ClickableTileBase> wallDestroyedListener;
 
     // Use this for initialization
     void Start () {
-        wallDestroyedListener = new UnityAction<Vector3>(SetBounds);
+        wallDestroyedListener = new UnityAction<ClickableTileBase>(SetBounds);
         EventManager.StartListening("WallDestroyed", wallDestroyedListener);
 	}
 	
@@ -31,8 +31,9 @@ public class CameraManager : MonoBehaviour {
 	}
 
     // Extends the camera bounds to include the given location
-    void SetBounds(Vector3 location)
+    void SetBounds(ClickableTileBase tileBase)
     {
+        Vector3 location = tileBase.transform.position;
         if(location.x > topRight.x)
         {
             topRight = new Vector2(location.x, topRight.x);

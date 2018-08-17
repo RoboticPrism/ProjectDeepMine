@@ -94,6 +94,7 @@ public abstract class BuildingBase : ClickableTileBase {
     {
         ResourceManager.instance.AddOre(-oreCost);
         ResourceManager.instance.AddPower(powerCost);
+        EventManager.TriggerEvent("BuildingCreated", this);
     }
 
     // Called when a building is entirely deconstructed and then sold

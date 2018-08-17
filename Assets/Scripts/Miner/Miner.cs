@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 public class Miner : MonoBehaviour {
@@ -11,6 +12,7 @@ public class Miner : MonoBehaviour {
     List<Task> taskList = new List<Task>();
 
     List<Vector3Int> pathToTarget = null;
+    Vector3Int target;
 
     Tilemap tileMap;
 
@@ -25,11 +27,18 @@ public class Miner : MonoBehaviour {
         Vector2Int.left + Vector2Int.up
     };
 
+    private UnityAction<ClickableTileBase> wallDestroyedListener;
+    private UnityAction<ClickableTileBase> buildingCreatedListener;
+
     // Use this for initialization
     void Start () {
         tileMap = FindObjectOfType<TilemapManager>().wallTilemap;
         FindObjectOfType<MinerManager>().AddMiner(this);
-	}
+        wallDestroyedListener = new UnityAction<ClickableTileBase>(UpdatePath);
+        EventManager.StartListening("WallDestroyed", wallDestroyedListener);
+        buildingCreatedListener = new UnityAction<ClickableTileBase>(UpdatePath);
+        EventManager.StartListening("BuildingCreated", buildingCreatedListener);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -109,11 +118,32 @@ public class Miner : MonoBehaviour {
         }
     }
 
+    public void MakePath(Vector3Int targetLocation)
+    {
+        target = targetLocation;
+        pathToTarget = new AStar(tileMap.WorldToCell(this.transform.position), targetLocation, tileMap).Generate();
+        if (pathToTarget.Count > 0)
+        {
+            // we dont want to move into the target, just next to it
+            pathToTarget.Remove(target);
+        }
+        else
+        {
+            // TODO: make a UI alert popup here
+            Debug.Log("cant complete task");
+            taskList.Remove(currentTask);
+            currentTask = null;
+        }
+    }
+
     public void MakePath(Vector2 targetLocation)
     {
-        pathToTarget = new AStar(tileMap.WorldToCell(this.transform.position), tileMap.WorldToCell(targetLocation), tileMap).Generate();
-        // we dont want to move into the target, just next to it
-        pathToTarget.RemoveAt(pathToTarget.Count - 1);
+        MakePath(tileMap.WorldToCell(targetLocation));
+    }
+
+    public void UpdatePath(ClickableTileBase tileBase)
+    {
+        MakePath(tileBase.transform.position);
     }
 
     //  Handles pathfinding a long the current route to a location

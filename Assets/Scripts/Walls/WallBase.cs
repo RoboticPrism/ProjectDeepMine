@@ -165,7 +165,7 @@ public abstract class WallBase : ClickableTileBase {
     // Destroys this wall and updates its neighbors
     public virtual void DestroySelf()
     {
-        EventManager.TriggerEvent("WallDestroyed", this.transform.position);
+        EventManager.TriggerEvent("WallDestroyed", this);
         isAlive = false;
         UpdateNeighbors();
         Vector3Int tileLoc = TilemapManager.instance.wallTilemap.WorldToCell(this.transform.position);
