@@ -15,4 +15,19 @@ public class MineTask : Task {
     {        
         return base.TaskAvailable();
     }
+
+    public bool DoTask(float mineSpeed)
+    {
+        if (targetWall)
+        {
+            targetWall.MineWall(mineSpeed);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    
 }

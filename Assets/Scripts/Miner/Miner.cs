@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class Miner : MonoBehaviour {
     public float moveSpeed = 0.1f;
+    public float rotationSpeed = 1f;
     public float mineSpeed = 1f;
     public float buildSpeed = 1f;
     Task currentTask;
@@ -89,19 +90,31 @@ public class Miner : MonoBehaviour {
         {
             if (currentTask is MineTask)
             {
-                DoMineTask((MineTask)currentTask);
+                if (DoMineTask((MineTask)currentTask))
+                {
+                    EndTask(currentTask);
+                }
             }
             else if (currentTask is BuildTask)
             {
-                DoBuildTask((BuildTask)currentTask);
+                if (DoBuildTask((BuildTask)currentTask))
+                {
+                    EndTask(currentTask);
+                }
             }
             else if (currentTask is RepairTask)
             {
-                DoRepairTask((RepairTask)currentTask);
+                if (DoRepairTask((RepairTask)currentTask))
+                {
+                    EndTask(currentTask);
+                }
             }
             else if (currentTask is DeconstructTask)
             {
-                DoDeconstructTask((DeconstructTask)currentTask);
+                if (DoDeconstructTask((DeconstructTask)currentTask))
+                {
+                    EndTask(currentTask);
+                }
             }
         }
     }
@@ -114,10 +127,17 @@ public class Miner : MonoBehaviour {
             MakePath(newTask.TargetLocation());
         } else
         {
-            RemoveTask(newTask);
+            EndTask(newTask);
         }
     }
 
+    public void EndTask(Task task)
+    {
+        currentTask = null;
+        taskList.Remove(task);
+    }
+
+    // Generates a new path to a target or alerts of a failure to make path
     public void MakePath(Vector3Int targetLocation)
     {
         target = targetLocation;
@@ -141,109 +161,117 @@ public class Miner : MonoBehaviour {
         MakePath(tileMap.WorldToCell(targetLocation));
     }
 
+    // For now just triggers a full recheck of the path, could make this smarter though
     public void UpdatePath(ClickableTileBase tileBase)
     {
         MakePath(tileBase.transform.position);
     }
 
-    //  Handles pathfinding a long the current route to a location
-    private void MoveTowards(Vector2 targetLocation)
-    {  
-        if(Vector3.Distance(this.transform.position, pathToTarget[0]) > 0.1)
+    // Handles moving along a set path towards a target
+    private bool MoveAlongPathBehavior()
+    {
+        if (pathToTarget != null && pathToTarget.Count > 0)
         {
-            this.transform.position =  Vector2.MoveTowards(this.transform.position, new Vector2(pathToTarget[0].x, pathToTarget[0].y), moveSpeed);
-        } else
+            // Account for grid offset
+            Vector2 targetLocation = new Vector2(pathToTarget[0].x + 0.5f, pathToTarget[0].y + 0.5f);
+            if (Vector3.Distance(this.transform.position, targetLocation) > 0.1)
+            {
+                MoveTowardsTarget(targetLocation);
+                RotateAlongPath();
+            } else
+            {
+                pathToTarget.RemoveAt(0);
+            }
+            return false;
+        }
+        else
         {
-            pathToTarget.RemoveAt(0);
+            pathToTarget = null;
+            return true;
+        }
+    }
+
+    // Handles moving towards the given target
+    private void MoveTowardsTarget(Vector2 targetLocation)
+    {
+        this.transform.position =  Vector2.MoveTowards(this.transform.position, targetLocation, moveSpeed);
+    }
+
+    // Handles rotating towards the next node on the path
+    private void RotateAlongPath()
+    {
+        if (pathToTarget != null && pathToTarget.Count > 0)
+        {
+            Vector2 targetLocation = new Vector2(pathToTarget[0].x + 0.5f, pathToTarget[0].y + 0.5f);
+
+            Vector2 vectorToTarget = targetLocation - (Vector2)transform.position;
+            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
+            if (Quaternion.Angle(transform.rotation, targetRotation) < 5)
+            {
+                transform.rotation = targetRotation;
+            }
+        }
+    }
+
+    // Handles rotating towards the task's target
+    private bool RotateTowardsTargetBehavior(Task task)
+    {
+        if (task.target != null)
+        {
+            Vector2 targetLocation = task.TargetLocation();
+
+            Vector2 vectorToTarget = targetLocation - (Vector2)transform.position;
+            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
+            if (Quaternion.Angle(transform.rotation, targetRotation) < 5)
+            {
+                transform.rotation = targetRotation;
+                return true;
+            }
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 
     // Handles moving towards and mining a wall
-    private void DoMineTask(MineTask mineTask)
+    private bool DoMineTask(MineTask mineTask)
     {
-        // move to wall
-        if (pathToTarget != null && pathToTarget.Count > 0)
-        {
-            MoveTowards(mineTask.TargetLocation());
-        }
-        // drill wall
-        else if (mineTask.targetWall.destroyTime > 0)
-        {
-            mineTask.targetWall.MineWall(mineSpeed);
-        }
-        // break wall
-        else
-        {
-            mineTask.targetWall.DestroySelf();
-            taskList.Remove(mineTask);
-            currentTask = null;
-            pathToTarget = null;
-        }
+        return
+             MoveAlongPathBehavior() &&
+             RotateTowardsTargetBehavior(mineTask) &&
+             mineTask.DoTask(mineSpeed);
     }
 
     // Handles moving towards and building a building
-    public void DoBuildTask(BuildTask buildTask)
+    public bool DoBuildTask(BuildTask buildTask)
     {
-        // move to building
-        if (pathToTarget != null && pathToTarget.Count > 0)
-        {
-            MoveTowards(buildTask.TargetLocation());
-        }
-        // build building
-        else if (buildTask.targetBuilding.buildAmount < buildTask.targetBuilding.buildMax)
-        {
-            buildTask.targetBuilding.AddConstruction(buildSpeed);
-        }
-        // end task
-        else
-        {
-            RemoveTask(buildTask);
-            currentTask = null;
-            pathToTarget = null;
-        }
+        return
+            MoveAlongPathBehavior() &&
+            RotateTowardsTargetBehavior(buildTask) &&
+            buildTask.DoTask(buildSpeed);
     }
 
     // Handles moving towards a building and then repairing it
-    public void DoRepairTask(RepairTask repairTask)
+    public bool DoRepairTask(RepairTask repairTask)
     {
-        // move to building
-        if (pathToTarget != null && pathToTarget.Count > 0)
-        {
-            MoveTowards(repairTask.TargetLocation());
-        }
-        // fix up building
-        else if (repairTask.targetBuilding.life < repairTask.targetBuilding.lifeMax)
-        {
-            repairTask.targetBuilding.AddLife((int)buildSpeed);
-        }
-        // end task
-        else
-        {
-            RemoveTask(repairTask);
-            currentTask = null;
-            pathToTarget = null;
-        }
+        return
+            MoveAlongPathBehavior() &&
+            RotateTowardsTargetBehavior(repairTask) &&
+            repairTask.DoTask((int)buildSpeed);
     }
 
     // Handles moving towards a building and then deconstructing it
-    public void DoDeconstructTask(DeconstructTask deconstructTask)
+    public bool DoDeconstructTask(DeconstructTask deconstructTask)
     {
-        // move to building
-        if (pathToTarget != null && pathToTarget.Count > 0)
-        {
-            MoveTowards(deconstructTask.TargetLocation());
-        }
-        // tear down building
-        else if (deconstructTask.targetBuilding.buildAmount >= 0)
-        {
-            deconstructTask.targetBuilding.AddConstruction(-buildSpeed);
-        }
-        // sell building
-        else
-        {
-            RemoveTask(deconstructTask);
-            currentTask = null;
-            pathToTarget = null;
-        }
+        return
+            MoveAlongPathBehavior() &&
+            RotateTowardsTargetBehavior(deconstructTask) &&
+            deconstructTask.DoTask(buildSpeed);
     }
 }

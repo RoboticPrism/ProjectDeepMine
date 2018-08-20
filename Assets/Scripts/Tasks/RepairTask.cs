@@ -25,4 +25,17 @@ public class RepairTask : Task {
         }
 
     }
+
+    public bool DoTask(int repairSpeed)
+    {
+        if(targetBuilding.life < targetBuilding.lifeMax)
+        {
+            targetBuilding.AddLife(repairSpeed);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

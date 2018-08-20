@@ -23,6 +23,18 @@ public class DeconstructTask : Task {
         {
             return false;
         }
+    }
 
+    public bool DoTask(float buildSpeed)
+    {
+        if(targetBuilding)
+        {
+            targetBuilding.AddConstruction(-buildSpeed);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

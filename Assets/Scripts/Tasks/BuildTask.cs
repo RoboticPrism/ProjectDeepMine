@@ -25,4 +25,16 @@ public class BuildTask : Task {
         
     }
 
+    public bool DoTask(float buildSpeed)
+    {
+        if(targetBuilding.buildAmount < targetBuilding.buildMax)
+        {
+            targetBuilding.AddConstruction(buildSpeed);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

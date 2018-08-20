@@ -38,5 +38,9 @@ public class MineableWall : WallBase {
     public void MineWall(float mineSpeed)
     {
         this.destroyTime -= mineSpeed;
+        if (destroyTime < 0)
+        {
+            DestroySelf();
+        }
     }
 }
