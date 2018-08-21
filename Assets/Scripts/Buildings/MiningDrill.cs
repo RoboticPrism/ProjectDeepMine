@@ -44,9 +44,12 @@ public class MiningDrill : BuildingBase {
         }
     }
 
-    public override bool CanBuildHere(FloorBase floorTile, WallBase wallTile)
+    public override bool CanBuildHere(GameObject floorObj, GameObject wallObj)
     {
-        if(wallTile == null && floorTile && floorTile.resourceType != FloorBase.resourceTypes.NONE)
+        if(wallObj == null &&
+            floorObj && 
+            floorObj.GetComponent<FloorBase>() && 
+            floorObj.GetComponent<FloorBase>().resourceType != FloorBase.resourceTypes.NONE)
         {
             return true;
         } else

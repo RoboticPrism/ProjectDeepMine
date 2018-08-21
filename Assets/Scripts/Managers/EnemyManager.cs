@@ -6,14 +6,15 @@ using UnityEngine.Events;
 public class EnemyManager : MonoBehaviour {
 
     public static EnemyManager instance;
-
-    List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
+    
     public List<EnemyBase> spawnableEnemies = new List<EnemyBase>();
 
     List<BuildingBase> buildingList = new List<BuildingBase>();
+    public List<EnemySpawner> spawnPoints = new List<EnemySpawner>();
 
     protected UnityAction<ClickableTileBase> buildingCreatedListener;
     protected UnityAction<ClickableTileBase> buildingRemovedListener;
+    protected UnityAction<ClickableTileBase> wallRemovedListener;
 
     // Use this for initialization
     void Start () {
@@ -22,6 +23,15 @@ public class EnemyManager : MonoBehaviour {
         EventManager.StartListening("BuildingCreated", buildingCreatedListener);
         buildingRemovedListener = new UnityAction<ClickableTileBase>(RemoveBuildingFromList);
         EventManager.StartListening("BuildingSold", buildingRemovedListener);
+        wallRemovedListener = new UnityAction<ClickableTileBase>(CheckForNewSpawner);
+        EventManager.StartListening("WallDestroyed", wallRemovedListener);
+        foreach(EnemySpawner spawner in FindObjectsOfType<EnemySpawner>())
+        {
+            if(spawner.CheckIfCovered())
+            {
+                spawnPoints.Add(spawner);
+            }
+        }
     }
 	
 	// Update is called once per frame
@@ -57,5 +67,19 @@ public class EnemyManager : MonoBehaviour {
             }
         }
         return nearest;
+    }
+
+    public void CheckForNewSpawner(ClickableTileBase tileBase)
+    {
+        Vector3Int location = TilemapManager.instance.wallTilemap.WorldToCell(tileBase.transform.position);
+        GameObject locObj = TilemapManager.instance.floorTilemap.GetInstantiatedObject(location);
+        if (locObj)
+        {
+            EnemySpawner enemySpawner = locObj.GetComponent<EnemySpawner>();
+            if (enemySpawner)
+            {
+                spawnPoints.Add(enemySpawner);
+            }
+        }
     }
 }

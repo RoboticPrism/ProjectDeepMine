@@ -137,15 +137,22 @@ public abstract class BuildingBase : ClickableTileBase {
         TilemapManager.instance.wallTilemap.SetTile(tileLoc, null);
     }
 
-    public virtual bool CanBuildHere(FloorBase floorTile, WallBase wallTile)
+    public virtual bool CanBuildHere(GameObject floorObj, GameObject wallObj)
     {
-        if(wallTile)
+        if (wallObj)
         {
             return false;
         }
         else
         {
-            return true;
+            if (floorObj && floorObj.GetComponent<EnemySpawner>())
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

@@ -26,19 +26,10 @@ public class BuildingBlueprint : MonoBehaviour {
         this.transform.position = worldPoint + new Vector3(0.5f, 0.5f, 0);
 
         Vector3Int floorPosition = TilemapManager.instance.floorTilemap.WorldToCell(worldPoint);
-        GameObject floorObj = TilemapManager.instance.floorTilemap.GetInstantiatedObject(floorPosition);
-        FloorBase floor = null;
-        if (floorObj)
-        {
-            floor = floorObj.GetComponent<FloorBase>();
-        }
+        GameObject floor = TilemapManager.instance.floorTilemap.GetInstantiatedObject(floorPosition);
 
-        Vector3Int wallPosition = TilemapManager.instance.floorTilemap.WorldToCell(worldPoint);
-        GameObject wallObj = TilemapManager.instance.floorTilemap.GetInstantiatedObject(wallPosition);
-        WallBase wall = null;
-        if (wallObj) {
-            wall = wallObj.GetComponent<WallBase>();
-        }
+        Vector3Int wallPosition = TilemapManager.instance.wallTilemap.WorldToCell(worldPoint);
+        GameObject wall = TilemapManager.instance.wallTilemap.GetInstantiatedObject(wallPosition);
         if (buildingType.CanBuildHere(floor, wall))
         {
             spriteRenderer.color = buildColor;
