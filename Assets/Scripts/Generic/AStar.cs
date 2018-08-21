@@ -70,8 +70,8 @@ public class AStar {
                     continue;
                 }
                 GameObject neighborObj = tilemap.GetInstantiatedObject(currentNeighbor);
-                // check for wall at the target location
-                if (neighborObj && neighborObj.GetComponent<WallBase>() && currentNeighbor != target)
+                // check for wall/building at the target location
+                if (neighborObj && (neighborObj.GetComponent<WallBase>() || neighborObj.GetComponent<BuildingBase>()) && currentNeighbor != target)
                 {
                     continue;
                 }
@@ -95,19 +95,19 @@ public class AStar {
             {
                 Vector3Int currentNeighbor = current + new Vector3Int(direction.x, direction.y, 0);
                 GameObject neighborObj = tilemap.GetInstantiatedObject(currentNeighbor);
-                // check for a wall at target location
-                if (neighborObj && neighborObj.GetComponent<WallBase>())
+                // check for a wall/building at target location
+                if (neighborObj && (neighborObj.GetComponent<WallBase>() || neighborObj.GetComponent<BuildingBase>()))
                 {
                     continue;
                 }
-                // check if the diagonal movement is blocked by a wall
+                // check if the diagonal movement is blocked by a wall/building
                 bool blocked = false;
                 List<Vector2Int> checkDirections = diagonalChecks[direction];
                 foreach (Vector2Int check in checkDirections)
                 {
                     Vector3Int checkPoint = current + new Vector3Int(check.x, check.y, 0);
                     GameObject checkObj = tilemap.GetInstantiatedObject(checkPoint);
-                    if (checkObj && checkObj.GetComponent<WallBase>())
+                    if (checkObj && (checkObj.GetComponent<WallBase>() || checkObj.GetComponent<BuildingBase>()))
                     {
                         blocked = true;
                         break;

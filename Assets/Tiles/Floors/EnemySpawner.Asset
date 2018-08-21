@@ -35,4 +35,4 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   PrefabLocalOffset: 0.5
-  prefabZOffset: -1
+  prefabZOffset: 1

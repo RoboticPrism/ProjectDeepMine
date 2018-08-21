@@ -15,6 +15,7 @@ public class Core : BuildingBase {
             new RepairTask("Repair Now", this, Task.priotities.QUEUE_NOW),
             new RepairTask("Prioritize Repair", this, Task.priotities.REQUEUE_NOW)
         };
+        OnCreate();
     }
 	
 	// Update is called once per frame

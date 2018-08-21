@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyBase {
 
+    AttackTask attackTask = null;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -13,4 +15,43 @@ public class MeleeEnemy : EnemyBase {
 	void Update () {
 		
 	}
+
+    void FixedUpdate()
+    {
+        DoNextAction();
+    }
+
+    void DoNextAction()
+    {
+        if(attackTask != null)
+        {
+            if(AttackTask())
+            {
+                attackTask = null;
+                
+            }
+        }
+        else
+        {
+            BuildingBase targetBuidling = EnemyManager.instance.GetNearestBuilding(this.transform.position);
+            if (targetBuidling)
+            {
+                attackTask = new AttackTask("", targetBuidling, Task.priotities.QUEUE_NOW);
+                MakePath(attackTask.TargetLocation());
+            }
+        }
+    }
+
+    bool AttackTask()
+    {
+        return
+             MoveAlongPathBehavior() &&
+             RotateTowardsTargetBehavior(attackTask) &&
+             attackTask.DoTask(damage, attackSpeed);
+    }
+
+    void DestroySelf()
+    {
+        Destroy(this.gameObject);
+    }
 }

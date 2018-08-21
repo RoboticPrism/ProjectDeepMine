@@ -102,6 +102,7 @@ public abstract class BuildingBase : ClickableTileBase {
     {
         ResourceManager.instance.AddOre(oreCost);
         ResourceManager.instance.AddPower(-powerCost);
+        EventManager.TriggerEvent("BuildingSold", this);
         DestroySelf();
     }
 
