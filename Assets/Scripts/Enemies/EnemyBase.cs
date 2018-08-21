@@ -19,5 +19,34 @@ public class EnemyBase : MoveableBase {
 	void Update () {
 		
 	}
-    
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("turret");
+        Turret turret = collision.GetComponent<Turret>();
+        if (turret && turret.targetEnemy == null)
+        {
+            turret.targetEnemy = this;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Turret turret = collision.GetComponent<Turret>();
+        if (turret && turret.targetEnemy == null)
+        {
+            turret.targetEnemy = this;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Turret turret = collision.GetComponent<Turret>();
+        if (collision.GetComponent<EnemyBase>() == turret.targetEnemy)
+        {
+            turret.targetEnemy = null;
+        }
+    }
+
+
 }

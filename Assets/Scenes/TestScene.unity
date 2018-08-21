@@ -571,6 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableEnemies: []
+  spawnPoints: []
 --- !u!1 &474875367
 GameObject:
   m_ObjectHideFlags: 0
@@ -8078,6 +8079,16 @@ Tilemap:
         type: 2}
       m_TileFlags: 1
       m_ColliderType: 2
+  - first: {x: -2, y: -5, z: 0}
+    second:
+      m_TileIndex: 3
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 1179466206587778, guid: c527710f2853a5a47a7e7db910c58a63,
+        type: 2}
+      m_TileFlags: 1
+      m_ColliderType: 1
   - first: {x: 2, y: -5, z: 0}
     second:
       m_TileIndex: 4
@@ -10386,13 +10397,13 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: dec823b98e74a7542bb2c84ce86b0682, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: cf750c99ba468264a94dabf90e032247, type: 2}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 4f36d8e154fa30f479c1272f8a8d9481, type: 2}
   - m_RefCount: 311
     m_Data: {fileID: 11400000, guid: fddaf948eba09e747a7a5aa2009f5748, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: eff179241b98513439967e68e55087ba, type: 3}
   - m_RefCount: 31
     m_Data: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}
   - m_RefCount: 67
@@ -10402,7 +10413,7 @@ Tilemap:
   - m_RefCount: 311
     m_Data: {fileID: 21300000, guid: 491bb58c11a0eeb43b763cb32df61ebe, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 410
+  - m_RefCount: 411
     m_Data:
       e00: 1
       e01: 0
@@ -10475,7 +10486,7 @@ Tilemap:
       e32: 1e-45
       e33: 0
   m_TileColorArray:
-  - m_RefCount: 379
+  - m_RefCount: 380
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: 13488.9375, g: 13488.9375, b: 13488.9375, a: 13488.9375}
