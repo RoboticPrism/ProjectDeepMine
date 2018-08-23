@@ -22,7 +22,6 @@ public class EnemyBase : MoveableBase {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("turret");
         Turret turret = collision.GetComponent<Turret>();
         if (turret && turret.targetEnemy == null)
         {
@@ -48,5 +47,17 @@ public class EnemyBase : MoveableBase {
         }
     }
 
+    public void TakeDamage(int damageTaken)
+    {
+        life -= damageTaken;
+        if (life <= 0)
+        {
+            DestroySelf();
+        }
+    }
 
+    public void DestroySelf()
+    {
+        Destroy(this.gameObject);
+    }
 }

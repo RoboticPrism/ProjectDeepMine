@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Turret : BuildingBase {
-
-    public int damage;
+    
     public int attackSpeed;
+    int attackSpeedCurrent = 0;
     int attackSpeedMax = 60;
 
     public float rotationSpeed = 1f;
 
     public EnemyBase targetEnemy;
+
+    public FriendlyProjectileBase projectilePrefab;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -25,7 +27,7 @@ public class Turret : BuildingBase {
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        RotateTowardsEnemy();
+        bool _ = RotateTowardsEnemy() && Shoot();
     }
 
     private bool RotateTowardsEnemy()
@@ -47,6 +49,21 @@ public class Turret : BuildingBase {
         }
         else
         {
+            return false;
+        }
+    }
+
+    private bool Shoot()
+    {
+        if (attackSpeedCurrent < attackSpeedMax)
+        {
+            attackSpeedCurrent += attackSpeed;
+            return false;
+        }
+        else
+        {
+            attackSpeedCurrent = 0;
+            FriendlyProjectileBase projectile = Instantiate(projectilePrefab, this.transform.position, this.transform.rotation);
             return true;
         }
     }

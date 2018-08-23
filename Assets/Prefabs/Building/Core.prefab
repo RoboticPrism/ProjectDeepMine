@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114275073892342082}
   - component: {fileID: 212562300614183900}
   - component: {fileID: 61595196320292216}
+  - component: {fileID: 50379203628268418}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -42,6 +43,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50379203628268418
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1033076409185816}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61595196320292216
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -79,7 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: 
-  tileMap: {fileID: 0}
   clickable: 1
   taskOwner: {fileID: 0}
   tileType: {fileID: 11400000, guid: cf750c99ba468264a94dabf90e032247, type: 2}

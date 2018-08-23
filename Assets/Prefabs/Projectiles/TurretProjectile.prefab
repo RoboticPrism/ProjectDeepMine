@@ -9,66 +9,66 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1428636775518900}
+  m_RootGameObject: {fileID: 1612891846035974}
   m_IsPrefabAsset: 1
---- !u!1 &1428636775518900
+--- !u!1 &1612891846035974
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4455685833004038}
-  - component: {fileID: 114531155187711242}
-  - component: {fileID: 212778967018197666}
-  - component: {fileID: 61521011598875340}
-  - component: {fileID: 50055010069157644}
+  - component: {fileID: 4930199698992980}
+  - component: {fileID: 114325419873514344}
+  - component: {fileID: 212884199861587832}
+  - component: {fileID: 58718571402367736}
+  - component: {fileID: 50844323513424150}
   m_Layer: 0
-  m_Name: PowerPlant
+  m_Name: TurretProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4455685833004038
+--- !u!4 &4930199698992980
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1428636775518900}
+  m_GameObject: {fileID: 1612891846035974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50055010069157644
+--- !u!50 &50844323513424150
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1428636775518900}
-  m_BodyType: 2
+  m_GameObject: {fileID: 1612891846035974}
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61521011598875340
-BoxCollider2D:
+--- !u!58 &58718571402367736
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1428636775518900}
+  m_GameObject: {fileID: 1612891846035974}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -76,49 +76,27 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &114531155187711242
+  m_Radius: 0.25
+--- !u!114 &114325419873514344
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1428636775518900}
+  m_GameObject: {fileID: 1612891846035974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a5a51af21d5db64cb9debfa5b5a7db3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ee48fb0ec9f93d44973739bba4f9797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: Power Plant
-  clickable: 1
-  taskOwner: {fileID: 0}
-  tileType: {fileID: 11400000, guid: 0548f62c89320fc49b91782a3f16e275, type: 2}
-  life: 100
-  lifeMax: 100
-  brokenLimit: 50
-  broken: 0
-  buildAmount: 0
-  buildMax: 100
-  built: 0
-  oreCost: 20
-  powerCost: 0
-  powerProvided: 3
---- !u!212 &212778967018197666
+  damage: 3
+  speed: 10
+--- !u!212 &212884199861587832
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1428636775518900}
+  m_GameObject: {fileID: 1612891846035974}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -148,12 +126,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 052ed19fa670cf7418845d5c6fc91e00, type: 3}
-  m_Color: {r: 0, g: 0.2746606, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 52c6c953b5111db418c5bb3bb914badf, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
