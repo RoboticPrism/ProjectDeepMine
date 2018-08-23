@@ -60,7 +60,7 @@ public abstract class BuildingBase : ClickableTileBase {
 
             OnDeconstruct();
         }
-        else if (buildAmount < 0)
+        else if (buildAmount <= 0)
         {
             Debug.Log("sell");
             OnSell();

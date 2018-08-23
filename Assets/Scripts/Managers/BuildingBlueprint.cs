@@ -17,6 +17,7 @@ public class BuildingBlueprint : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         spriteRenderer = this.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = buildingType.GetComponent<SpriteRenderer>().sprite;
 	}
 	
 	// Update is called once per frame

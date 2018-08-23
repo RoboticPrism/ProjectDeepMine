@@ -30,11 +30,11 @@ public class DeconstructTask : Task {
         if(targetBuilding)
         {
             targetBuilding.AddConstruction(-buildSpeed);
-            return true;
+            return false;
         }
         else
         {
-            return false;
+            return true;
         }
     }
 }
