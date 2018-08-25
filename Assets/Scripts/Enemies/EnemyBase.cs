@@ -5,10 +5,15 @@ using UnityEngine;
 public class EnemyBase : MoveableBase {
 
     public int life;
-    public int maxLife;
+    public int lifeMax;
 
     public int damage = 1;
     public float attackSpeed = 1f;
+
+    public HealthBar healthBarPrefab;
+    HealthBar healthBarInstance;
+
+    public Color healthBarColor;
 
 	// Use this for initialization
 	void Start () {
@@ -54,10 +59,33 @@ public class EnemyBase : MoveableBase {
         {
             DestroySelf();
         }
+        UpdateHealthBar();
     }
 
     public void DestroySelf()
     {
         Destroy(this.gameObject);
+    }
+
+    // Updates the health bar, builds on if needed, or destroys health bar if unit is at max
+    private void UpdateHealthBar()
+    {
+        if (life < lifeMax)
+        {
+            if (healthBarInstance == null)
+            {
+                healthBarInstance = Instantiate(healthBarPrefab, transform);
+                healthBarInstance.transform.position += new Vector3(0, -0.4f, 0);
+                healthBarInstance.UpdateColor(healthBarColor);
+            }
+            healthBarInstance.UpdateBar((float)life / lifeMax);
+        }
+        else
+        {
+            if (healthBarInstance)
+            {
+                Destroy(healthBarInstance.gameObject);
+            }
+        }
     }
 }

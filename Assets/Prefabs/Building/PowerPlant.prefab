@@ -112,6 +112,10 @@ MonoBehaviour:
   built: 0
   oreCost: 20
   powerCost: 0
+  healthBarPrefab: {fileID: 114595616249524122, guid: 96df83764b49de344bff03ec513c1df7,
+    type: 2}
+  healthBarColor: {r: 1, g: 0, b: 0, a: 1}
+  buildBarColor: {r: 1, g: 1, b: 0, a: 1}
   powerProvided: 3
 --- !u!212 &212778967018197666
 SpriteRenderer:

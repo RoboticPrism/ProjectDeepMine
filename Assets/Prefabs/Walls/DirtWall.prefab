@@ -111,8 +111,12 @@ MonoBehaviour:
   pillarSprite: {fileID: 0}
   blocksLighting: 1
   isAlive: 1
-  destroyTime: 100
+  life: 100
+  lifeMax: 100
   type: 0
+  healthBarPrefab: {fileID: 114595616249524122, guid: 96df83764b49de344bff03ec513c1df7,
+    type: 2}
+  healthBarColor: {r: 1, g: 1, b: 0, a: 1}
 --- !u!212 &212308304393458838
 SpriteRenderer:
   m_ObjectHideFlags: 1

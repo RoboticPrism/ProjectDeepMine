@@ -13,6 +13,8 @@ public class MoveableBase : MonoBehaviour {
     protected UnityAction<ClickableTileBase> wallDestroyedListener;
     protected UnityAction<ClickableTileBase> buildingCreatedListener;
 
+    public GameObject moveableBody;
+
     // Use this for initialization
     void Start () {
         wallDestroyedListener = new UnityAction<ClickableTileBase>(UpdatePath);
@@ -96,10 +98,10 @@ public class MoveableBase : MonoBehaviour {
             Vector2 vectorToTarget = targetLocation - (Vector2)transform.position;
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
-            if (Quaternion.Angle(transform.rotation, targetRotation) < 5)
+            moveableBody.transform.rotation = Quaternion.Slerp(moveableBody.transform.rotation, targetRotation, rotationSpeed);
+            if (Quaternion.Angle(moveableBody.transform.rotation, targetRotation) < 5)
             {
-                transform.rotation = targetRotation;
+                moveableBody.transform.rotation = targetRotation;
             }
         }
     }
@@ -114,10 +116,10 @@ public class MoveableBase : MonoBehaviour {
             Vector2 vectorToTarget = targetLocation - (Vector2)transform.position;
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
-            if (Quaternion.Angle(transform.rotation, targetRotation) < 5)
+            moveableBody.transform.rotation = Quaternion.Slerp(moveableBody.transform.rotation, targetRotation, rotationSpeed);
+            if (Quaternion.Angle(moveableBody.transform.rotation, targetRotation) < 5)
             {
-                transform.rotation = targetRotation;
+                moveableBody.transform.rotation = targetRotation;
                 return true;
             }
             return false;

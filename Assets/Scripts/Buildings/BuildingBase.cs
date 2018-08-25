@@ -18,8 +18,14 @@ public abstract class BuildingBase : ClickableTileBase {
     public int oreCost = 1;
     public int powerCost = 1;
 
-	// Use this for initialization
-	protected override void Start () {
+    public HealthBar healthBarPrefab;
+    HealthBar healthBarInstance;
+    HealthBar buildBarInstance;
+    public Color healthBarColor;
+    public Color buildBarColor;
+
+    // Use this for initialization
+    protected override void Start () {
         base.Start();
         potentialTasks = new List<Task>
         {
@@ -65,6 +71,7 @@ public abstract class BuildingBase : ClickableTileBase {
             Debug.Log("sell");
             OnSell();
         }
+        UpdateBuildBar();
     }
 
     public void AddLife(int addAmount)
@@ -87,6 +94,7 @@ public abstract class BuildingBase : ClickableTileBase {
                 OnBreak();
             }
         }
+        UpdateHealthBar();
     }
 
     // Called when a building has first been put down but is not constructed yet
@@ -110,7 +118,6 @@ public abstract class BuildingBase : ClickableTileBase {
     public virtual void OnBuilt()
     {
         built = true;
-        
     }
 
     // Called when a building begins being deconstructed
@@ -152,6 +159,50 @@ public abstract class BuildingBase : ClickableTileBase {
             else
             {
                 return true;
+            }
+        }
+    }
+
+    // Updates the health bar, builds on if needed, or destroys health bar if unit is at max
+    private void UpdateHealthBar()
+    {
+        if (life < lifeMax)
+        {
+            if (healthBarInstance == null)
+            {
+                healthBarInstance = Instantiate(healthBarPrefab, transform);
+                healthBarInstance.transform.position += new Vector3(0, -0.4f, 0);
+                healthBarInstance.UpdateColor(healthBarColor);
+            }
+            healthBarInstance.UpdateBar((float)life / lifeMax);
+        }
+        else
+        {
+            if(healthBarInstance)
+            {
+                Destroy(healthBarInstance.gameObject);
+            }
+        }
+    }
+
+    // Updates the build progress bar, builds on if needed, or destroys health bar if unit is at max
+    private void UpdateBuildBar()
+    {
+        if (buildAmount < buildMax)
+        {
+            if (buildBarInstance == null)
+            {
+                buildBarInstance = Instantiate(healthBarPrefab, transform);
+                buildBarInstance.transform.position += new Vector3(0, -0.2f, 0);
+                buildBarInstance.UpdateColor(buildBarColor);
+            }
+            buildBarInstance.UpdateBar(buildAmount / buildMax);
+        }
+        else
+        {
+            if(buildBarInstance)
+            {
+                Destroy(buildBarInstance.gameObject);
             }
         }
     }

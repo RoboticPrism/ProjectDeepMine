@@ -10,6 +10,8 @@ public class Turret : BuildingBase {
 
     public float rotationSpeed = 1f;
 
+    public GameObject turretHead;
+
     public EnemyBase targetEnemy;
 
     public FriendlyProjectileBase projectilePrefab;
@@ -27,7 +29,10 @@ public class Turret : BuildingBase {
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        bool _ = RotateTowardsEnemy() && Shoot();
+        if (built && !broken)
+        {
+            bool _ = RotateTowardsEnemy() && Shoot();
+        }
     }
 
     private bool RotateTowardsEnemy()
@@ -39,10 +44,10 @@ public class Turret : BuildingBase {
             Vector2 vectorToTarget = targetLocation - (Vector2)transform.position;
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
-            if (Quaternion.Angle(transform.rotation, targetRotation) < 5)
+            turretHead.transform.rotation = Quaternion.Slerp(turretHead.transform.rotation, targetRotation, rotationSpeed);
+            if (Quaternion.Angle(turretHead.transform.rotation, targetRotation) < 5)
             {
-                transform.rotation = targetRotation;
+                turretHead.transform.rotation = targetRotation;
                 return true;
             }
             return false;
@@ -63,7 +68,7 @@ public class Turret : BuildingBase {
         else
         {
             attackSpeedCurrent = 0;
-            FriendlyProjectileBase projectile = Instantiate(projectilePrefab, this.transform.position, this.transform.rotation);
+            FriendlyProjectileBase projectile = Instantiate(projectilePrefab, this.transform.position, turretHead.transform.rotation);
             return true;
         }
     }
