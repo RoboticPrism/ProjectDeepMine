@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FloorBase : MonoBehaviour {
-
     public int resourceCount = 0;
     public int resourcesPerHaul = 5;
     public bool buildable = true;

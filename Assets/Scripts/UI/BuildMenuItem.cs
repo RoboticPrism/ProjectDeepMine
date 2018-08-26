@@ -34,7 +34,7 @@ public class BuildMenuItem : MonoBehaviour {
 
     public void SetupItem(BuildingBase buildingBase, Action action)
     {
-        this.text.text = buildingBase.displayName;
+        this.text.text = buildingBase.GetComponent<HoverInfo>().displayName;
         this.image.sprite = buildingBase.GetComponent<SpriteRenderer>().sprite;
         this.buildingBase = buildingBase;
         this.oreCost.text = buildingBase.oreCost.ToString();

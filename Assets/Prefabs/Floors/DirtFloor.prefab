@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4409133992098154}
   - component: {fileID: 114393248333442716}
+  - component: {fileID: 114232549393195468}
   - component: {fileID: 212796784830527340}
   m_Layer: 0
   m_Name: DirtFloor
@@ -41,6 +42,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114232549393195468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1568773169328620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Dirt Floor
+  sprite: {fileID: 21300000, guid: 018680f15b5db284d9626dd893162da1, type: 3}
+  description: A plain dirt floor.  Can be built upon.
 --- !u!114 &114393248333442716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,6 +67,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9118ed855230e2d4c923431a3ce7e96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: Dirt Floor
+  description: A plain dirt floor.  Can be built upon.
+  resourceCount: 0
+  resourcesPerHaul: 5
+  buildable: 1
+  resourceType: 0
 --- !u!212 &212796784830527340
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -52,8 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93db16641334c0542b6be1431c72366a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: 
-  tileMap: {fileID: 0}
+  displayName: Unknown
+  description: This area has yet to be discovered.
+  clickable: 1
+  taskOwner: {fileID: 0}
   spriteRenderer: {fileID: 212296770356454828}
   boxCollider: {fileID: 0}
   unknownSprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}

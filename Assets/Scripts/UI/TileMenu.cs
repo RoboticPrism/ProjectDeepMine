@@ -39,7 +39,7 @@ public class TileMenu : MonoBehaviour {
     public void CreateMenu(ClickableTileBase selectedTile)
     {
         this.selectedTile = selectedTile;
-        this.title.text = selectedTile.displayName;
+        this.title.text = selectedTile.GetComponent<HoverInfo>().displayName;
         MineableWall mineableWall = selectedTile.GetComponent<MineableWall>();
         BuildingBase buildingBase = selectedTile.GetComponent<BuildingBase>();
 

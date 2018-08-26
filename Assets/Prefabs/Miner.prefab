@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4571543121436204}
   - component: {fileID: 212161468758871910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MoveableBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,8 +36,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4355184135099980}
   - component: {fileID: 114986426207556168}
+  - component: {fileID: 114217428123476892}
+  - component: {fileID: 58006233565154696}
   - component: {fileID: 50526862172916372}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Miner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +80,7 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1526358376470928}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -91,6 +93,36 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &58006233565154696
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526358376470928}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &114217428123476892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526358376470928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 1
+  displayName: Basic Miner
+  sprite: {fileID: 21300000, guid: eff179241b98513439967e68e55087ba, type: 3}
+  description: A basic worker that can construct buildings and mine walls.
 --- !u!114 &114986426207556168
 MonoBehaviour:
   m_ObjectHideFlags: 1

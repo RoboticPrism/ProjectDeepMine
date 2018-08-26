@@ -5,8 +5,6 @@ using UnityEngine.Tilemaps;
 
 // An object that sits in the grid and can be clicked to select it
 public class ClickableTileBase : MonoBehaviour {
-
-    public string displayName;
     public bool clickable = true;
     public List<Task> potentialTasks = new List<Task>();
     public Task currentTask;

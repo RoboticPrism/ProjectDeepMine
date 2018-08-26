@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4645630660950390}
   - component: {fileID: 114275073892342082}
+  - component: {fileID: 114620833684224080}
   - component: {fileID: 212562300614183900}
   - component: {fileID: 61595196320292216}
   - component: {fileID: 50379203628268418}
@@ -99,12 +100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6196ee462f6fa6449a81f9d323bc07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: 
+  displayName: Base Core
+  description: The core of your base.  If this gets destroyed, you lose.  Cannot be
+    moved.
   clickable: 1
   taskOwner: {fileID: 0}
   tileType: {fileID: 11400000, guid: cf750c99ba468264a94dabf90e032247, type: 2}
-  life: 1000
-  lifeMax: 1000
+  life: 100
+  lifeMax: 100
   brokenLimit: 50
   broken: 0
   buildAmount: 1
@@ -116,6 +119,21 @@ MonoBehaviour:
     type: 2}
   healthBarColor: {r: 1, g: 0, b: 0, a: 1}
   buildBarColor: {r: 1, g: 1, b: 0, a: 1}
+--- !u!114 &114620833684224080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1033076409185816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Base Core
+  sprite: {fileID: 21300000, guid: 052ed19fa670cf7418845d5c6fc91e00, type: 3}
+  description: The core of your base.  If this gets destroyed, you lose.  Cannot be
+    moved.
 --- !u!212 &212562300614183900
 SpriteRenderer:
   m_ObjectHideFlags: 1

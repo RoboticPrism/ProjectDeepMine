@@ -9,6 +9,8 @@ public abstract class WallBase : ClickableTileBase {
     public SpriteRenderer spriteRenderer;
     public BoxCollider2D boxCollider;
 
+    private HoverInfo hoverInfo;
+
     List<Vector2> neighborDirections = new List<Vector2> {
         Vector2.up,
         Vector2.right,
@@ -45,7 +47,8 @@ public abstract class WallBase : ClickableTileBase {
             { new List<bool> { false, false, false, false }, pillarSprite },
         };
         TilemapManager.instance.wallTilemap = FindObjectOfType<TilemapManager>().wallTilemap;
-        boxCollider = this.GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        hoverInfo = GetComponent<HoverInfo>();
         clickable = false;
         CheckNeighbors();
         UpdateShading();
@@ -85,6 +88,10 @@ public abstract class WallBase : ClickableTileBase {
             i++;
         }
         clickable = !IsSurrounded(false);
+        if (hoverInfo)
+        {
+            hoverInfo.visible = !IsSurrounded(true);
+        }
     }
 
     // Updates the shading on the block relative to its neighbors

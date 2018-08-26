@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4455685833004038}
   - component: {fileID: 114531155187711242}
+  - component: {fileID: 114684195478921796}
   - component: {fileID: 212778967018197666}
   - component: {fileID: 61521011598875340}
   - component: {fileID: 50055010069157644}
@@ -100,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: Power Plant
+  description: Provides power to nearby buildings.
   clickable: 1
   taskOwner: {fileID: 0}
   tileType: {fileID: 11400000, guid: 0548f62c89320fc49b91782a3f16e275, type: 2}
@@ -117,6 +119,20 @@ MonoBehaviour:
   healthBarColor: {r: 1, g: 0, b: 0, a: 1}
   buildBarColor: {r: 1, g: 1, b: 0, a: 1}
   powerProvided: 3
+--- !u!114 &114684195478921796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1428636775518900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Power Plant
+  sprite: {fileID: 21300000, guid: 052ed19fa670cf7418845d5c6fc91e00, type: 3}
+  description: Provides power to nearby buildings.
 --- !u!212 &212778967018197666
 SpriteRenderer:
   m_ObjectHideFlags: 1

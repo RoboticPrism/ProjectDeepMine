@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4539196220785170}
   - component: {fileID: 114152273323275194}
+  - component: {fileID: 114445701637462880}
   - component: {fileID: 212398528238813404}
   - component: {fileID: 61255931586051402}
   - component: {fileID: 50685501316566532}
@@ -99,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd30a40abed546e42b7cbd697e0d06f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: Solid Wall
   clickable: 1
   taskOwner: {fileID: 0}
   spriteRenderer: {fileID: 212398528238813404}
@@ -111,6 +111,22 @@ MonoBehaviour:
   pillarSprite: {fileID: 0}
   blocksLighting: 1
   isAlive: 1
+--- !u!114 &114445701637462880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345919295657736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 1
+  displayName: Solid Wall
+  sprite: {fileID: 21300000, guid: 491bb58c11a0eeb43b763cb32df61ebe, type: 3}
+  description: This wall is packed solid.  Cannot be destroyed by conventional mining
+    methods.
 --- !u!212 &212398528238813404
 SpriteRenderer:
   m_ObjectHideFlags: 1

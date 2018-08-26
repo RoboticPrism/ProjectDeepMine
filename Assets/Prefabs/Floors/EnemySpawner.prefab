@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4353790211343924}
   - component: {fileID: 114024765349415246}
+  - component: {fileID: 114478845576497254}
   - component: {fileID: 212359221904404272}
   m_Layer: 0
   m_Name: EnemySpawner
@@ -52,10 +53,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9842d4c40468e094aaaf6ed19de091ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: Dirt Hole
+  description: A hole in the floor.  Enemies can burrow out of it.  Too unstable to
+    be built on.
   resourceCount: 0
   resourcesPerHaul: 5
   buildable: 1
   resourceType: 0
+--- !u!114 &114478845576497254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922921353419972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Dirt Hole
+  sprite: {fileID: 21300000, guid: c7ae29f91a5cec24d9df0b1dbdaf0924, type: 3}
+  description: A hole in the floor.  Enemies can burrow out of it.  Too unstable to
+    be built on.
 --- !u!212 &212359221904404272
 SpriteRenderer:
   m_ObjectHideFlags: 1
