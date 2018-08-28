@@ -9,7 +9,7 @@ public class AttackTask : Task {
 
     public BuildingBase targetBuilding;
 
-    public AttackTask(string taskName, BuildingBase target, priotities priority) : base(taskName, target, priority)
+    public AttackTask(string taskName, BuildingBase target) : base(taskName, target)
     {
         this.targetBuilding = target;
     }

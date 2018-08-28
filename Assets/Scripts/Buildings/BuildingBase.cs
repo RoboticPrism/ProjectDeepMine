@@ -29,15 +29,9 @@ public abstract class BuildingBase : ClickableTileBase {
         base.Start();
         potentialTasks = new List<Task>
         {
-            new BuildTask("Schedule Build", this, Task.priotities.QUEUE),
-            new BuildTask("Build Now", this, Task.priotities.QUEUE_NOW),
-            new BuildTask("Prioritize Build", this, Task.priotities.REQUEUE_NOW),
-            new RepairTask("Schedule Repair", this, Task.priotities.QUEUE),
-            new RepairTask("Repair Now", this, Task.priotities.QUEUE_NOW),
-            new RepairTask("Prioritize Repair", this, Task.priotities.REQUEUE_NOW),
-            new DeconstructTask("Schedule Deconstruct", this, Task.priotities.QUEUE),
-            new DeconstructTask("Deconstruct Now", this, Task.priotities.QUEUE_NOW),
-            new DeconstructTask("Prioritize Deconstruct", this, Task.priotities.REQUEUE_NOW),
+            new BuildTask("Build", this),
+            new RepairTask("Repair", this),
+            new DeconstructTask("Deconstruct", this)
         };
         OnCreate();
 	}
@@ -117,12 +111,14 @@ public abstract class BuildingBase : ClickableTileBase {
     // Called when a building is done being constructed
     public virtual void OnBuilt()
     {
+        EventManager.TriggerEvent("BuildingBuilt", this);
         built = true;
     }
 
     // Called when a building begins being deconstructed
     public virtual void OnDeconstruct()
     {
+        EventManager.TriggerEvent("BuildingDeconstructed", this);
         built = false;
     }
 
@@ -136,6 +132,16 @@ public abstract class BuildingBase : ClickableTileBase {
     public virtual void OnFix()
     {
         broken = false;
+    }
+
+    public virtual void OnDamaged()
+    {
+        EventManager.TriggerEvent("BuildingDamaged", this);
+    }
+
+    public virtual void OnRepaired()
+    {
+        EventManager.TriggerEvent("BuildingRepaired", this);
     }
 
     public void DestroySelf()

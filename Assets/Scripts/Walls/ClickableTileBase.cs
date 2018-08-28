@@ -7,8 +7,6 @@ using UnityEngine.Tilemaps;
 public class ClickableTileBase : MonoBehaviour {
     public bool clickable = true;
     public List<Task> potentialTasks = new List<Task>();
-    public Task currentTask;
-    public Miner taskOwner;
 
     // Use this for initialization
     protected virtual void Start () {

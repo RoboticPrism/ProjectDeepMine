@@ -38,7 +38,7 @@ public class BuildingBlueprint : MonoBehaviour {
             {
                 TilemapManager.instance.wallTilemap.SetTile(wallPosition, buildingType.tileType);
                 BuildingBase newBuilding = TilemapManager.instance.wallTilemap.GetInstantiatedObject(wallPosition).GetComponent<BuildingBase>();
-                MinerManager.instance.AddTaskToQueue(new BuildTask("", newBuilding, Task.priotities.QUEUE));
+                MinerManager.instance.AddTaskToQueue(new BuildTask("", newBuilding));
                 DestroySelf();
             }
         }

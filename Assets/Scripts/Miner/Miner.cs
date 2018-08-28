@@ -8,8 +8,7 @@ public class Miner : MoveableBase {
     public float mineSpeed = 1f;
     public float buildSpeed = 1f;
 
-    Task currentTask;
-    List<Task> taskList = new List<Task>();
+    public Task currentTask;
 
     // Use this for initialization
     void Start () {
@@ -26,40 +25,11 @@ public class Miner : MoveableBase {
         DoNextTask();
     }
 
-    // adds a task to the end of the queue
-    public void AddTask(Task task)
-    {
-        taskList.Add(task);
-        task.SetTaskOwner(this);
-    }
-
-    public void RemoveTask(Task task)
-    {
-        task.SetTaskOwner(null);
-        taskList.Remove(task);
-    }
-
-    // adds a task to the front of the queue, interrupting any current tasks
-    public void AddTaskNow(Task task)
-    {
-        taskList.Insert(0, task);
-        task.SetTaskOwner(this);
-        SelectTask(task);
-    }
-
-    // removes a task from further down the queue and places it on top of the queue
-    public void PrioritizeTask(Task task)
-    {
-        RemoveTask(task);
-        AddTaskNow(task);
-        SelectTask(task);
-    }
-
     private void DoNextTask()
     {
-        if(taskList.Count > 0 && currentTask == null)
+        if(currentTask == null)
         {
-            SelectTask(taskList[0]);
+            SelectTask(MinerManager.instance.GrabNextTask());
         }
         else if (currentTask != null)
         {
@@ -67,28 +37,28 @@ public class Miner : MoveableBase {
             {
                 if (DoMineTask((MineTask)currentTask))
                 {
-                    EndTask(currentTask);
+                    CompleteTask();
                 }
             }
             else if (currentTask is BuildTask)
             {
                 if (DoBuildTask((BuildTask)currentTask))
                 {
-                    EndTask(currentTask);
+                    CompleteTask();
                 }
             }
             else if (currentTask is RepairTask)
             {
                 if (DoRepairTask((RepairTask)currentTask))
                 {
-                    EndTask(currentTask);
+                    CompleteTask();
                 }
             }
             else if (currentTask is DeconstructTask)
             {
                 if (DoDeconstructTask((DeconstructTask)currentTask))
                 {
-                    EndTask(currentTask);
+                    CompleteTask();
                 }
             }
         }
@@ -96,23 +66,59 @@ public class Miner : MoveableBase {
 
     public void SelectTask(Task newTask)
     {
-        if (newTask.target && MakePath(newTask.TargetLocation()))
+        if (newTask != null)
         {
-            currentTask = newTask;
-        }
-        else
-        {
-            EndTask(newTask);
+            if (newTask.target && MakePath(newTask.TargetLocation()))
+            {
+                currentTask = newTask;
+                currentTask.owner = this;
+            }
+            else
+            {
+                CompleteTask();
+            }
         }
     }
 
-    public void EndTask(Task task)
+    public Task ReplaceTask(Task newTask)
     {
-        currentTask = null;
-        taskList.Remove(task);
+        Task oldTask = currentTask;
+        if (newTask != null)
+        {
+            if (newTask.target && MakePath(newTask.TargetLocation()))
+            {
+                UnqueueTask(oldTask);
+                SelectTask(newTask);
+                return oldTask;
+            }
+            else
+            {
+                CompleteTask();
+            }
+        }
+        return null;
     }
 
-    
+    public void UnqueueTask(Task task)
+    {
+        if (task != null)
+        {
+            task.owner = null;
+            task.queued = false;
+        }
+        RemovePath();
+    }
+
+    public void CompleteTask()
+    {
+        MinerManager.instance.CompleteTask(currentTask);
+        currentTask = null;
+        RemovePath();
+    }
+
+    ///////////////////
+    // TASK HANDLING //
+    ///////////////////
 
     // Handles moving towards and mining a wall
     private bool DoMineTask(MineTask mineTask)

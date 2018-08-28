@@ -7,7 +7,6 @@ public class TileMenu : MonoBehaviour {
 
     ClickableTileBase selectedTile;
     public TileMenuOption menuOptionPrefab;
-    MinerManager minerManager;
     public Canvas canvas;
     public Transform optionArea;
     public Text title;
@@ -17,7 +16,7 @@ public class TileMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        minerManager = FindObjectOfType<MinerManager>();
+        
 	}
 
     // Update is called once per frame
@@ -66,18 +65,66 @@ public class TileMenu : MonoBehaviour {
         int i = 0;
         foreach (Task task in tasksToRender)
         {
-            TileMenuOption menuOption = Instantiate(menuOptionPrefab, optionArea);
-            menuOption.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, (-i * menuOption.height) - 1.5f);
-            menuOption.SetName(task.taskName);
-            menuOption.SetAction(AddTask, task);
-            i++;
+            foreach (Task.priotities priority in System.Enum.GetValues(typeof(Task.priotities)))
+            {
+                if(priority == Task.priotities.QUEUE && task.CanQueue())
+                {
+                    TileMenuOption menuOption = Instantiate(menuOptionPrefab, optionArea);
+                    menuOption.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, (-i * menuOption.height) - 1.5f);
+                    menuOption.SetName(task.taskName);
+                    menuOption.SetAction(AddTask, task);
+                    i++;
+                }
+                else if (priority == Task.priotities.QUEUE_NOW && task.CanQueueNow())
+                {
+                    TileMenuOption menuOption = Instantiate(menuOptionPrefab, optionArea);
+                    menuOption.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, (-i * menuOption.height) - 1.5f);
+                    menuOption.SetName(task.taskName + " now");
+                    menuOption.SetAction(AddTaskNow, task);
+                    i++;
+                }
+                else if(priority == Task.priotities.REQUEUE_NOW && task.CanRequeueNow())
+                {
+                    TileMenuOption menuOption = Instantiate(menuOptionPrefab, optionArea);
+                    menuOption.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, (-i * menuOption.height) - 1.5f);
+                    menuOption.SetName("Prioritize " + task.taskName);
+                    menuOption.SetAction(PrioritizeTask, task);
+                    i++;
+                }
+                else if (priority == Task.priotities.CANCEL && task.CanCancel())
+                {
+                    TileMenuOption menuOption = Instantiate(menuOptionPrefab, optionArea);
+                    menuOption.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, (-i * menuOption.height) - 1.5f);
+                    menuOption.SetName("Cancel " + task.taskName);
+                    menuOption.SetAction(CancelTask, task);
+                    i++;
+                }
+            }
         }
         canvas.GetComponent<RectTransform>().sizeDelta = new Vector2(panelWidth, 1 + (i * menuOptionPrefab.height));
     }
 
     void AddTask(Task task)
     {
-        minerManager.AddTaskToQueue(task);
+        MinerManager.instance.AddTaskToQueue(task);
+        DestroySelf();
+    }
+
+    void AddTaskNow(Task task)
+    {
+        MinerManager.instance.DoTaskNow(task);
+        DestroySelf();
+    }
+
+    void PrioritizeTask(Task task)
+    {
+        MinerManager.instance.DoTaskNow(task);
+        DestroySelf();
+    }
+
+    void CancelTask(Task task)
+    {
+        MinerManager.instance.CancelTask(task);
         DestroySelf();
     }
 

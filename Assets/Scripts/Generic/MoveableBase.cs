@@ -57,6 +57,11 @@ public class MoveableBase : MonoBehaviour {
         MakePath(tileBase.transform.position);
     }
 
+    public void RemovePath()
+    {
+        pathToTarget = null;
+    }
+
     // Handles moving along a set path towards a target
     protected bool MoveAlongPathBehavior()
     {

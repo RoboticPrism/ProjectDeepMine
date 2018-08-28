@@ -6,7 +6,7 @@ public class BuildTask : Task {
 
     public BuildingBase targetBuilding;
 
-    public BuildTask(string taskName, BuildingBase target, priotities priority) : base(taskName, target, priority) {
+    public BuildTask(string taskName, BuildingBase target) : base(taskName, target) {
         this.targetBuilding = target;
     }
 

@@ -6,7 +6,7 @@ public class MineTask : Task {
 
     public MineableWall targetWall;
 
-    public MineTask(string taskName, MineableWall target, priotities priority) : base(taskName, target, priority) {
+    public MineTask(string taskName, MineableWall target) : base(taskName, target) {
         this.targetWall = target;
     }
 

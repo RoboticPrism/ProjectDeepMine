@@ -36,7 +36,7 @@ public class MeleeEnemy : EnemyBase {
             BuildingBase targetBuidling = EnemyManager.instance.GetNearestBuilding(this.transform.position);
             if (targetBuidling)
             {
-                attackTask = new AttackTask("", targetBuidling, Task.priotities.QUEUE_NOW);
+                attackTask = new AttackTask("", targetBuidling);
                 MakePath(attackTask.TargetLocation());
             }
         }

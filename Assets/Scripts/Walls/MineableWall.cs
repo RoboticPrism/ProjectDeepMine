@@ -24,9 +24,7 @@ public class MineableWall : WallBase {
         base.Start();
         potentialTasks = new List<Task>
         {
-            new MineTask("Schedule Mine", this, Task.priotities.QUEUE),
-            new MineTask("Mine Now", this, Task.priotities.QUEUE_NOW),
-            new MineTask("Prioritize Mine", this, Task.priotities.REQUEUE_NOW),
+            new MineTask("Mine", this)
         };
     }
 	

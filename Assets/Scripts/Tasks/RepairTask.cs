@@ -6,7 +6,7 @@ public class RepairTask : Task {
 
     public BuildingBase targetBuilding;
 
-    public RepairTask(string taskName, BuildingBase target, priotities priority) : base(taskName, target, priority)
+    public RepairTask(string taskName, BuildingBase target) : base(taskName, target)
     {
         this.targetBuilding = target;
     }

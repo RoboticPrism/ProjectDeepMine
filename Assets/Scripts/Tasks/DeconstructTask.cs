@@ -6,7 +6,7 @@ public class DeconstructTask : Task {
 
     public BuildingBase targetBuilding;
 
-    public DeconstructTask(string taskName, BuildingBase target, priotities priority) : base(taskName, target, priority)
+    public DeconstructTask(string taskName, BuildingBase target) : base(taskName, target)
     {
         this.targetBuilding = target;
     }

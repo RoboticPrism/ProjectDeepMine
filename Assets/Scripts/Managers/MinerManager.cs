@@ -9,6 +9,9 @@ public class MinerManager : MonoBehaviour {
 
     public static MinerManager instance;
 
+    List<Task> queuedTaskList = new List<Task>(); // List of tasks to be done
+    List<Task> selectedTaskList = new List<Task>(); // List of tasks currently being done by miners
+
     // Use this for initialization
     void Start() {
         instance = this;
@@ -44,17 +47,65 @@ public class MinerManager : MonoBehaviour {
 
     public void AddTaskToQueue(Task task)
     {
-        if (task.priority == Task.priotities.QUEUE)
+        queuedTaskList.Add(task);
+        task.queued = true;
+    }
+
+    public void AddTaskToStartOfQueue(Task task)
+    {
+        queuedTaskList.Insert(0, task);
+        task.queued = true;
+    }
+
+    // Forcibly schedules a new task and throws the old current task to the front of the queue
+    // TODO select a unit to perform the task right now better
+    public void DoTaskNow(Task task)
+    {
+        Task oldTask = minerList[0].ReplaceTask(task);
+        if (oldTask != null)
         {
-            NextAvailableMiner().AddTask(task);
+            AddTaskToStartOfQueue(oldTask);
         }
-        else if (task.priority == Task.priotities.QUEUE_NOW)
+    }
+
+    // Forcible removes the task early
+    public void CancelTask(Task task)
+    {
+        if(queuedTaskList.Contains(task))
         {
-            NextAvailableMiner().AddTaskNow(task);
+            queuedTaskList.Remove(task);
+            task.owner = null;
+            task.queued = false;
+        } else if (selectedTaskList.Contains(task))
+        {
+            task.owner.CompleteTask();
+            task.owner = null;
+            task.queued = false;
+        }
+    }
+
+    // Removes the completed task from the selected list
+    public void CompleteTask(Task completedTask)
+    {
+        selectedTaskList.Remove(completedTask);
+    }
+
+    // Returns the next task and moves it from the queue to selected
+    public Task GrabNextTask()
+    {
+        if (queuedTaskList.Count > 0)
+        {
+            Task nextTask = queuedTaskList[0];
+            queuedTaskList.Remove(nextTask);
+            selectedTaskList.Add(nextTask);
+            return nextTask;
         }
         else
         {
-            NextAvailableMiner().PrioritizeTask(task);
+            return null;
         }
+
     }
+
+    
 }

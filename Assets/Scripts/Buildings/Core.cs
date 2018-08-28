@@ -11,9 +11,7 @@ public class Core : BuildingBase {
         // Core can't be build or deconstructed
         potentialTasks = new List<Task>
         {
-            new RepairTask("Schedule Repair", this, Task.priotities.QUEUE),
-            new RepairTask("Repair Now", this, Task.priotities.QUEUE_NOW),
-            new RepairTask("Prioritize Repair", this, Task.priotities.REQUEUE_NOW)
+            new RepairTask("Repair", this)
         };
         OnCreate();
     }
