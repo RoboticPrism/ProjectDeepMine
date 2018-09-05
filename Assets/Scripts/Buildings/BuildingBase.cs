@@ -70,10 +70,15 @@ public abstract class BuildingBase : ClickableTileBase {
 
     public void AddLife(int addAmount)
     {
+        if (life == lifeMax && addAmount < 0)
+        {
+            OnDamaged();
+        }
         life += addAmount;
-        if (life > lifeMax)
+        if (life >= lifeMax)
         {
             life = lifeMax;
+            OnFix();
         }
         // a half built building can't stop working
         if (built)
@@ -81,7 +86,7 @@ public abstract class BuildingBase : ClickableTileBase {
             // Update broken state
             if (life >= brokenLimit && broken)
             {
-                OnFix();
+                OnRepaired();
             }
             else if (life < brokenLimit && !broken)
             {
@@ -111,15 +116,15 @@ public abstract class BuildingBase : ClickableTileBase {
     // Called when a building is done being constructed
     public virtual void OnBuilt()
     {
-        EventManager.TriggerEvent("BuildingBuilt", this);
         built = true;
+        EventManager.TriggerEvent("BuildingBuilt", this);
     }
 
     // Called when a building begins being deconstructed
     public virtual void OnDeconstruct()
     {
-        EventManager.TriggerEvent("BuildingDeconstructed", this);
         built = false;
+        EventManager.TriggerEvent("BuildingDeconstructing", this);
     }
 
     // Called when a building has been damaged enough to no longer function
@@ -134,11 +139,13 @@ public abstract class BuildingBase : ClickableTileBase {
         broken = false;
     }
 
+    // Called when a building first takes damage from full health
     public virtual void OnDamaged()
     {
         EventManager.TriggerEvent("BuildingDamaged", this);
     }
 
+    // Called when a building is repaired to full health
     public virtual void OnRepaired()
     {
         EventManager.TriggerEvent("BuildingRepaired", this);

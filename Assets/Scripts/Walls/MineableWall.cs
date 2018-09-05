@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 using System.Linq;
 
@@ -41,12 +42,27 @@ public class MineableWall : WallBase {
 
     public void MineWall(float mineSpeed)
     {
+        if(life == lifeMax)
+        {
+            OnMineStart();
+        }
         this.life -= mineSpeed;
         if (life < 0)
         {
-            DestroySelf();
+            OnWallDestroy();   
         }
         UpdateHealthBar();
+    }
+
+    void OnMineStart()
+    {
+        EventManager.instance.SendMessage("WallMining", this);
+    }
+
+    void OnWallDestroy()
+    {
+        EventManager.instance.SendMessage("WallDestroyed", this);
+        DestroySelf();
     }
 
     // Updates the health bar, builds on if needed, or destroys health bar if unit is at max

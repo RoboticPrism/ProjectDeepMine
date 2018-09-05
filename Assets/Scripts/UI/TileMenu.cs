@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class TileMenu : MonoBehaviour {
 
@@ -14,10 +15,22 @@ public class TileMenu : MonoBehaviour {
 
     public List<Task> tasksToRender = new List<Task>();
 
-	// Use this for initialization
-	void Start () {
-        
-	}
+    UnityAction<ClickableTileBase> updateListener;
+    UnityAction<ClickableTileBase> destroyedListener;
+
+    // Use this for initialization
+    void Start () {
+        updateListener = new UnityAction<ClickableTileBase>(RecreateMenu);
+        destroyedListener = new UnityAction<ClickableTileBase>(DestroyMenu);
+        EventManager.StartListening("BuildingCreated", updateListener);
+        EventManager.StartListening("BuildingBuilt", updateListener);
+        EventManager.StartListening("BuildingDeconstructing", updateListener);
+        EventManager.StartListening("BuildingDamaged", updateListener);
+        EventManager.StartListening("BuildingRepaired", updateListener);
+        EventManager.StartListening("WallMining", updateListener);
+        EventManager.StartListening("BuildingSold", destroyedListener);
+        EventManager.StartListening("WallDestroyed", destroyedListener);
+    }
 
     // Update is called once per frame
     void Update()
@@ -57,6 +70,41 @@ public class TileMenu : MonoBehaviour {
         else
         {
             RenderOptions();
+        }
+    }
+
+    public void RecreateMenu(ClickableTileBase clickableTileBase)
+    {   
+        if (clickableTileBase.Equals(selectedTile))
+        {
+            foreach (TileMenuOption option in optionArea.GetComponentsInChildren<TileMenuOption>())
+            {
+                Destroy(option.gameObject);
+            }
+            foreach (Task task in selectedTile.potentialTasks)
+            {
+                if (task.TaskAvailable())
+                {
+                    tasksToRender.Add(task);
+                }
+            }
+            // Don't render a menu with no options
+            if (tasksToRender.Count == 0)
+            {
+                DestroySelf();
+            }
+            else
+            {
+                RenderOptions();
+            }
+        }
+    }
+
+    public void DestroyMenu(ClickableTileBase clickableTileBase)
+    {
+        if(clickableTileBase.Equals(selectedTile))
+        {
+            DestroySelf();
         }
     }
 
