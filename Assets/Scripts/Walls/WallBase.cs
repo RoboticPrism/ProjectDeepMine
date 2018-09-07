@@ -31,8 +31,6 @@ public abstract class WallBase : ClickableTileBase {
 
     Dictionary<List<bool>, Sprite> wallTypes;
 
-    public bool blocksLighting = true;
-
     public bool isAlive = true;
 
     // Use this for initialization
@@ -75,8 +73,7 @@ public abstract class WallBase : ClickableTileBase {
             GameObject cellObj = TilemapManager.instance.wallTilemap.GetInstantiatedObject(cell);
             if (cellObj && 
                 cellObj.GetComponent<WallBase>() && 
-                cellObj.GetComponent<WallBase>().isAlive &&
-                cellObj.GetComponent<WallBase>().blocksLighting)
+                cellObj.GetComponent<WallBase>().isAlive)
             {
                 hasNeighbors[i] = true;
             }
