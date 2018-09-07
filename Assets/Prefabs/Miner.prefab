@@ -134,11 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8c9cf4c9a425e41aeecfc639c27a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.1
+  moveSpeed: 0.05
   rotationSpeed: 0.5
   moveableBody: {fileID: 1447061184162384}
-  mineSpeed: 1
-  buildSpeed: 1
+  mineSpeed: 0.2
+  buildSpeed: 0.2
 --- !u!212 &212161468758871910
 SpriteRenderer:
   m_ObjectHideFlags: 1

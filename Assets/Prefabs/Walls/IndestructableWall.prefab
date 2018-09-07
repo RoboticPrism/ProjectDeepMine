@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4539196220785170}
   - component: {fileID: 114152273323275194}
   - component: {fileID: 114445701637462880}
+  - component: {fileID: 114274846363162244}
   - component: {fileID: 212398528238813404}
   - component: {fileID: 61255931586051402}
   - component: {fileID: 50685501316566532}
@@ -101,7 +102,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  taskOwner: {fileID: 0}
   spriteRenderer: {fileID: 212398528238813404}
   boxCollider: {fileID: 61255931586051402}
   unknownSprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}
@@ -109,8 +109,19 @@ MonoBehaviour:
   wallSprite: {fileID: 21300000, guid: 491bb58c11a0eeb43b763cb32df61ebe, type: 3}
   outerCornerSprite: {fileID: 0}
   pillarSprite: {fileID: 0}
-  blocksLighting: 1
   isAlive: 1
+--- !u!114 &114274846363162244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345919295657736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e40adb3ae202b4db11cdb3942cd745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
 --- !u!114 &114445701637462880
 MonoBehaviour:
   m_ObjectHideFlags: 1

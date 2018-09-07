@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4018701898565160}
   - component: {fileID: 114091005607716610}
   - component: {fileID: 114593165394011348}
+  - component: {fileID: 114601154950987028}
   - component: {fileID: 212723123526774896}
   - component: {fileID: 61485599218016574}
   - component: {fileID: 61127007512858646}
@@ -193,6 +194,18 @@ MonoBehaviour:
   displayName: Basic Turret
   sprite: {fileID: 21300000, guid: eff179241b98513439967e68e55087ba, type: 3}
   description: Shoots enemies that come within range.
+--- !u!114 &114601154950987028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1179466206587778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e40adb3ae202b4db11cdb3942cd745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
 --- !u!212 &212723123526774896
 SpriteRenderer:
   m_ObjectHideFlags: 1

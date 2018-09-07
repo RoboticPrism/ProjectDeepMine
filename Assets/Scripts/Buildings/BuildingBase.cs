@@ -101,8 +101,8 @@ public abstract class BuildingBase : ClickableTileBase {
     // Called when a building has first been put down but is not constructed yet
     public virtual void OnCreate()
     {
-        ResourceManager.instance.AddOre(-oreCost);
-        ResourceManager.instance.AddPower(powerCost);
+        ResourceManager.instance.AddOre(-oreCost, this.transform.position);
+        ResourceManager.instance.AddPower(powerCost, this.transform.position + new Vector3(0, -0.5f, 0));
         ResourceManager.instance.AddSeismicActivity(seismicOutput);
         EventManager.TriggerEvent("BuildingCreated", this);
     }
@@ -110,8 +110,8 @@ public abstract class BuildingBase : ClickableTileBase {
     // Called when a building is entirely deconstructed and then sold
     public virtual void OnSell()
     {
-        ResourceManager.instance.AddOre(oreCost);
-        ResourceManager.instance.AddPower(-powerCost);
+        ResourceManager.instance.AddOre(oreCost, this.transform.position);
+        ResourceManager.instance.AddPower(-powerCost, this.transform.position + new Vector3(0, -0.5f, 0));
         ResourceManager.instance.AddSeismicActivity(-seismicOutput);
         EventManager.TriggerEvent("BuildingSold", this);
         DestroySelf();

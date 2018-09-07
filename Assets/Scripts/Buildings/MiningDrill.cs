@@ -34,7 +34,7 @@ public class MiningDrill : BuildingBase {
             {
                 currentMining = 0;
                 if (floorBase.resourceType == FloorBase.resourceTypes.ORE) {
-                    ResourceManager.instance.AddOre(floorBase.MineResources());
+                    ResourceManager.instance.AddOre(floorBase.MineResources(), floorBase.transform.position);
                 }
             }
             else

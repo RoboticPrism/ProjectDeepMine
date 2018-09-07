@@ -17,6 +17,10 @@ public class ResourceManager : MonoBehaviour {
 
     public static ResourceManager instance;
 
+    public PopupText textPopupPrefab;
+    public Sprite oreSprite;
+    public Sprite powerSprite;
+
     // Use this for initialization
     void Start () {
         instance = this;
@@ -36,11 +40,12 @@ public class ResourceManager : MonoBehaviour {
         EventManager.TriggerEvent("ResourcesChanged");
     }
 
-    public void AddOre(int newOre)
+    public void AddOre(int newOre, Vector3 location)
     {
         oreCount += newOre;
         oreText.text = oreCount.ToString();
         EventManager.TriggerEvent("ResourcesChanged");
+        CreatePopupText(location, newOre, oreSprite);
     }
 
     public void SetPower(int newPowerCount)
@@ -50,11 +55,12 @@ public class ResourceManager : MonoBehaviour {
         EventManager.TriggerEvent("ResourcesChanged");
     }
 
-    public void AddPower(int newPower)
+    public void AddPower(int newPower, Vector3 location)
     {
         powerCount += newPower;
         powerText.text = powerCount + " / " + powerMax;
         EventManager.TriggerEvent("ResourcesChanged");
+        CreatePopupText(location, newPower, powerSprite);
     }
 
     public void SetPowerMax(int newPowerCount)
@@ -64,11 +70,12 @@ public class ResourceManager : MonoBehaviour {
         EventManager.TriggerEvent("ResourcesChanged");
     }
 
-    public void AddPowerMax(int newPower)
+    public void AddPowerMax(int newPower, Vector3 location)
     {
         powerMax += newPower;
         powerText.text = powerCount + " / " + powerMax;
         EventManager.TriggerEvent("ResourcesChanged");
+        CreatePopupText(location, newPower, powerSprite);
     }
 
     public int PowerAvailable()
@@ -80,5 +87,18 @@ public class ResourceManager : MonoBehaviour {
     {
         seismicActivity += newSeismic;
         EventManager.TriggerEvent("ResourcesChanged");
+    }
+
+    public void CreatePopupText(Vector3 location, float amount, Sprite sprite)
+    {
+        if (amount != 0)
+        {
+            string text = amount.ToString();
+            if (amount > 0)
+            {
+                text = "+" + text;
+            }
+            Instantiate(textPopupPrefab, location, Quaternion.Euler(Vector3.zero)).Setup(text, sprite);
+        }
     }
 }

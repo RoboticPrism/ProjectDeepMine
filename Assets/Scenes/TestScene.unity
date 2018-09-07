@@ -6130,6 +6130,10 @@ MonoBehaviour:
   seismicActivity: 0
   oreText: {fileID: 1426479148}
   powerText: {fileID: 1040843061}
+  textPopupPrefab: {fileID: 114096211996486646, guid: f93e84fadba0d9647969529b2acbe346,
+    type: 2}
+  oreSprite: {fileID: 21300000, guid: 9dc4b7b28a302784b9e1465f9988e285, type: 3}
+  powerSprite: {fileID: 21300000, guid: 49e0bd6f48424dd4985ade1f562cbeeb, type: 3}
 --- !u!1 &941751086
 GameObject:
   m_ObjectHideFlags: 0

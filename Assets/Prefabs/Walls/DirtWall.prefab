@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4098344456345368}
   - component: {fileID: 114527736120763020}
   - component: {fileID: 114780645589988098}
+  - component: {fileID: 114892977501633058}
   - component: {fileID: 212308304393458838}
   - component: {fileID: 61665371143270882}
   - component: {fileID: 50481981999280838}
@@ -100,10 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee9a1875279f9543a42a24a26a25b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: Dirt Wall
-  description: A soft dirt wall.  Can be destroyed by any form of worker.
   clickable: 1
-  taskOwner: {fileID: 0}
   spriteRenderer: {fileID: 212308304393458838}
   boxCollider: {fileID: 61665371143270882}
   unknownSprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}
@@ -111,7 +109,6 @@ MonoBehaviour:
   wallSprite: {fileID: 21300000, guid: 7f7c8acd54d7ac04a9913a474d992d55, type: 3}
   outerCornerSprite: {fileID: 0}
   pillarSprite: {fileID: 0}
-  blocksLighting: 1
   isAlive: 1
   life: 100
   lifeMax: 100
@@ -130,9 +127,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visible: 1
   displayName: Dirt Wall
   sprite: {fileID: 21300000, guid: 7f7c8acd54d7ac04a9913a474d992d55, type: 3}
   description: A soft dirt wall.  Can be destroyed by any form of worker.
+--- !u!114 &114892977501633058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1426092684848844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e40adb3ae202b4db11cdb3942cd745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
 --- !u!212 &212308304393458838
 SpriteRenderer:
   m_ObjectHideFlags: 1
