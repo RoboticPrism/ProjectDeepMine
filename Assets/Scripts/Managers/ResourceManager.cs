@@ -10,6 +10,8 @@ public class ResourceManager : MonoBehaviour {
     public int powerCount = 0;
     public int powerMax = 3;
 
+    public float seismicActivity = 0; // This effects how fast waves occur
+
     public Text oreText;
     public Text powerText;
 
@@ -72,5 +74,11 @@ public class ResourceManager : MonoBehaviour {
     public int PowerAvailable()
     {
         return powerMax - powerCount;
+    }
+
+    public void AddSeismicActivity(float newSeismic)
+    {
+        seismicActivity += newSeismic;
+        EventManager.TriggerEvent("ResourcesChanged");
     }
 }

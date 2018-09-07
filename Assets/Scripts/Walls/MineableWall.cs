@@ -56,12 +56,12 @@ public class MineableWall : WallBase {
 
     void OnMineStart()
     {
-        EventManager.instance.SendMessage("WallMining", this);
+        EventManager.TriggerEvent("WallMining", this);
     }
 
     void OnWallDestroy()
     {
-        EventManager.instance.SendMessage("WallDestroyed", this);
+        EventManager.TriggerEvent("WallDestroyed", this);
         DestroySelf();
     }
 

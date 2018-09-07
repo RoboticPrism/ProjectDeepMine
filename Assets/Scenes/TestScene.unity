@@ -688,7 +688,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7d3e1be8521364b9edf639bf7a7d6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnableEnemies: []
+  waveTimeCurrent: 0
+  waveTimeMax: 100
+  enemyWave: 0
+  enemiesPerWave: 5
+  enemiesLeftToSpawn: 0
+  spawnableEnemies:
+  - {fileID: 114397447841407798, guid: 51634294054421549a303c2b867ed8ee, type: 2}
+  spawnedEnemies: []
   spawnPoints: []
 --- !u!1 &474875367
 GameObject:
@@ -6120,6 +6127,7 @@ MonoBehaviour:
   oreCount: 100
   powerCount: 0
   powerMax: 3
+  seismicActivity: 0
   oreText: {fileID: 1426479148}
   powerText: {fileID: 1040843061}
 --- !u!1 &941751086
@@ -11396,48 +11404,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1768078660}
   m_CullTransparentMesh: 0
---- !u!1001 &1961292829
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4572900742232318, guid: 51634294054421549a303c2b867ed8ee, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572900742232318, guid: 51634294054421549a303c2b867ed8ee, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572900742232318, guid: 51634294054421549a303c2b867ed8ee, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572900742232318, guid: 51634294054421549a303c2b867ed8ee, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572900742232318, guid: 51634294054421549a303c2b867ed8ee, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572900742232318, guid: 51634294054421549a303c2b867ed8ee, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572900742232318, guid: 51634294054421549a303c2b867ed8ee, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572900742232318, guid: 51634294054421549a303c2b867ed8ee, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 51634294054421549a303c2b867ed8ee, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &1964054480
 GameObject:
   m_ObjectHideFlags: 0

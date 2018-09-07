@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114593165394011348}
   - component: {fileID: 212723123526774896}
   - component: {fileID: 61485599218016574}
+  - component: {fileID: 61127007512858646}
   - component: {fileID: 50497374743245668}
   m_Layer: 0
   m_Name: Turret
@@ -94,6 +95,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &61127007512858646
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1179466206587778}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!61 &61485599218016574
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -131,7 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  taskOwner: {fileID: 0}
   tileType: {fileID: 11400000, guid: 4f36d8e154fa30f479c1272f8a8d9481, type: 2}
   life: 100
   lifeMax: 100
@@ -142,6 +167,7 @@ MonoBehaviour:
   built: 0
   oreCost: 10
   powerCost: 1
+  seismicOutput: 0
   healthBarPrefab: {fileID: 114595616249524122, guid: 96df83764b49de344bff03ec513c1df7,
     type: 2}
   healthBarColor: {r: 1, g: 0, b: 0, a: 1}

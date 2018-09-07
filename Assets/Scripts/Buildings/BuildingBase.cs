@@ -18,6 +18,8 @@ public abstract class BuildingBase : ClickableTileBase {
     public int oreCost = 1;
     public int powerCost = 1;
 
+    public float seismicOutput = 0f;
+
     public HealthBar healthBarPrefab;
     HealthBar healthBarInstance;
     HealthBar buildBarInstance;
@@ -101,6 +103,7 @@ public abstract class BuildingBase : ClickableTileBase {
     {
         ResourceManager.instance.AddOre(-oreCost);
         ResourceManager.instance.AddPower(powerCost);
+        ResourceManager.instance.AddSeismicActivity(seismicOutput);
         EventManager.TriggerEvent("BuildingCreated", this);
     }
 
@@ -109,6 +112,7 @@ public abstract class BuildingBase : ClickableTileBase {
     {
         ResourceManager.instance.AddOre(oreCost);
         ResourceManager.instance.AddPower(-powerCost);
+        ResourceManager.instance.AddSeismicActivity(-seismicOutput);
         EventManager.TriggerEvent("BuildingSold", this);
         DestroySelf();
     }

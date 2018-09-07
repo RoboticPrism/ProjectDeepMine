@@ -52,17 +52,22 @@ public class HoverManager : MonoBehaviour {
 
     private void UpdateDisplay()
     {
-        HoverInfo hoveredInfo = hoveredObject.GetComponent<HoverInfo>();
-
-        if (hoveredInfo && hoveredInfo.visible)
+        if (hoveredObject)
         {
-            itemName.text = hoveredInfo.displayName;
-            itemImage.sprite = hoveredInfo.sprite;
-            itemDescription.text = hoveredInfo.description;
-        } else {
-            itemName.text = "Unknown";
-            itemImage.sprite = unknownSprite;
-            itemDescription.text = "This area has yet to be discovered.";
+            HoverInfo hoveredInfo = hoveredObject.GetComponent<HoverInfo>();
+
+            if (hoveredInfo && hoveredInfo.visible)
+            {
+                itemName.text = hoveredInfo.displayName;
+                itemImage.sprite = hoveredInfo.sprite;
+                itemDescription.text = hoveredInfo.description;
+            }
+            else
+            {
+                itemName.text = "Unknown";
+                itemImage.sprite = unknownSprite;
+                itemDescription.text = "This area has yet to be discovered.";
+            }
         }
     }
 }

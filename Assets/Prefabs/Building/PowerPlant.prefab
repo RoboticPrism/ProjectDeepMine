@@ -100,10 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5a51af21d5db64cb9debfa5b5a7db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: Power Plant
-  description: Provides power to nearby buildings.
   clickable: 1
-  taskOwner: {fileID: 0}
   tileType: {fileID: 11400000, guid: 0548f62c89320fc49b91782a3f16e275, type: 2}
   life: 100
   lifeMax: 100
@@ -114,6 +111,7 @@ MonoBehaviour:
   built: 0
   oreCost: 20
   powerCost: 0
+  seismicOutput: 0.1
   healthBarPrefab: {fileID: 114595616249524122, guid: 96df83764b49de344bff03ec513c1df7,
     type: 2}
   healthBarColor: {r: 1, g: 0, b: 0, a: 1}
@@ -130,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visible: 1
   displayName: Power Plant
   sprite: {fileID: 21300000, guid: 052ed19fa670cf7418845d5c6fc91e00, type: 3}
   description: Provides power to nearby buildings.

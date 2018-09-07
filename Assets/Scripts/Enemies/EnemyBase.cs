@@ -63,6 +63,7 @@ public class EnemyBase : MoveableBase {
 
     public void DestroySelf()
     {
+        EnemyManager.instance.RemoveEnemyFromList(this);
         Destroy(this.gameObject);
     }
 

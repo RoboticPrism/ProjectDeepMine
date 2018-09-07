@@ -6,8 +6,17 @@ using UnityEngine.Events;
 public class EnemyManager : MonoBehaviour {
 
     public static EnemyManager instance;
-    
+
+    public float waveTimeCurrent = 0;
+    public float waveTimeMax = 100;
+
+    public bool enemyWave = false;
+
+    public int enemiesPerWave = 5;
+    public int enemiesLeftToSpawn = 0;
+
     public List<EnemyBase> spawnableEnemies = new List<EnemyBase>();
+    public List<EnemyBase> spawnedEnemies = new List<EnemyBase>();
 
     List<BuildingBase> buildingList = new List<BuildingBase>();
     public List<EnemySpawner> spawnPoints = new List<EnemySpawner>();
@@ -38,6 +47,55 @@ public class EnemyManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    private void FixedUpdate()
+    {
+        waveTimeCurrent += ResourceManager.instance.seismicActivity/60;
+
+        if (enemyWave)
+        {
+            if(enemiesLeftToSpawn <= 0 && spawnedEnemies.Count <= 0)
+            {
+                EndWave();
+            }
+            if(enemiesLeftToSpawn > 0)
+            {
+                EnemyBase enemyToSpawn = spawnableEnemies[Random.Range(0, spawnableEnemies.Count)];
+                Vector3 spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position;
+                EnemyBase enemy = Instantiate( enemyToSpawn, spawnPosition, Quaternion.Euler(Vector3.zero));
+                spawnedEnemies.Add(enemy);
+                enemiesLeftToSpawn -= 1;
+            }
+        }
+        else
+        {
+            if(waveTimeCurrent >= waveTimeMax)
+            {
+                StartWave();
+            }
+        }
+    }
+
+    private void StartWave()
+    {
+        enemyWave = true;
+        enemiesLeftToSpawn = enemiesPerWave;
+    }
+
+    private void EndWave()
+    {
+        enemyWave = false;
+        waveTimeCurrent = 0;
+    }
+
+    public void RemoveEnemyFromList(EnemyBase enemyBase)
+    {
+        spawnedEnemies.Remove(enemyBase);
+    }
+
+    ////////////////////
+    // BUILD TRACKING //
+    ////////////////////
 
     void AddBuildingToList(ClickableTileBase newBuilding)
     {
