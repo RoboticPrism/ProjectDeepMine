@@ -102,6 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
+  potentialTaskPrefabs:
+  - {fileID: 114466769079953366, guid: f323185c662fc4b49864802d8c542cab, type: 2}
+  potentialTasks: []
   spriteRenderer: {fileID: 212308304393458838}
   boxCollider: {fileID: 61665371143270882}
   unknownSprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}

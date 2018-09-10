@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyBase {
 
+    public AttackTask attackTaskPrefab;
     AttackTask attackTask = null;
 
 	// Use this for initialization
@@ -36,7 +37,8 @@ public class MeleeEnemy : EnemyBase {
             BuildingBase targetBuidling = EnemyManager.instance.GetNearestBuilding(this.transform.position);
             if (targetBuidling)
             {
-                attackTask = new AttackTask("", targetBuidling);
+                attackTask = Instantiate(attackTaskPrefab, transform);
+                attackTask.Setup(targetBuidling);
                 MakePath(attackTask.TargetLocation());
             }
         }

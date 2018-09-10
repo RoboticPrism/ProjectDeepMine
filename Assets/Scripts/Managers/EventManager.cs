@@ -7,7 +7,7 @@ public class EventManager : MonoBehaviour {
 
     public static EventManager instance;
 
-    public class TileEvent : UnityEvent<ClickableTileBase> { };
+    public class TileEvent : UnityEvent<TaskableBase> { };
 
     private Dictionary<string, UnityEvent> eventDictionary = new Dictionary<string, UnityEvent>();
     private Dictionary<string, TileEvent> tileEventDictionary = new Dictionary<string, TileEvent>();
@@ -33,7 +33,7 @@ public class EventManager : MonoBehaviour {
         }
     }
 
-    public static void StartListening(string eventName, UnityAction<ClickableTileBase> listener)
+    public static void StartListening(string eventName, UnityAction<TaskableBase> listener)
     {
         TileEvent thisEvent = null;
         if (instance.tileEventDictionary.TryGetValue(eventName, out thisEvent))
@@ -59,7 +59,7 @@ public class EventManager : MonoBehaviour {
         }
     }
 
-    public static void StopListening(string eventName, UnityAction<ClickableTileBase> listener)
+    public static void StopListening(string eventName, UnityAction<TaskableBase> listener)
     {
         if (instance == null) return;
         TileEvent thisEvent = null;
@@ -79,7 +79,7 @@ public class EventManager : MonoBehaviour {
         }
     }
 
-    public static void TriggerEvent(string eventName, ClickableTileBase location)
+    public static void TriggerEvent(string eventName, TaskableBase location)
     {
         TileEvent thisEvent = null;
         if (instance.tileEventDictionary.TryGetValue(eventName, out thisEvent))

@@ -6,9 +6,10 @@ public class DeconstructTask : Task {
 
     public BuildingBase targetBuilding;
 
-    public DeconstructTask(string taskName, BuildingBase target) : base(taskName, target)
+    public override void Setup(TaskableBase target)
     {
-        this.targetBuilding = target;
+        base.Setup(target);
+        this.targetBuilding = target.GetComponent<BuildingBase>();
     }
 
     // returns true if the current task is feasible

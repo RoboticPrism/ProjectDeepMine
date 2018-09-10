@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class TileMenu : MonoBehaviour {
 
-    ClickableTileBase selectedTile;
+    TaskableBase selectedTile;
     public TileMenuOption menuOptionPrefab;
     public Canvas canvas;
     public Transform optionArea;
@@ -15,13 +15,13 @@ public class TileMenu : MonoBehaviour {
 
     public List<Task> tasksToRender = new List<Task>();
 
-    UnityAction<ClickableTileBase> updateListener;
-    UnityAction<ClickableTileBase> destroyedListener;
+    UnityAction<TaskableBase> updateListener;
+    UnityAction<TaskableBase> destroyedListener;
 
     // Use this for initialization
     void Start () {
-        updateListener = new UnityAction<ClickableTileBase>(RecreateMenu);
-        destroyedListener = new UnityAction<ClickableTileBase>(DestroyMenu);
+        updateListener = new UnityAction<TaskableBase>(RecreateMenu);
+        destroyedListener = new UnityAction<TaskableBase>(DestroyMenu);
         EventManager.StartListening("BuildingCreated", updateListener);
         EventManager.StartListening("BuildingBuilt", updateListener);
         EventManager.StartListening("BuildingDeconstructing", updateListener);
@@ -48,7 +48,7 @@ public class TileMenu : MonoBehaviour {
         }
     }
 
-    public void CreateMenu(ClickableTileBase selectedTile)
+    public void CreateMenu(TaskableBase selectedTile)
     {
         this.selectedTile = selectedTile;
         this.title.text = selectedTile.GetComponent<HoverInfo>().displayName;
@@ -73,9 +73,9 @@ public class TileMenu : MonoBehaviour {
         }
     }
 
-    public void RecreateMenu(ClickableTileBase clickableTileBase)
+    public void RecreateMenu(TaskableBase TaskableBase)
     {   
-        if (clickableTileBase.Equals(selectedTile))
+        if (TaskableBase.Equals(selectedTile))
         {
             foreach (TileMenuOption option in optionArea.GetComponentsInChildren<TileMenuOption>())
             {
@@ -100,9 +100,9 @@ public class TileMenu : MonoBehaviour {
         }
     }
 
-    public void DestroyMenu(ClickableTileBase clickableTileBase)
+    public void DestroyMenu(TaskableBase TaskableBase)
     {
-        if(clickableTileBase.Equals(selectedTile))
+        if(TaskableBase.Equals(selectedTile))
         {
             DestroySelf();
         }

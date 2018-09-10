@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 // Base class that all wall pieces extend from
-public abstract class WallBase : ClickableTileBase {
+public abstract class WallBase : TaskableBase {
 
     public SpriteRenderer spriteRenderer;
     public BoxCollider2D boxCollider;

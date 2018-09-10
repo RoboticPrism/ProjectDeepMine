@@ -89,6 +89,7 @@ public class Miner : MoveableBase {
             {
                 UnqueueTask(oldTask);
                 SelectTask(newTask);
+                newTask.Queue();
                 return oldTask;
             }
             else
@@ -103,8 +104,7 @@ public class Miner : MoveableBase {
     {
         if (task != null)
         {
-            task.owner = null;
-            task.queued = false;
+            task.Unqueue();
         }
         RemovePath();
     }

@@ -23,10 +23,6 @@ public class MineableWall : WallBase {
     // Use this for initialization
     protected override void Start () {
         base.Start();
-        potentialTasks = new List<Task>
-        {
-            new MineTask("Mine", this)
-        };
     }
 	
 	// Update is called once per frame

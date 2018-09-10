@@ -21,18 +21,18 @@ public class EnemyManager : MonoBehaviour {
     List<BuildingBase> buildingList = new List<BuildingBase>();
     public List<EnemySpawner> spawnPoints = new List<EnemySpawner>();
 
-    protected UnityAction<ClickableTileBase> buildingCreatedListener;
-    protected UnityAction<ClickableTileBase> buildingRemovedListener;
-    protected UnityAction<ClickableTileBase> wallRemovedListener;
+    protected UnityAction<TaskableBase> buildingCreatedListener;
+    protected UnityAction<TaskableBase> buildingRemovedListener;
+    protected UnityAction<TaskableBase> wallRemovedListener;
 
     // Use this for initialization
     void Start () {
         instance = this;
-        buildingCreatedListener = new UnityAction<ClickableTileBase>(AddBuildingToList);
+        buildingCreatedListener = new UnityAction<TaskableBase>(AddBuildingToList);
         EventManager.StartListening("BuildingCreated", buildingCreatedListener);
-        buildingRemovedListener = new UnityAction<ClickableTileBase>(RemoveBuildingFromList);
+        buildingRemovedListener = new UnityAction<TaskableBase>(RemoveBuildingFromList);
         EventManager.StartListening("BuildingSold", buildingRemovedListener);
-        wallRemovedListener = new UnityAction<ClickableTileBase>(CheckForNewSpawner);
+        wallRemovedListener = new UnityAction<TaskableBase>(CheckForNewSpawner);
         EventManager.StartListening("WallDestroyed", wallRemovedListener);
         foreach(EnemySpawner spawner in FindObjectsOfType<EnemySpawner>())
         {
@@ -97,12 +97,12 @@ public class EnemyManager : MonoBehaviour {
     // BUILD TRACKING //
     ////////////////////
 
-    void AddBuildingToList(ClickableTileBase newBuilding)
+    void AddBuildingToList(TaskableBase newBuilding)
     {
         buildingList.Add(newBuilding.GetComponent<BuildingBase>());
     }
 
-    void RemoveBuildingFromList(ClickableTileBase oldBuilding)
+    void RemoveBuildingFromList(TaskableBase oldBuilding)
     {
         buildingList.Remove(oldBuilding.GetComponent<BuildingBase>());
     }
@@ -127,7 +127,7 @@ public class EnemyManager : MonoBehaviour {
         return nearest;
     }
 
-    public void CheckForNewSpawner(ClickableTileBase tileBase)
+    public void CheckForNewSpawner(TaskableBase tileBase)
     {
         Vector3Int location = TilemapManager.instance.wallTilemap.WorldToCell(tileBase.transform.position);
         GameObject locObj = TilemapManager.instance.floorTilemap.GetInstantiatedObject(location);

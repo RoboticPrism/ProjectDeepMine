@@ -158,6 +158,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
+  potentialTaskPrefabs:
+  - {fileID: 114398734277967446, guid: 3cb63de9751566745bd76d5618cb0f7e, type: 2}
+  - {fileID: 114626575226069306, guid: 9ef07d4d0bfdd6e469b2c2d8822dea24, type: 2}
+  - {fileID: 114889724165535862, guid: 7b5a15dac30241542b4f55b5b1cbe5ba, type: 2}
+  potentialTasks: []
   tileType: {fileID: 11400000, guid: 4f36d8e154fa30f479c1272f8a8d9481, type: 2}
   life: 100
   lifeMax: 100

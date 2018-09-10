@@ -144,6 +144,8 @@ MonoBehaviour:
   healthBarPrefab: {fileID: 114595616249524122, guid: 96df83764b49de344bff03ec513c1df7,
     type: 2}
   healthBarColor: {r: 1, g: 0, b: 0, a: 1}
+  attackTaskPrefab: {fileID: 114709895412189440, guid: 99d8e363a6b28e04f8b7ffc6d3c21b86,
+    type: 2}
 --- !u!212 &212723782469632978
 SpriteRenderer:
   m_ObjectHideFlags: 1

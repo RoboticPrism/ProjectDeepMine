@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BuildingBase : ClickableTileBase {
+public abstract class BuildingBase : TaskableBase {
 
     public WallTile tileType;
 
@@ -29,13 +29,11 @@ public abstract class BuildingBase : ClickableTileBase {
     // Use this for initialization
     protected override void Start () {
         base.Start();
-        potentialTasks = new List<Task>
-        {
-            new BuildTask("Build", this),
-            new RepairTask("Repair", this),
-            new DeconstructTask("Deconstruct", this)
-        };
         OnCreate();
+        if (potentialTasks[0].GetComponent<BuildTask>())
+        {
+            MinerManager.instance.AddTaskToQueue(potentialTasks[0]); // Implicit assumption that first take is a build task
+        }
 	}
 	
 	// Update is called once per frame

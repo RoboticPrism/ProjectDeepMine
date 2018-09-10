@@ -8,11 +8,6 @@ public class Core : BuildingBase {
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
-        // Core can't be build or deconstructed
-        potentialTasks = new List<Task>
-        {
-            new RepairTask("Repair", this)
-        };
         OnCreate();
     }
 	

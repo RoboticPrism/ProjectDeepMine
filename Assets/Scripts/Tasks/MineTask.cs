@@ -6,8 +6,9 @@ public class MineTask : Task {
 
     public MineableWall targetWall;
 
-    public MineTask(string taskName, MineableWall target) : base(taskName, target) {
-        this.targetWall = target;
+    public override void Setup(TaskableBase target) {
+        base.Setup(target);
+        this.targetWall = target.GetComponent<MineableWall>();
     }
 
     // returns true if the current task is feasible

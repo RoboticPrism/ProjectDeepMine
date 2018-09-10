@@ -39,7 +39,7 @@ public class MinerManager : MonoBehaviour {
         return minerList[0];
     }
 
-    public void CreateTileMenu(ClickableTileBase tile)
+    public void CreateTileMenu(TaskableBase tile)
     {
         TileMenu tileMenu = Instantiate(tileMenuPrefab, tile.transform.position, Quaternion.Euler(Vector3.zero));
         tileMenu.CreateMenu(tile);
@@ -48,13 +48,13 @@ public class MinerManager : MonoBehaviour {
     public void AddTaskToQueue(Task task)
     {
         queuedTaskList.Add(task);
-        task.queued = true;
+        task.Queue();
     }
 
     public void AddTaskToStartOfQueue(Task task)
     {
         queuedTaskList.Insert(0, task);
-        task.queued = true;
+        task.Queue();
     }
 
     // Forcibly schedules a new task and throws the old current task to the front of the queue
@@ -74,13 +74,11 @@ public class MinerManager : MonoBehaviour {
         if(queuedTaskList.Contains(task))
         {
             queuedTaskList.Remove(task);
-            task.owner = null;
-            task.queued = false;
+            task.Cancel();
         } else if (selectedTaskList.Contains(task))
         {
             task.owner.CompleteTask();
-            task.owner = null;
-            task.queued = false;
+            task.Cancel();
         }
     }
 
@@ -88,6 +86,7 @@ public class MinerManager : MonoBehaviour {
     public void CompleteTask(Task completedTask)
     {
         selectedTaskList.Remove(completedTask);
+        completedTask.Complete();
     }
 
     // Returns the next task and moves it from the queue to selected

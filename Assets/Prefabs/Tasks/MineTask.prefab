@@ -9,63 +9,62 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1327703325968270}
+  m_RootGameObject: {fileID: 1686583842359752}
   m_IsPrefabAsset: 1
---- !u!1 &1327703325968270
+--- !u!1 &1686583842359752
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4709414294001856}
-  - component: {fileID: 114948398373916202}
-  - component: {fileID: 212550283547717482}
+  - component: {fileID: 4837811835475846}
+  - component: {fileID: 114466769079953366}
+  - component: {fileID: 212341207903217226}
   m_Layer: 0
-  m_Name: Blueprint
+  m_Name: MineTask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4709414294001856
+--- !u!4 &4837811835475846
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1327703325968270}
+  m_GameObject: {fileID: 1686583842359752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.52, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114948398373916202
+--- !u!114 &114466769079953366
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1327703325968270}
+  m_GameObject: {fileID: 1686583842359752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9509ebb718b5b124283f33fa9625ed1e, type: 3}
+  m_Script: {fileID: 11500000, guid: a4509aa1428963f4c846edf74b9ad693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingType: {fileID: 0}
-  MiningDrillBlueprint: {fileID: 21300000, guid: 052ed19fa670cf7418845d5c6fc91e00,
-    type: 3}
-  buildColor: {r: 0, g: 0.38654184, b: 1, a: 0.78431374}
-  noBuildColor: {r: 1, g: 0, b: 0, a: 0.78431374}
-  buildTaskPrefab: {fileID: 114398734277967446, guid: 3cb63de9751566745bd76d5618cb0f7e,
-    type: 2}
---- !u!212 &212550283547717482
+  taskName: Mine
+  target: {fileID: 0}
+  owner: {fileID: 0}
+  queued: 0
+  spriteRenderer: {fileID: 212341207903217226}
+  targetWall: {fileID: 0}
+--- !u!212 &212341207903217226
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1327703325968270}
-  m_Enabled: 1
+  m_GameObject: {fileID: 1686583842359752}
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -94,8 +93,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 052ed19fa670cf7418845d5c6fc91e00, type: 3}
-  m_Color: {r: 0.051886797, g: 0.4143549, b: 1, a: 0.6509804}
+  m_Sprite: {fileID: 21300000, guid: ff3a7bc3bc698be46afbbe581b23b1f4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

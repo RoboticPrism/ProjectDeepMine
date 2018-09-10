@@ -10,16 +10,16 @@ public class MoveableBase : MonoBehaviour {
     protected List<Vector3Int> pathToTarget = null;
     protected Vector3Int target;
 
-    protected UnityAction<ClickableTileBase> wallDestroyedListener;
-    protected UnityAction<ClickableTileBase> buildingCreatedListener;
+    protected UnityAction<TaskableBase> wallDestroyedListener;
+    protected UnityAction<TaskableBase> buildingCreatedListener;
 
     public GameObject moveableBody;
 
     // Use this for initialization
     void Start () {
-        wallDestroyedListener = new UnityAction<ClickableTileBase>(UpdatePath);
+        wallDestroyedListener = new UnityAction<TaskableBase>(UpdatePath);
         EventManager.StartListening("WallDestroyed", wallDestroyedListener);
-        buildingCreatedListener = new UnityAction<ClickableTileBase>(UpdatePath);
+        buildingCreatedListener = new UnityAction<TaskableBase>(UpdatePath);
         EventManager.StartListening("BuildingCreated", buildingCreatedListener);
     }
 	
@@ -52,7 +52,7 @@ public class MoveableBase : MonoBehaviour {
     }
 
     // For now just triggers a full recheck of the path, could make this smarter though
-    public void UpdatePath(ClickableTileBase tileBase)
+    public void UpdatePath(TaskableBase tileBase)
     {
         MakePath(tileBase.transform.position);
     }
