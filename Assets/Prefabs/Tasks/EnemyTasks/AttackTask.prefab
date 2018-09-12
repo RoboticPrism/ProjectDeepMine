@@ -53,7 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskName: 
   target: {fileID: 0}
-  owner: {fileID: 0}
-  queued: 0
   spriteRenderer: {fileID: 0}
+  owner: {fileID: 0}
   targetBuilding: {fileID: 0}

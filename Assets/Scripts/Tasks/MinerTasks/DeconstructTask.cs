@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RepairTask : Task {
+public class DeconstructTask : MinerTask {
 
     public BuildingBase targetBuilding;
 
@@ -15,8 +15,8 @@ public class RepairTask : Task {
     // returns true if the current task is feasible
     public override bool TaskAvailable()
     {
-        // can't schedule a repair task if the building is at max hp
-        if (targetBuilding.life < targetBuilding.lifeMax)
+        // can't schedule a deconstruct task if the building is being build or is broken
+        if (targetBuilding.built && !targetBuilding.broken)
         {
             return base.TaskAvailable();
         }
@@ -24,14 +24,13 @@ public class RepairTask : Task {
         {
             return false;
         }
-
     }
 
-    public bool DoTask(int repairSpeed)
+    public bool DoTask(float buildSpeed)
     {
-        if(targetBuilding.life < targetBuilding.lifeMax)
+        if(targetBuilding)
         {
-            targetBuilding.AddLife(repairSpeed);
+            targetBuilding.AddConstruction(-buildSpeed);
             return false;
         }
         else

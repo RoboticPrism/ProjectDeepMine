@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MineTask : Task {
+public class MineTask : MinerTask {
 
     public MineableWall targetWall;
 

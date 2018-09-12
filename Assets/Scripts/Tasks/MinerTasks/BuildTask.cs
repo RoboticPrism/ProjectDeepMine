@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeconstructTask : Task {
+public class BuildTask : MinerTask {
 
     public BuildingBase targetBuilding;
 
@@ -15,8 +15,8 @@ public class DeconstructTask : Task {
     // returns true if the current task is feasible
     public override bool TaskAvailable()
     {
-        // can't schedule a deconstruct task if the building is being build or is broken
-        if (targetBuilding.built && !targetBuilding.broken)
+        // can't schedule a build task if the building is already built
+        if (!targetBuilding.built)
         {
             return base.TaskAvailable();
         }
@@ -24,13 +24,14 @@ public class DeconstructTask : Task {
         {
             return false;
         }
+        
     }
 
     public bool DoTask(float buildSpeed)
     {
-        if(targetBuilding)
+        if(targetBuilding.buildAmount < targetBuilding.buildMax)
         {
-            targetBuilding.AddConstruction(-buildSpeed);
+            targetBuilding.AddConstruction(buildSpeed);
             return false;
         }
         else

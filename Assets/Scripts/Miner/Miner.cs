@@ -8,7 +8,7 @@ public class Miner : MoveableBase {
     public float mineSpeed = 1f;
     public float buildSpeed = 1f;
 
-    public Task currentTask;
+    public MinerTask currentTask;
 
     // Use this for initialization
     void Start () {
@@ -64,7 +64,7 @@ public class Miner : MoveableBase {
         }
     }
 
-    public void SelectTask(Task newTask)
+    public void SelectTask(MinerTask newTask)
     {
         if (newTask != null)
         {
@@ -80,9 +80,9 @@ public class Miner : MoveableBase {
         }
     }
 
-    public Task ReplaceTask(Task newTask)
+    public MinerTask ReplaceTask(MinerTask newTask)
     {
-        Task oldTask = currentTask;
+        MinerTask oldTask = currentTask;
         if (newTask != null)
         {
             if (newTask.target && MakePath(newTask.TargetLocation()))
@@ -100,7 +100,7 @@ public class Miner : MoveableBase {
         return null;
     }
 
-    public void UnqueueTask(Task task)
+    public void UnqueueTask(MinerTask task)
     {
         if (task != null)
         {

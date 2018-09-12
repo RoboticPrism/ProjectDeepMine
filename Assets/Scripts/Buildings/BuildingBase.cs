@@ -26,13 +26,15 @@ public abstract class BuildingBase : TaskableBase {
     public Color healthBarColor;
     public Color buildBarColor;
 
+    BuildingTask currentTask;
+
     // Use this for initialization
     protected override void Start () {
         base.Start();
         OnCreate();
         if (potentialTasks[0].GetComponent<BuildTask>())
         {
-            MinerManager.instance.AddTaskToQueue(potentialTasks[0]); // Implicit assumption that first take is a build task
+            MinerManager.instance.AddTaskToQueue(potentialTasks[0].GetComponent<BuildTask>()); // Implicit assumption that first take is a build task
         }
 	}
 	
@@ -44,8 +46,16 @@ public abstract class BuildingBase : TaskableBase {
     // FixedUpdate is called once per tick
     protected override void FixedUpdate()
     {
+        if(currentTask)
+        {
+            currentTask.DoTask();
+        }
         base.FixedUpdate();
     }
+
+    ////////////////////
+    // STATE UPDATERS //
+    ////////////////////
 
     public void AddConstruction(float addAmount)
     {
@@ -95,6 +105,10 @@ public abstract class BuildingBase : TaskableBase {
         }
         UpdateHealthBar();
     }
+
+    ////////////////////
+    // EVENT TRIGGERS //
+    ////////////////////
 
     // Called when a building has first been put down but is not constructed yet
     public virtual void OnCreate()
@@ -151,6 +165,26 @@ public abstract class BuildingBase : TaskableBase {
     public virtual void OnRepaired()
     {
         EventManager.TriggerEvent("BuildingRepaired", this);
+    }
+
+    ////////////////////
+    // BUILDING TASKS //
+    ////////////////////
+
+    public void AddBuildingTask(BuildingTask task)
+    {
+        if(task && currentTask == null)
+        {
+            currentTask = task;
+        }
+    }
+
+    public void EndBuildingTask(BuildingTask task)
+    {
+        if(task == currentTask)
+        {
+            currentTask = null;
+        }
     }
 
     public void DestroySelf()

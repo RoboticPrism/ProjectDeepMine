@@ -139,6 +139,7 @@ MonoBehaviour:
   moveableBody: {fileID: 1447061184162384}
   mineSpeed: 0.2
   buildSpeed: 0.2
+  currentTask: {fileID: 0}
 --- !u!212 &212161468758871910
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTask : Task {
-
-    float attackCooldown = 60;
-    float attackCooldownMax = 60;
+public class RepairTask : MinerTask {
 
     public BuildingBase targetBuilding;
 
@@ -18,8 +15,8 @@ public class AttackTask : Task {
     // returns true if the current task is feasible
     public override bool TaskAvailable()
     {
-        // can't schedule an attack task if the building is already broken
-        if (!targetBuilding.broken)
+        // can't schedule a repair task if the building is at max hp
+        if (targetBuilding.life < targetBuilding.lifeMax)
         {
             return base.TaskAvailable();
         }
@@ -27,26 +24,18 @@ public class AttackTask : Task {
         {
             return false;
         }
+
     }
 
-    public bool DoTask(int damage, float attackSpeed)
+    public bool DoTask(int repairSpeed)
     {
-        if (targetBuilding.life > 0)
+        if(targetBuilding.life < targetBuilding.lifeMax)
         {
-            if (attackCooldown >= attackCooldownMax)
-            {
-                targetBuilding.AddLife(-damage);
-                attackCooldown = 0;
-            }
-            else
-            {
-                attackCooldown += attackSpeed;
-            }
+            targetBuilding.AddLife(repairSpeed);
             return false;
         }
         else
         {
-            targetBuilding.life = 0;
             return true;
         }
     }

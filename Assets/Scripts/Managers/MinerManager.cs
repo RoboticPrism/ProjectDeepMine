@@ -9,8 +9,8 @@ public class MinerManager : MonoBehaviour {
 
     public static MinerManager instance;
 
-    List<Task> queuedTaskList = new List<Task>(); // List of tasks to be done
-    List<Task> selectedTaskList = new List<Task>(); // List of tasks currently being done by miners
+    List<MinerTask> queuedTaskList = new List<MinerTask>(); // List of tasks to be done
+    List<MinerTask> selectedTaskList = new List<MinerTask>(); // List of tasks currently being done by miners
 
     // Use this for initialization
     void Start() {
@@ -24,7 +24,6 @@ public class MinerManager : MonoBehaviour {
 
     public void AddMiner(Miner miner)
     {
-        Debug.Log("added miner");
         minerList.Add(miner);
     }
 
@@ -39,19 +38,20 @@ public class MinerManager : MonoBehaviour {
         return minerList[0];
     }
 
+    // TODO: this probably should get decoupled from miner manager
     public void CreateTileMenu(TaskableBase tile)
     {
         TileMenu tileMenu = Instantiate(tileMenuPrefab, tile.transform.position, Quaternion.Euler(Vector3.zero));
         tileMenu.CreateMenu(tile);
     }
 
-    public void AddTaskToQueue(Task task)
+    public void AddTaskToQueue(MinerTask task)
     {
         queuedTaskList.Add(task);
         task.Queue();
     }
 
-    public void AddTaskToStartOfQueue(Task task)
+    public void AddTaskToStartOfQueue(MinerTask task)
     {
         queuedTaskList.Insert(0, task);
         task.Queue();
@@ -59,9 +59,9 @@ public class MinerManager : MonoBehaviour {
 
     // Forcibly schedules a new task and throws the old current task to the front of the queue
     // TODO select a unit to perform the task right now better
-    public void DoTaskNow(Task task)
+    public void DoTaskNow(MinerTask task)
     {
-        Task oldTask = minerList[0].ReplaceTask(task);
+        MinerTask oldTask = minerList[0].ReplaceTask(task);
         if (oldTask != null)
         {
             AddTaskToStartOfQueue(oldTask);
@@ -69,7 +69,7 @@ public class MinerManager : MonoBehaviour {
     }
 
     // Forcible removes the task early
-    public void CancelTask(Task task)
+    public void CancelTask(MinerTask task)
     {
         if(queuedTaskList.Contains(task))
         {
@@ -83,18 +83,18 @@ public class MinerManager : MonoBehaviour {
     }
 
     // Removes the completed task from the selected list
-    public void CompleteTask(Task completedTask)
+    public void CompleteTask(MinerTask completedTask)
     {
         selectedTaskList.Remove(completedTask);
         completedTask.Complete();
     }
 
     // Returns the next task and moves it from the queue to selected
-    public Task GrabNextTask()
+    public MinerTask GrabNextTask()
     {
         if (queuedTaskList.Count > 0)
         {
-            Task nextTask = queuedTaskList[0];
+            MinerTask nextTask = queuedTaskList[0];
             queuedTaskList.Remove(nextTask);
             selectedTaskList.Add(nextTask);
             return nextTask;
@@ -103,8 +103,5 @@ public class MinerManager : MonoBehaviour {
         {
             return null;
         }
-
     }
-
-    
 }

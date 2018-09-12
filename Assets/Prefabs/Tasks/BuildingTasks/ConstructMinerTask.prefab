@@ -9,31 +9,31 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1223657632636246}
+  m_RootGameObject: {fileID: 1497415944058152}
   m_IsPrefabAsset: 1
---- !u!1 &1223657632636246
+--- !u!1 &1497415944058152
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4941202442374834}
-  - component: {fileID: 114889724165535862}
-  - component: {fileID: 212010045140807926}
+  - component: {fileID: 4170583398754748}
+  - component: {fileID: 114661317854761326}
+  - component: {fileID: 212595420562065350}
   m_Layer: 0
-  m_Name: DeconstructTask
+  m_Name: ConstructMinerTask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4941202442374834
+--- !u!4 &4170583398754748
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1223657632636246}
+  m_GameObject: {fileID: 1497415944058152}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,29 +41,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114889724165535862
+--- !u!114 &114661317854761326
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1223657632636246}
+  m_GameObject: {fileID: 1497415944058152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57387ef6e9726a3418c33c701e6a1a04, type: 3}
+  m_Script: {fileID: 11500000, guid: a16e34231c89a284fa693cdc591e4235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskName: Deconstruct
+  taskName: Create Miner
   target: {fileID: 0}
+  spriteRenderer: {fileID: 212595420562065350}
   owner: {fileID: 0}
-  queued: 0
-  spriteRenderer: {fileID: 212010045140807926}
-  targetBuilding: {fileID: 0}
---- !u!212 &212010045140807926
+  taskSpeed: 0.05
+  taskCurrentTime: 0
+  taskMaxTime: 100
+  minerPrefab: {fileID: 114986426207556168, guid: 44d52b4522c69f34a921f9a297db7c31,
+    type: 2}
+--- !u!212 &212595420562065350
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1223657632636246}
+  m_GameObject: {fileID: 1497415944058152}
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -93,7 +96,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1c76663bd5e723249947e199838065f5, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,6 +104,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
