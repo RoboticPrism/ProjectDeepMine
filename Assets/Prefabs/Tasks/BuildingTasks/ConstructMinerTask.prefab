@@ -59,8 +59,12 @@ MonoBehaviour:
   taskSpeed: 0.05
   taskCurrentTime: 0
   taskMaxTime: 100
+  healthBarPrefab: {fileID: 114595616249524122, guid: 96df83764b49de344bff03ec513c1df7,
+    type: 2}
+  barColor: {r: 0, g: 1, b: 0, a: 1}
   minerPrefab: {fileID: 114986426207556168, guid: 44d52b4522c69f34a921f9a297db7c31,
     type: 2}
+  oreCost: 10
 --- !u!212 &212595420562065350
 SpriteRenderer:
   m_ObjectHideFlags: 1

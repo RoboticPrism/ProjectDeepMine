@@ -29,7 +29,7 @@ public class Miner : MoveableBase {
     {
         if(currentTask == null)
         {
-            SelectTask(MinerManager.instance.GrabNextTask());
+            StartTask(MinerManager.instance.GrabNextTask());
         }
         else if (currentTask != null)
         {
@@ -64,7 +64,7 @@ public class Miner : MoveableBase {
         }
     }
 
-    public void SelectTask(MinerTask newTask)
+    public void StartTask(MinerTask newTask)
     {
         if (newTask != null)
         {
@@ -80,32 +80,16 @@ public class Miner : MoveableBase {
         }
     }
 
-    public MinerTask ReplaceTask(MinerTask newTask)
+    public void SwapTask(MinerTask task)
     {
-        MinerTask oldTask = currentTask;
-        if (newTask != null)
-        {
-            if (newTask.target && MakePath(newTask.TargetLocation()))
-            {
-                UnqueueTask(oldTask);
-                SelectTask(newTask);
-                newTask.Queue();
-                return oldTask;
-            }
-            else
-            {
-                CompleteTask();
-            }
-        }
-        return null;
+        UnqueueTask();
+        StartTask(task);
     }
 
-    public void UnqueueTask(MinerTask task)
+    // Prematurely stop work on a task
+    public void UnqueueTask()
     {
-        if (task != null)
-        {
-            task.Unqueue();
-        }
+        currentTask = null;
         RemovePath();
     }
 

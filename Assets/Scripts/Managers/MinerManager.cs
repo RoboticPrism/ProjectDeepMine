@@ -32,10 +32,84 @@ public class MinerManager : MonoBehaviour {
         minerList.Remove(miner);
     }
 
+    // Selects the next idle worker available
     Miner NextAvailableMiner()
     {
-        // TODO: add multi worker scheduling
-        return minerList[0];
+        foreach(Miner miner in minerList)
+        {
+            if(miner.currentTask == null)
+            {
+                return miner;
+            }
+        }
+        return null;
+    }
+
+    // Selects the next idle worker available nearest to the location
+    Miner NextAvailableMiner(Vector3 location)
+    {
+        Miner retMiner = null;
+        foreach (Miner miner in minerList)
+        {
+            if (miner.currentTask == null)
+            {
+                if (retMiner != null)
+                {
+                    // TODO: experiment with using AStar distance calcs instead
+                    if(Vector3.Distance(miner.transform.position, location) < Vector3.Distance(retMiner.transform.position, location))
+                    {
+                        retMiner = miner;
+                    }
+                }
+                else
+                {
+                    retMiner = miner;
+                }
+            }
+        }
+        return retMiner;
+    }
+
+    // Forcibly selects a miner, even if its busy
+    Miner NextMiner()
+    {
+        Miner retMiner;
+        retMiner = NextAvailableMiner();
+        if(retMiner)
+        {
+            return retMiner;
+        }
+        else
+        {
+            return minerList[0];
+        }
+    }
+
+    // Forcibly selects the miner closest to a location, even if its busy
+    Miner NextMiner(Vector3 location)
+    {
+        Miner retMiner = null;
+        retMiner = NextAvailableMiner(location);
+        if (retMiner)
+        {
+            return retMiner;
+        }
+        foreach (Miner miner in minerList)
+        {
+            if (retMiner != null)
+            {
+                // TODO: experiment with using AStar distance calcs instead
+                if (Vector3.Distance(miner.transform.position, location) < Vector3.Distance(retMiner.transform.position, location))
+                {
+                    retMiner = miner;
+                }
+            }
+            else
+            {
+                retMiner = miner;
+            }
+        }
+        return retMiner;
     }
 
     // TODO: this probably should get decoupled from miner manager
@@ -57,15 +131,42 @@ public class MinerManager : MonoBehaviour {
         task.Queue();
     }
 
+    public void ForceTask(MinerTask task, Miner miner)
+    {
+        if(miner.currentTask)
+        {
+            DeselectTask(task);
+        }
+        if (!selectedTaskList.Contains(task))
+        {
+            selectedTaskList.Add(task);
+        }
+        if(queuedTaskList.Contains(task))
+        {
+            queuedTaskList.Remove(task);
+        }
+        task.Queue();
+        miner.SwapTask(task);
+    }
+
+    public void DeselectTask(MinerTask task)
+    {
+        if (selectedTaskList.Contains(task))
+        {
+            selectedTaskList.Remove(task);
+        }
+        if (!queuedTaskList.Contains(task))
+        {
+            queuedTaskList.Insert(0, task);
+        }
+        task.Unqueue();
+    }
+
     // Forcibly schedules a new task and throws the old current task to the front of the queue
     // TODO select a unit to perform the task right now better
     public void DoTaskNow(MinerTask task)
     {
-        MinerTask oldTask = minerList[0].ReplaceTask(task);
-        if (oldTask != null)
-        {
-            AddTaskToStartOfQueue(oldTask);
-        }
+        ForceTask(task, NextMiner(task.TargetLocation()));
     }
 
     // Forcible removes the task early
