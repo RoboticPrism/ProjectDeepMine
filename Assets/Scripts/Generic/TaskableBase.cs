@@ -6,17 +6,11 @@ using UnityEngine.Tilemaps;
 // An object that sits in the grid and can be clicked to select it
 public class TaskableBase : MonoBehaviour {
     public bool clickable = true;
-    public List<Task> potentialTaskPrefabs = new List<Task>();
-    public List<Task> potentialTasks = new List<Task>();
+    public Task currentTask;
 
     // Use this for initialization
     protected virtual void Start () {
-        foreach (Task taskPrefab in potentialTaskPrefabs)
-        {
-            Task newTask = Instantiate(taskPrefab, transform);
-            newTask.Setup(this);
-            potentialTasks.Add(newTask);
-        }
+        
 	}
 	
 	// Update is called once per frame
@@ -30,13 +24,26 @@ public class TaskableBase : MonoBehaviour {
 
     }
 
+    // Instantiates a task
+    public virtual Task CreateTask(Task task)
+    {
+        
+        currentTask = Instantiate(task);
+        currentTask.Setup(this);
+        if (currentTask.GetComponent<MinerTask>())
+        {
+            MinerManager.instance.AddTaskToQueue(currentTask.GetComponent<MinerTask>());
+        }
+        return currentTask;
+    }
+
     // On mouse down, pop menu
     private void OnMouseDown()
     {
         UIHoverListener uhl = FindObjectOfType<UIHoverListener>();
         if (clickable && (uhl == null || !uhl.isUIOverride))
         {
-            FindObjectOfType<MinerManager>().CreateTileMenu(this);
+            FindObjectOfType<HoverManager>().SelectTile(this);
         }
     }
 }

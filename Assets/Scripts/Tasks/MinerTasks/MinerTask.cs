@@ -6,12 +6,6 @@ public class MinerTask : Task {
 
     public Miner owner;
     bool queued = false;
-    public enum priotities { QUEUE, QUEUE_NOW, REQUEUE_NOW, CANCEL }
-
-    public override void Setup (TaskableBase target)
-    {
-        base.Setup(target);
-    }
 
     // returns true if the current task is feasible
     public override bool TaskAvailable()
@@ -43,11 +37,6 @@ public class MinerTask : Task {
     {
         queued = true;
         ShowIcon();
-    }
-
-    public void Complete()
-    {
-        HideIcon();
     }
 
     public void Unqueue()

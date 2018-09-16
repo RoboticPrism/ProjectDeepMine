@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class DeconstructTask : MinerTask {
 
-    public BuildingBase targetBuilding;
-
-    public override void Setup(TaskableBase target)
-    {
-        base.Setup(target);
-        this.targetBuilding = target.GetComponent<BuildingBase>();
-    }
-
     // returns true if the current task is feasible
     public override bool TaskAvailable()
     {
+        BuildingBase targetBuilding = target.GetComponent<BuildingBase>();
         // can't schedule a deconstruct task if the building is being build or is broken
         if (targetBuilding.built && !targetBuilding.broken)
         {
@@ -26,9 +19,15 @@ public class DeconstructTask : MinerTask {
         }
     }
 
+    public static bool TaskAvailable(BuildingBase building)
+    {
+        return building.built && !building.broken;
+    }
+
     public bool DoTask(float buildSpeed)
     {
-        if(targetBuilding)
+        BuildingBase targetBuilding = target.GetComponent<BuildingBase>();
+        if (targetBuilding)
         {
             targetBuilding.AddConstruction(-buildSpeed);
             return false;

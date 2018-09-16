@@ -117,11 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  potentialTaskPrefabs:
-  - {fileID: 114398734277967446, guid: 3cb63de9751566745bd76d5618cb0f7e, type: 2}
-  - {fileID: 114626575226069306, guid: 9ef07d4d0bfdd6e469b2c2d8822dea24, type: 2}
-  - {fileID: 114889724165535862, guid: 7b5a15dac30241542b4f55b5b1cbe5ba, type: 2}
-  potentialTasks: []
+  currentTask: {fileID: 0}
   tileType: {fileID: 11400000, guid: e3ba5b9538aa89e499e2d04a7e7cc0af, type: 2}
   life: 100
   lifeMax: 100
@@ -137,6 +133,12 @@ MonoBehaviour:
     type: 2}
   healthBarColor: {r: 1, g: 0, b: 0, a: 1}
   buildBarColor: {r: 1, g: 1, b: 0, a: 1}
+  buildTaskPrefab: {fileID: 114398734277967446, guid: 3cb63de9751566745bd76d5618cb0f7e,
+    type: 2}
+  repairTaskPrefab: {fileID: 114626575226069306, guid: 9ef07d4d0bfdd6e469b2c2d8822dea24,
+    type: 2}
+  deconstructTaskPrefab: {fileID: 114889724165535862, guid: 7b5a15dac30241542b4f55b5b1cbe5ba,
+    type: 2}
   mineSpeed: 1
   miningNeeded: 100
   currentMining: 0

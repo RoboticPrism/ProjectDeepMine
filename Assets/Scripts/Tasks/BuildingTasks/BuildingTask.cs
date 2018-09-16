@@ -30,7 +30,7 @@ public class BuildingTask : Task {
         healthBarInstance.UpdateColor(barColor);
     }
 
-    public void DoTask()
+    public override void DoTask()
     {
         if(taskCurrentTime == 0)
         {
@@ -43,14 +43,14 @@ public class BuildingTask : Task {
         }
         else
         {
-            CompleteTask();
+            Complete();
         }
     }
 
-    protected virtual void CompleteTask()
+    public override void Complete()
     {
         Destroy(healthBarInstance.gameObject);
         taskCurrentTime = 0;
-        owner.EndBuildingTask(this);   
+        base.Complete();
     }
 }

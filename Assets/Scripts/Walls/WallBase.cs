@@ -9,6 +9,8 @@ public abstract class WallBase : TaskableBase {
     public SpriteRenderer spriteRenderer;
     public BoxCollider2D boxCollider;
 
+    public MineTask mineTaskPrefab;
+
     private HoverInfo hoverInfo;
 
     List<Vector2> neighborDirections = new List<Vector2> {

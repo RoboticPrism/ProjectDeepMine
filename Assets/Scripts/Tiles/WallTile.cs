@@ -9,8 +9,21 @@ public class WallTile : Tile {
     public float PrefabLocalOffset = 0.5f;
     public float prefabZOffset = -1f;
 
+    public MineTask mineTaskPrefab;
+
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
+
+        
+
+        if (go != null)
+        {
+            //Modify position of GO to match middle of Tile sprite
+            go.transform.position = new Vector3(position.x + PrefabLocalOffset
+                , position.y + PrefabLocalOffset
+                , prefabZOffset);
+
+        }
 
         //This prevents rogue prefab objects from appearing when the Tile palette is present
 #if UNITY_EDITOR
@@ -22,15 +35,6 @@ public class WallTile : Tile {
             }
         }
 #endif
-
-        if (go != null)
-        {
-            //Modify position of GO to match middle of Tile sprite
-            go.transform.position = new Vector3(position.x + PrefabLocalOffset
-                , position.y + PrefabLocalOffset
-                , prefabZOffset);
-
-        }
 
         return true;
     }

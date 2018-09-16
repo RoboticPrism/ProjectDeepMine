@@ -26,18 +26,20 @@ public abstract class BuildingBase : TaskableBase {
     public Color healthBarColor;
     public Color buildBarColor;
 
-    BuildingTask currentTask;
+    public BuildTask buildTaskPrefab;
+    public RepairTask repairTaskPrefab;
+    public DeconstructTask deconstructTaskPrefab;
 
     // Use this for initialization
     protected override void Start () {
         base.Start();
         OnCreate();
-        if (potentialTasks[0].GetComponent<BuildTask>())
+        if (buildTaskPrefab)
         {
-            MinerManager.instance.AddTaskToQueue(potentialTasks[0].GetComponent<BuildTask>()); // Implicit assumption that first take is a build task
+            CreateTask(buildTaskPrefab);
         }
 	}
-	
+
 	// Update is called once per frame
 	protected override void Update () {
         base.Update();
@@ -170,22 +172,6 @@ public abstract class BuildingBase : TaskableBase {
     ////////////////////
     // BUILDING TASKS //
     ////////////////////
-
-    public void AddBuildingTask(BuildingTask task)
-    {
-        if(task && currentTask == null)
-        {
-            currentTask = task;
-        }
-    }
-
-    public void EndBuildingTask(BuildingTask task)
-    {
-        if(task == currentTask)
-        {
-            currentTask = null;
-        }
-    }
 
     public void DestroySelf()
     {

@@ -114,9 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
-  potentialTaskPrefabs:
-  - {fileID: 114626575226069306, guid: 9ef07d4d0bfdd6e469b2c2d8822dea24, type: 2}
-  potentialTasks: []
+  currentTask: {fileID: 0}
   tileType: {fileID: 11400000, guid: cf750c99ba468264a94dabf90e032247, type: 2}
   life: 100
   lifeMax: 100
@@ -132,6 +130,10 @@ MonoBehaviour:
     type: 2}
   healthBarColor: {r: 1, g: 0, b: 0, a: 1}
   buildBarColor: {r: 1, g: 1, b: 0, a: 1}
+  buildTaskPrefab: {fileID: 0}
+  repairTaskPrefab: {fileID: 114626575226069306, guid: 9ef07d4d0bfdd6e469b2c2d8822dea24,
+    type: 2}
+  deconstructTaskPrefab: {fileID: 0}
 --- !u!114 &114620833684224080
 MonoBehaviour:
   m_ObjectHideFlags: 1

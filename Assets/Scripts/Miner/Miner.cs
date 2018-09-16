@@ -72,6 +72,7 @@ public class Miner : MoveableBase {
             {
                 currentTask = newTask;
                 currentTask.owner = this;
+                EventManager.TriggerEvent("TaskStarted", currentTask.target);
             }
             else
             {
@@ -96,6 +97,7 @@ public class Miner : MoveableBase {
     public void CompleteTask()
     {
         MinerManager.instance.CompleteTask(currentTask);
+        currentTask.Complete();
         currentTask = null;
         RemovePath();
     }

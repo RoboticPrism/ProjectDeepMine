@@ -45,9 +45,12 @@ public class MineableWall : WallBase {
         this.life -= mineSpeed;
         if (life < 0)
         {
-            OnWallDestroy();   
+            OnWallDestroy();
         }
-        UpdateHealthBar();
+        else
+        {
+            UpdateHealthBar();
+        }
     }
 
     void OnMineStart()

@@ -5,12 +5,11 @@ using UnityEngine;
 public class MinerManager : MonoBehaviour {
 
     List<Miner> minerList = new List<Miner>();
-    public TileMenu tileMenuPrefab;
 
     public static MinerManager instance;
 
-    List<MinerTask> queuedTaskList = new List<MinerTask>(); // List of tasks to be done
-    List<MinerTask> selectedTaskList = new List<MinerTask>(); // List of tasks currently being done by miners
+    public List<MinerTask> queuedTaskList = new List<MinerTask>(); // List of tasks to be done
+    public List<MinerTask> selectedTaskList = new List<MinerTask>(); // List of tasks currently being done by miners
 
     // Use this for initialization
     void Start() {
@@ -110,13 +109,6 @@ public class MinerManager : MonoBehaviour {
             }
         }
         return retMiner;
-    }
-
-    // TODO: this probably should get decoupled from miner manager
-    public void CreateTileMenu(TaskableBase tile)
-    {
-        TileMenu tileMenu = Instantiate(tileMenuPrefab, tile.transform.position, Quaternion.Euler(Vector3.zero));
-        tileMenu.CreateMenu(tile);
     }
 
     public void AddTaskToQueue(MinerTask task)

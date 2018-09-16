@@ -18,7 +18,7 @@ public class ConstructMinerTask : BuildingTask {
         ResourceManager.instance.AddOre(-oreCost, this.transform.position);
     }
 
-    protected override void CompleteTask()
+    public override void Complete()
     {
         GridUtilities gridUtil = new GridUtilities(TilemapManager.instance.wallTilemap);
         List<Vector3Int> openPositions = gridUtil.GetEmptyNeighbors(owner.gameObject);
@@ -26,7 +26,7 @@ public class ConstructMinerTask : BuildingTask {
         {
             Miner newMiner = Instantiate(minerPrefab, openPositions[0] + new Vector3(0.5f, 0.5f, 0), Quaternion.Euler(Vector3.zero));
             MinerManager.instance.AddMiner(newMiner);
-            base.CompleteTask();
+            base.Complete();
         }
     }
 }
