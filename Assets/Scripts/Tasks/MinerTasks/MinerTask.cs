@@ -37,7 +37,6 @@ public class MinerTask : Task {
     public void Queue()
     {
         queued = true;
-        ShowIcon();
     }
 
     public void Unqueue()
@@ -50,22 +49,6 @@ public class MinerTask : Task {
     {
         queued = false;
         owner = null;
-        HideIcon();
-    }
-
-    void ShowIcon()
-    {
-        if (spriteRenderer)
-        {
-            spriteRenderer.enabled = true;
-        }
-    }
-
-    void HideIcon()
-    {
-        if (spriteRenderer)
-        {
-            spriteRenderer.enabled = false;
-        }
+        DestroySelf();
     }
 }

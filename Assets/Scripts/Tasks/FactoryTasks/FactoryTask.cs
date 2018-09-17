@@ -52,10 +52,20 @@ public class FactoryTask : Task {
         }
     }
 
-    public override void Complete()
+    public virtual void Complete()
+    {
+        DestroySelf();
+    }
+
+    public virtual void Cancel()
+    {
+        DestroySelf();
+    }
+
+    public override void DestroySelf()
     {
         Destroy(healthBarInstance.gameObject);
         taskCurrentTime = 0;
-        base.Complete();
+        base.DestroySelf();
     }
 }

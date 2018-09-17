@@ -139,7 +139,8 @@ MonoBehaviour:
     type: 2}
   deconstructTaskPrefab: {fileID: 114889724165535862, guid: 7b5a15dac30241542b4f55b5b1cbe5ba,
     type: 2}
-  factoryTaskPrefabs: []
+  factoryTaskPrefabs:
+  - {fileID: 114371373272833796, guid: eab7fef60c7851e4d968a8233ac87fd4, type: 2}
 --- !u!114 &114173177788500770
 MonoBehaviour:
   m_ObjectHideFlags: 1

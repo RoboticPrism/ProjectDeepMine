@@ -32,4 +32,10 @@ public class CreateMinerTask : FactoryTask {
             base.Complete();
         }
     }
+
+    public override void Cancel()
+    {
+        ResourceManager.instance.AddOre(oreCost, this.transform.position);
+        base.Cancel();
+    }
 }

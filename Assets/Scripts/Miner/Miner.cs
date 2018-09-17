@@ -97,7 +97,7 @@ public class Miner : MoveableBase {
     public void CompleteTask()
     {
         MinerManager.instance.CompleteTask(currentTask);
-        currentTask.Complete();
+        currentTask.DestroySelf();
         currentTask = null;
         RemovePath();
     }

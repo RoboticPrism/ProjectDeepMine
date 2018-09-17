@@ -20,6 +20,7 @@ public class PopupText : MonoBehaviour {
     public void Setup(string newText, Sprite newSprite)
     {
         text.text = newText;
+        text.GetComponent<MeshRenderer>().sortingLayerName = "Diegetic UI";
         spriteRenderer.sprite = newSprite;
         this.transform.position += new Vector3(0, 0, -2);
     }

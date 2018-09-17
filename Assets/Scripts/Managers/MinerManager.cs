@@ -179,7 +179,7 @@ public class MinerManager : MonoBehaviour {
     public void CompleteTask(MinerTask completedTask)
     {
         selectedTaskList.Remove(completedTask);
-        completedTask.Complete();
+        completedTask.DestroySelf();
     }
 
     // Returns the next task and moves it from the queue to selected

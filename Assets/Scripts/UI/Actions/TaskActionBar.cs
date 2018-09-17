@@ -23,20 +23,26 @@ public class TaskActionBar : MonoBehaviour {
 
     public void PrioritizeAction()
     {
-        if (taskable.currentTask.GetComponent<MinerTask>())
+        MinerTask minerTask = taskable.currentTask.GetComponent<MinerTask>();
+        if (minerTask)
         {
-            MinerManager.instance.DoTaskNow(taskable.currentTask.GetComponent<MinerTask>());
+            MinerManager.instance.DoTaskNow(minerTask);
         }
-        //TODO: Case for buildingtask
+        // Factory tasks can't be prioratized
     }
 
     public void CancelAction()
     {
-        if (taskable.currentTask.GetComponent<MinerTask>())
+        MinerTask minerTask = taskable.currentTask.GetComponent<MinerTask>();
+        FactoryTask factoryTask = taskable.currentTask.GetComponent<FactoryTask>();
+        if (minerTask)
         {
-            MinerManager.instance.CancelTask(taskable.currentTask.GetComponent<MinerTask>());
+            MinerManager.instance.CancelTask(minerTask);
         }
-        //TODO: Case for buildingtask
+        else if(factoryTask)
+        {
+            factoryTask.owner.GetComponent<FactoryBase>().CancelTask();
+        }
     }
 
     public void RefreshUI()

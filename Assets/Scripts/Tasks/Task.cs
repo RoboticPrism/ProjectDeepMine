@@ -18,11 +18,11 @@ public class Task : MonoBehaviour {
         EventManager.TriggerEvent("TaskCreated", target);
     }
 
-    public virtual void Complete()
+    public virtual void DestroySelf()
     {
         target.currentTask = null;
         EventManager.TriggerEvent("TaskDestroyed", target);
-        DestroySelf();
+        Destroy(this.gameObject);
     }
 
     public virtual bool TaskAvailable()
@@ -38,10 +38,5 @@ public class Task : MonoBehaviour {
     public Vector3 TargetLocation()
     {
         return target.transform.position;
-    }
-
-    public void DestroySelf()
-    {
-        Destroy(this.gameObject);
     }
 }
