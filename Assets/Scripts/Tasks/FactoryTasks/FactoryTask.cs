@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingTask : Task {
+public class FactoryTask : Task {
     
+    [HideInInspector]
     public BuildingBase owner;
+
+    [Header("Build Stats")]
     public float taskSpeed = 0.05f;
     public float taskCurrentTime = 0f;
     public float taskMaxTime = 100f;
+
+    [Header("Health Bar")]
     public HealthBar healthBarPrefab;
     HealthBar healthBarInstance;
     public Color barColor;

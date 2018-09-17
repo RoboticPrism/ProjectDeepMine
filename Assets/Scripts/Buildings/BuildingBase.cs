@@ -6,26 +6,32 @@ public abstract class BuildingBase : TaskableBase {
 
     public WallTile tileType;
 
+    [Header("Life Stats")]
     public float life = 100;
     public float lifeMax = 100;
     public float brokenLimit = 50;
-    public bool broken = false;
-
+    
+    [Header("Build Stats")]
     public float buildAmount = 0;
     public float buildMax = 100;
-    public bool built = false;
 
+    [Header("States")]
+    public bool broken = false;
+    public bool built = false;
+    
+    [Header("Costs")]
     public int oreCost = 1;
     public int powerCost = 1;
-
     public float seismicOutput = 0f;
 
+    [Header("Health Bars")]
     public HealthBar healthBarPrefab;
     HealthBar healthBarInstance;
     HealthBar buildBarInstance;
     public Color healthBarColor;
     public Color buildBarColor;
 
+    [Header("Tasks")]
     public BuildTask buildTaskPrefab;
     public RepairTask repairTaskPrefab;
     public DeconstructTask deconstructTaskPrefab;

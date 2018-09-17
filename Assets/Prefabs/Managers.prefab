@@ -1114,11 +1114,13 @@ MonoBehaviour:
     type: 2}
   wallActionBarPrefab: {fileID: 114264599740659182, guid: 044d5618635ca274f9ade700529d8d5c,
     type: 2}
+  factoryActionBarPrefab: {fileID: 114248400728216648, guid: d7844efd3306d7b48922abb0ea4e60d0,
+    type: 2}
+  selectedIcon: {fileID: 1616708447129666}
   itemName: {fileID: 114686190736153794}
   itemDescription: {fileID: 114188235006062158}
   itemImage: {fileID: 114958653402881724}
   unknownSprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}
-  selectedIcon: {fileID: 1616708447129666}
 --- !u!114 &114400617410844226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1629,7 +1631,7 @@ MonoBehaviour:
   buildings:
   - {fileID: 114772929080669658, guid: 35ccc6432eb08fd41ba280629c6a90ca, type: 2}
   - {fileID: 114531155187711242, guid: 3ce2837ca32204f459dbc8d5e4622fb2, type: 2}
-  - {fileID: 114935802229384890, guid: e8ec66e84b6d03b49b80ba8810756fd3, type: 2}
+  - {fileID: 114136021442652832, guid: e8ec66e84b6d03b49b80ba8810756fd3, type: 2}
   - {fileID: 114091005607716610, guid: c527710f2853a5a47a7e7db910c58a63, type: 2}
 --- !u!114 &114926253459499532
 MonoBehaviour:

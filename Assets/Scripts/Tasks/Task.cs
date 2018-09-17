@@ -5,7 +5,10 @@ using UnityEngine;
 public class Task : MonoBehaviour {
 
     public string taskName;
+    [HideInInspector]
     public TaskableBase target;
+
+    [Header("Instance Connections")]
     public SpriteRenderer spriteRenderer;
 
     public virtual void Setup(TaskableBase target)

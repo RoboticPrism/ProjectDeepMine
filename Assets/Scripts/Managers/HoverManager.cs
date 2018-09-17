@@ -13,6 +13,8 @@ public class HoverManager : MonoBehaviour {
     BuildingActionBar buildingActionBarInstance;
     public WallActionBar wallActionBarPrefab;
     WallActionBar wallActionBarInstance;
+    public FactoryActionBar factoryActionBarPrefab;
+    FactoryActionBar factoryActionBarInstance;
 
     [Header("Instance Connections")]
     public GameObject selectedIcon;
@@ -100,7 +102,7 @@ public class HoverManager : MonoBehaviour {
                 }
                 else
                 {
-                    taskActionBarInstance = Instantiate(taskActionBarPrefab);
+                    taskActionBarInstance = Instantiate(taskActionBarPrefab, transform);
                     taskActionBarInstance.Setup(selectedObject);
                 }
 
@@ -109,9 +111,13 @@ public class HoverManager : MonoBehaviour {
                 {
                     Destroy(buildingActionBarInstance.gameObject);
                 }
-                else if (wallActionBarInstance)
+                if (wallActionBarInstance)
                 {
                     Destroy(wallActionBarInstance.gameObject);
+                }
+                if (factoryActionBarInstance)
+                {
+                    Destroy(factoryActionBarInstance.gameObject);
                 }
             }
             else
@@ -133,8 +139,21 @@ public class HoverManager : MonoBehaviour {
                     }
                     else
                     {
-                        buildingActionBarInstance = Instantiate(buildingActionBarPrefab);
+                        buildingActionBarInstance = Instantiate(buildingActionBarPrefab, transform);
                         buildingActionBarInstance.Setup(buildingObject);
+                    }
+                    FactoryBase factoryObject = buildingObject.GetComponent<FactoryBase>();
+                    if (factoryObject)
+                    {
+                        if (factoryActionBarInstance)
+                        {
+                            factoryActionBarInstance.RefreshUI();
+                        }
+                        else
+                        {
+                            factoryActionBarInstance = Instantiate(factoryActionBarPrefab, transform);
+                            factoryActionBarInstance.Setup(factoryObject);
+                        }
                     }
                 }
                 else if (wallObject) {
@@ -144,7 +163,7 @@ public class HoverManager : MonoBehaviour {
                     }
                     else
                     {
-                        wallActionBarInstance = Instantiate(wallActionBarPrefab);
+                        wallActionBarInstance = Instantiate(wallActionBarPrefab, transform);
                         wallActionBarInstance.Setup(wallObject);
                     }
                 }
@@ -175,25 +194,32 @@ public class HoverManager : MonoBehaviour {
         {
             if(buildingObject.currentTask)
             {
-                taskActionBarInstance = Instantiate(taskActionBarPrefab);
+                taskActionBarInstance = Instantiate(taskActionBarPrefab, transform);
                 taskActionBarInstance.Setup(buildingObject);
             }
             else
             {
-                buildingActionBarInstance = Instantiate(buildingActionBarPrefab);
+                buildingActionBarInstance = Instantiate(buildingActionBarPrefab, transform);
                 buildingActionBarInstance.Setup(buildingObject);
+
+                FactoryBase factoryObject = buildingObject.GetComponent<FactoryBase>();
+                if (factoryObject)
+                {
+                    factoryActionBarInstance = Instantiate(factoryActionBarPrefab, transform);
+                    factoryActionBarInstance.Setup(factoryObject);
+                }
             }
         }
         else if (wallObject)
         {
             if (wallObject.currentTask)
             {
-                taskActionBarInstance = Instantiate(taskActionBarPrefab);
+                taskActionBarInstance = Instantiate(taskActionBarPrefab, transform);
                 taskActionBarInstance.Setup(wallObject);
             }
             else
             {
-                wallActionBarInstance = Instantiate(wallActionBarPrefab);
+                wallActionBarInstance = Instantiate(wallActionBarPrefab, transform);
                 wallActionBarInstance.Setup(wallObject);
             }
         }
@@ -214,6 +240,10 @@ public class HoverManager : MonoBehaviour {
         if(wallActionBarInstance)
         {
             Destroy(wallActionBarInstance.gameObject);
+        }
+        if(factoryActionBarInstance)
+        {
+            Destroy(factoryActionBarInstance.gameObject);
         }
     }
 

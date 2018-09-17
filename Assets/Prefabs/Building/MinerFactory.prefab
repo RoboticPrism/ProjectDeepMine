@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4671183184150374}
-  - component: {fileID: 114935802229384890}
+  - component: {fileID: 114136021442652832}
   - component: {fileID: 114084165103094592}
   - component: {fileID: 114173177788500770}
   - component: {fileID: 212198765954051018}
@@ -105,7 +105,7 @@ MonoBehaviour:
   displayName: Miner Factory
   sprite: {fileID: 21300000, guid: 052ed19fa670cf7418845d5c6fc91e00, type: 3}
   description: Can be used to construct additional miners.
---- !u!114 &114173177788500770
+--- !u!114 &114136021442652832
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,19 +113,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1152073895102600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e40adb3ae202b4db11cdb3942cd745, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 1
---- !u!114 &114935802229384890
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1152073895102600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0024662b0278ce449189fc340108260, type: 3}
+  m_Script: {fileID: 11500000, guid: e8831cac2955c744b9df98f52dd7da76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
@@ -134,9 +122,9 @@ MonoBehaviour:
   life: 100
   lifeMax: 100
   brokenLimit: 50
-  broken: 0
   buildAmount: 0
   buildMax: 100
+  broken: 0
   built: 0
   oreCost: 20
   powerCost: 2
@@ -151,6 +139,19 @@ MonoBehaviour:
     type: 2}
   deconstructTaskPrefab: {fileID: 114889724165535862, guid: 7b5a15dac30241542b4f55b5b1cbe5ba,
     type: 2}
+  factoryTaskPrefabs: []
+--- !u!114 &114173177788500770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1152073895102600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e40adb3ae202b4db11cdb3942cd745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
 --- !u!212 &212198765954051018
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -46,7 +46,9 @@ public class TaskActionBar : MonoBehaviour {
             taskImage.sprite = taskable.currentTask.spriteRenderer.sprite;
             taskName.text = taskable.currentTask.taskName;
             prioritizeButton.interactable = false;
-            if (!taskable.currentTask.GetComponent<MinerTask>().owner)
+
+            MinerTask minerTask = taskable.currentTask.GetComponent<MinerTask>();
+            if (minerTask && !minerTask.owner)
             {
                 prioritizeButton.interactable = true;
             }

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstructMinerTask : BuildingTask {
+public class CreateMinerTask : FactoryTask {
 
+    [Header("Prefab Connections")]
     public Miner minerPrefab;
+
+    [Header("Costs")]
     public int oreCost;
 
     public override bool TaskAvailable()
