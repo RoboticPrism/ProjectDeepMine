@@ -27,6 +27,8 @@ public class HoverManager : MonoBehaviour {
     UnityAction<TaskableBase> updateListener;
     UnityAction<TaskableBase> destroyedListener;
 
+    public GameObject selectedIcon;
+
     // Use this for initialization
     void Start()
     {
@@ -43,49 +45,7 @@ public class HoverManager : MonoBehaviour {
         EventManager.StartListening("TaskDestroyed", updateListener);
         EventManager.StartListening("BuildingSold", destroyedListener);
         EventManager.StartListening("WallDestroyed", destroyedListener);
-    }
-
-    void RefreshMenus(TaskableBase taskable)
-    {
-        if (taskable == selectedObject)
-        {
-            if (buildingActionBarInstance)
-            {
-                buildingActionBarInstance.RefreshUI();
-            }
-            if (wallActionBarInstance)
-            {
-                wallActionBarInstance.RefreshUI();
-            }
-            if(selectedObject && selectedObject.currentTask)
-            {
-                if (taskActionBarInstance)
-                {
-                    taskActionBarInstance.RefreshUI();
-                }
-                else
-                {
-                    taskActionBarInstance = Instantiate(taskActionBarPrefab);
-                    taskActionBarInstance.Setup(selectedObject);
-                }
-            }
-            else
-            {
-                if(taskActionBarInstance)
-                {
-                    Destroy(taskActionBarInstance.gameObject);
-                }
-            }
-        }
-    }
-
-    void DestroyMenus(TaskableBase taskable)
-    {
-        if (taskable == selectedObject)
-        {
-            DeselectTile();
-        }
-    }
+    } 
 
     // Update is called once per frame
     void Update () {
@@ -125,11 +85,55 @@ public class HoverManager : MonoBehaviour {
         UpdateDisplay();
 	}
 
+    void RefreshMenus(TaskableBase taskable)
+    {
+        if (taskable == selectedObject)
+        {
+            if (buildingActionBarInstance)
+            {
+                buildingActionBarInstance.RefreshUI();
+            }
+            if (wallActionBarInstance)
+            {
+                wallActionBarInstance.RefreshUI();
+            }
+            if (selectedObject && selectedObject.currentTask)
+            {
+                if (taskActionBarInstance)
+                {
+                    taskActionBarInstance.RefreshUI();
+                }
+                else
+                {
+                    taskActionBarInstance = Instantiate(taskActionBarPrefab);
+                    taskActionBarInstance.Setup(selectedObject);
+                }
+            }
+            else
+            {
+                if (taskActionBarInstance)
+                {
+                    Destroy(taskActionBarInstance.gameObject);
+                }
+            }
+        }
+    }
+
+    void DestroyMenus(TaskableBase taskable)
+    {
+        if (taskable == selectedObject)
+        {
+            DeselectTile();
+        }
+    }
+
     public void SelectTile(TaskableBase tile)
     {
         DeselectTile();
 
         selectedObject = tile;
+        selectedIcon.SetActive(true);
+        selectedIcon.transform.position = selectedObject.transform.position;
 
         BuildingBase buildingObject = tile.GetComponent<BuildingBase>();
         WallBase wallObject = tile.GetComponent<WallBase>();
@@ -160,7 +164,8 @@ public class HoverManager : MonoBehaviour {
     public void DeselectTile()
     {
         selectedObject = null;
-        if(taskActionBarInstance)
+        selectedIcon.SetActive(false);
+        if (taskActionBarInstance)
         {
             Destroy(taskActionBarInstance.gameObject);
         }
