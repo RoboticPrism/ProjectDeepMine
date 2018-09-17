@@ -102,8 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
+  currentTask: {fileID: 0}
   spriteRenderer: {fileID: 212398528238813404}
   boxCollider: {fileID: 61255931586051402}
+  mineTaskPrefab: {fileID: 0}
   unknownSprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}
   innerCornerSprite: {fileID: 0}
   wallSprite: {fileID: 21300000, guid: 491bb58c11a0eeb43b763cb32df61ebe, type: 3}
@@ -170,8 +172,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1120871755
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 491bb58c11a0eeb43b763cb32df61ebe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -14,6 +14,9 @@ public class HoverManager : MonoBehaviour {
     public WallActionBar wallActionBarPrefab;
     WallActionBar wallActionBarInstance;
 
+    [Header("Instance Connections")]
+    public GameObject selectedIcon;
+
     GameObject hoveredObject;
     TaskableBase selectedObject;
 
@@ -26,8 +29,6 @@ public class HoverManager : MonoBehaviour {
 
     UnityAction<TaskableBase> updateListener;
     UnityAction<TaskableBase> destroyedListener;
-
-    public GameObject selectedIcon;
 
     // Use this for initialization
     void Start()
@@ -85,20 +86,14 @@ public class HoverManager : MonoBehaviour {
         UpdateDisplay();
 	}
 
+    // Called on events that should refresh the menu
     void RefreshMenus(TaskableBase taskable)
     {
         if (taskable == selectedObject)
         {
-            if (buildingActionBarInstance)
+            if(taskable.currentTask)
             {
-                buildingActionBarInstance.RefreshUI();
-            }
-            if (wallActionBarInstance)
-            {
-                wallActionBarInstance.RefreshUI();
-            }
-            if (selectedObject && selectedObject.currentTask)
-            {
+                // Create or update task action bar
                 if (taskActionBarInstance)
                 {
                     taskActionBarInstance.RefreshUI();
@@ -108,17 +103,56 @@ public class HoverManager : MonoBehaviour {
                     taskActionBarInstance = Instantiate(taskActionBarPrefab);
                     taskActionBarInstance.Setup(selectedObject);
                 }
+
+                // clean up building and wall action bars
+                if (buildingActionBarInstance)
+                {
+                    Destroy(buildingActionBarInstance.gameObject);
+                }
+                else if (wallActionBarInstance)
+                {
+                    Destroy(wallActionBarInstance.gameObject);
+                }
             }
             else
             {
+                // Clean up task action bar
                 if (taskActionBarInstance)
                 {
                     Destroy(taskActionBarInstance.gameObject);
+                }
+
+                // refresh building and wall action bars
+                BuildingBase buildingObject = taskable.GetComponent<BuildingBase>();
+                WallBase wallObject = taskable.GetComponent<WallBase>();
+                if (buildingObject)
+                {
+                    if (buildingActionBarInstance)
+                    {
+                        buildingActionBarInstance.RefreshUI();
+                    }
+                    else
+                    {
+                        buildingActionBarInstance = Instantiate(buildingActionBarPrefab);
+                        buildingActionBarInstance.Setup(buildingObject);
+                    }
+                }
+                else if (wallObject) {
+                    if (wallActionBarInstance)
+                    {
+                        wallActionBarInstance.RefreshUI();
+                    }
+                    else
+                    {
+                        wallActionBarInstance = Instantiate(wallActionBarPrefab);
+                        wallActionBarInstance.Setup(wallObject);
+                    }
                 }
             }
         }
     }
 
+    // Called on events that should destroy the menu
     void DestroyMenus(TaskableBase taskable)
     {
         if (taskable == selectedObject)
@@ -139,24 +173,28 @@ public class HoverManager : MonoBehaviour {
         WallBase wallObject = tile.GetComponent<WallBase>();
         if(buildingObject)
         {
-            buildingActionBarInstance = Instantiate(buildingActionBarPrefab);
-            buildingActionBarInstance.Setup(buildingObject);
-
             if(buildingObject.currentTask)
             {
                 taskActionBarInstance = Instantiate(taskActionBarPrefab);
                 taskActionBarInstance.Setup(buildingObject);
             }
+            else
+            {
+                buildingActionBarInstance = Instantiate(buildingActionBarPrefab);
+                buildingActionBarInstance.Setup(buildingObject);
+            }
         }
         else if (wallObject)
         {
-            wallActionBarInstance = Instantiate(wallActionBarPrefab);
-            wallActionBarInstance.Setup(wallObject);
-
             if (wallObject.currentTask)
             {
                 taskActionBarInstance = Instantiate(taskActionBarPrefab);
                 taskActionBarInstance.Setup(wallObject);
+            }
+            else
+            {
+                wallActionBarInstance = Instantiate(wallActionBarPrefab);
+                wallActionBarInstance.Setup(wallObject);
             }
         }
     }

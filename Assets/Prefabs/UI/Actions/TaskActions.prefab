@@ -357,6 +357,7 @@ MonoBehaviour:
   taskName: {fileID: 114845202095381266}
   prioritizeButton: {fileID: 114602498997725850}
   cancelButton: {fileID: 114588873769405228}
+  taskable: {fileID: 0}
 --- !u!114 &114311879230267542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -976,7 +977,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &224219089079124662

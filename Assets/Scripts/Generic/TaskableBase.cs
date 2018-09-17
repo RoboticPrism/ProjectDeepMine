@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.EventSystems;
 
 // An object that sits in the grid and can be clicked to select it
 public class TaskableBase : MonoBehaviour {
@@ -40,8 +41,8 @@ public class TaskableBase : MonoBehaviour {
     // On mouse down, pop menu
     private void OnMouseDown()
     {
-        UIHoverListener uhl = FindObjectOfType<UIHoverListener>();
-        if (clickable && (uhl == null || !uhl.isUIOverride))
+        // Clicks will go through event system objects by default, so make sure we check for that before allowing clicks
+        if (clickable && !EventSystem.current.IsPointerOverGameObject())
         {
             FindObjectOfType<HoverManager>().SelectTile(this);
         }

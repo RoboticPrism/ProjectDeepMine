@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor
+    uniqueID: 1449910059
+    locked: 0
+  - name: Wall
+    uniqueID: 1120871755
+    locked: 0
+  - name: Actors
+    uniqueID: 2347939307
+    locked: 0
+  - name: Diegetic UI
+    uniqueID: 3066895571
+    locked: 0
+  - name: Non-Diegetic UI
+    uniqueID: 370744293
+    locked: 0

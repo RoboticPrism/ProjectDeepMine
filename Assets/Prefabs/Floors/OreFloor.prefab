@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visible: 1
   displayName: Ore Floor
   sprite: {fileID: 21300000, guid: 4501ff4fddd92d944bf99f877a36de59, type: 3}
   description: Floor filled with ore.  Build a mining drill here to extract the ore.
@@ -67,8 +68,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9118ed855230e2d4c923431a3ce7e96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: Ore Floor
-  description: Floor filled with ore.  Build a mining drill here to extract the ore.
   resourceCount: 100
   resourcesPerHaul: 5
   buildable: 1
@@ -105,8 +104,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1449910059
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4501ff4fddd92d944bf99f877a36de59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
