@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MinerTask : Task {
-
-    [HideInInspector]
+    
     public Miner owner;
     bool queued = false;
 

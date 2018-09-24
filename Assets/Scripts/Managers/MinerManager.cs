@@ -125,20 +125,20 @@ public class MinerManager : MonoBehaviour {
 
     public void ForceTask(MinerTask task, Miner miner)
     {
-        if(miner.currentTask)
+        if (miner.currentTask)
         {
-            DeselectTask(task);
+            DeselectTask(miner.currentTask);
+        }
+        task.Queue();
+        miner.SwapTask(task);
+        if (queuedTaskList.Contains(task))
+        {
+            queuedTaskList.Remove(task);
         }
         if (!selectedTaskList.Contains(task))
         {
             selectedTaskList.Add(task);
         }
-        if(queuedTaskList.Contains(task))
-        {
-            queuedTaskList.Remove(task);
-        }
-        task.Queue();
-        miner.SwapTask(task);
     }
 
     public void DeselectTask(MinerTask task)
@@ -146,6 +146,7 @@ public class MinerManager : MonoBehaviour {
         if (selectedTaskList.Contains(task))
         {
             selectedTaskList.Remove(task);
+            queuedTaskList.Add(task);
         }
         if (!queuedTaskList.Contains(task))
         {

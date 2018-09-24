@@ -28,7 +28,7 @@ public class TaskActionBar : MonoBehaviour {
         {
             MinerManager.instance.DoTaskNow(minerTask);
         }
-        // Factory tasks can't be prioratized
+        // Factory tasks can't be prioritized
     }
 
     public void CancelAction()
