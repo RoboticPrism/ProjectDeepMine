@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4765343656170696}
   - component: {fileID: 212723782469632978}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: MoveableBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114184099360072300}
   - component: {fileID: 58418042294847722}
   - component: {fileID: 50554338902400442}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: SwarmerEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

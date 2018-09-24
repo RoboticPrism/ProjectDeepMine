@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 212778967018197666}
   - component: {fileID: 61521011598875340}
   - component: {fileID: 50055010069157644}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PowerPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,9 +119,9 @@ MonoBehaviour:
   life: 100
   lifeMax: 100
   brokenLimit: 50
-  broken: 0
   buildAmount: 0
   buildMax: 100
+  broken: 0
   built: 0
   oreCost: 20
   powerCost: 0

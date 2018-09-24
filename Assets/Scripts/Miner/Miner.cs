@@ -130,7 +130,7 @@ public class Miner : MoveableBase {
         return
             MoveAlongPathBehavior() &&
             RotateTowardsTargetBehavior(repairTask) &&
-            repairTask.DoTask((int)buildSpeed);
+            repairTask.DoTask(buildSpeed);
     }
 
     // Handles moving towards a building and then deconstructing it

@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 212562300614183900}
   - component: {fileID: 61595196320292216}
   - component: {fileID: 50379203628268418}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,9 +119,9 @@ MonoBehaviour:
   life: 100
   lifeMax: 100
   brokenLimit: 50
-  broken: 0
   buildAmount: 1
   buildMax: 1
+  broken: 0
   built: 1
   oreCost: 0
   powerCost: 0

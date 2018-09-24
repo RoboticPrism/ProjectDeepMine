@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4567400471051940}
   - component: {fileID: 114556190366289544}
   - component: {fileID: 212296770356454828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HiddenRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}

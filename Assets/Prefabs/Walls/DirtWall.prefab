@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 212308304393458838}
   - component: {fileID: 61665371143270882}
   - component: {fileID: 50481981999280838}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DirtWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,6 +116,7 @@ MonoBehaviour:
   life: 100
   lifeMax: 100
   type: 0
+  dropObjectPrefab: {fileID: 0}
   healthBarPrefab: {fileID: 114595616249524122, guid: 96df83764b49de344bff03ec513c1df7,
     type: 2}
   healthBarColor: {r: 1, g: 1, b: 0, a: 1}

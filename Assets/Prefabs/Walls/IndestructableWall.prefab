@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 212398528238813404}
   - component: {fileID: 61255931586051402}
   - component: {fileID: 50685501316566532}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: IndestructableWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

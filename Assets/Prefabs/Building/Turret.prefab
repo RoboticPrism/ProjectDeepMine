@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 61485599218016574}
   - component: {fileID: 61127007512858646}
   - component: {fileID: 50497374743245668}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4029400706333214}
   - component: {fileID: 212870963212669020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TurretHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,9 +163,9 @@ MonoBehaviour:
   life: 100
   lifeMax: 100
   brokenLimit: 50
-  broken: 0
   buildAmount: 0
   buildMax: 100
+  broken: 0
   built: 0
   oreCost: 10
   powerCost: 1

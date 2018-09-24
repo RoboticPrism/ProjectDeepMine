@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 212006746877134964}
   - component: {fileID: 61030288254523996}
   - component: {fileID: 50071477925760154}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DirtWallWithBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4698882954267936}
   - component: {fileID: 212738211098800430}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlueDeposit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

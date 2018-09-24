@@ -25,7 +25,7 @@ public class RepairTask : MinerTask {
         return building.life < building.lifeMax;
     }
 
-    public bool DoTask(int repairSpeed)
+    public bool DoTask(float repairSpeed)
     {
         BuildingBase targetBuilding = target.GetComponent<BuildingBase>();
         if (targetBuilding.life < targetBuilding.lifeMax)

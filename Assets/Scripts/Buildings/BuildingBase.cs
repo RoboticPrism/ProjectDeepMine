@@ -86,7 +86,7 @@ public abstract class BuildingBase : TaskableBase {
         UpdateBuildBar();
     }
 
-    public void AddLife(int addAmount)
+    public void AddLife(float addAmount)
     {
         if (life == lifeMax && addAmount < 0)
         {
