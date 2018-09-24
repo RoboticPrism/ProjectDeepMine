@@ -9,13 +9,17 @@ using System.Linq;
 // A wall in a room, lights itself accordingly
 public class MineableWall : WallBase {
 
+    [Header("Stats")]
     public float life = 100f;
     public float lifeMax = 100f;
 
     public enum wallType { dirt, stone };
     public wallType type;
 
+    [Header("Prefab Connections")]
+    public GameObject dropObjectPrefab;
 
+    [Header("Health Bar")]
     public HealthBar healthBarPrefab;
     HealthBar healthBarInstance;
     public Color healthBarColor;
@@ -61,6 +65,10 @@ public class MineableWall : WallBase {
     void OnWallDestroy()
     {
         EventManager.TriggerEvent("WallDestroyed", this);
+        if (dropObjectPrefab)
+        {
+            Instantiate(dropObjectPrefab, transform.position, Quaternion.Euler(Vector3.zero));
+        }
         DestroySelf();
     }
 

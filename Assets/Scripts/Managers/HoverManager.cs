@@ -91,7 +91,7 @@ public class HoverManager : MonoBehaviour {
     // Called on events that should refresh the menu
     void RefreshMenus(TaskableBase taskable)
     {
-        if (taskable == selectedObject)
+        if (taskable && taskable == selectedObject)
         {
             if(taskable.currentTask)
             {

@@ -9,8 +9,6 @@ public class WallTile : Tile {
     public float PrefabLocalOffset = 0.5f;
     public float prefabZOffset = -1f;
 
-    public MineTask mineTaskPrefab;
-
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
 
