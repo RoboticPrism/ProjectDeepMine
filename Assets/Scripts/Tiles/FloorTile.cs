@@ -17,7 +17,7 @@ public class FloorTile : Tile
 #if UNITY_EDITOR
         if (go != null)
         {
-            if (go.scene.name == null)
+            if (go.scene.name == "Preview Scene")
             {
                 DestroyImmediate(go);
             }
