@@ -9,6 +9,11 @@ public class EnemyBase : MoveableBase {
     public int damage = 1;
     public float attackSpeed = 1f;
 
+    protected float attackCooldown = 60;
+    protected float attackCooldownMax = 60;
+
+    protected bool needsNewTask = true;
+
     public HealthBar healthBarPrefab;
     HealthBar healthBarInstance;
 

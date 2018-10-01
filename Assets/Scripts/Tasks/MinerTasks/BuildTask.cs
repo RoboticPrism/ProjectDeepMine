@@ -24,17 +24,9 @@ public class BuildTask : MinerTask {
         return !building.built;
     }
 
-    public bool DoTask(float buildSpeed)
+    // Starts the associtated coroutine on the miner
+    public override void StartTaskCoroutine(Miner miner)
     {
-        BuildingBase targetBuilding = target.GetComponent<BuildingBase>();
-        if (targetBuilding.buildAmount < targetBuilding.buildMax)
-        {
-            targetBuilding.AddConstruction(buildSpeed);
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        miner.StartCoroutine(miner.BuildTask(this.target.GetComponent<BuildingBase>()));
     }
 }

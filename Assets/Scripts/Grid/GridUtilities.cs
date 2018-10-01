@@ -27,6 +27,11 @@ public class GridUtilities {
         this.tilemap = tilemap;
     }
 
+    public static Vector3Int WorldToCell(Tilemap grid, Vector3 worldPos)
+    {
+        return grid.WorldToCell(worldPos);
+    }
+
     public List<Vector3Int> GetEmptyNeighbors(GameObject gameObject, bool includeDiagonals = false)
     {
         return GetEmptyNeighbors(tilemap.WorldToCell(gameObject.transform.position), includeDiagonals);

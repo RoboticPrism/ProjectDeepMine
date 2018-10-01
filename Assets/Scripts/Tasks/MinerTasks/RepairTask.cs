@@ -25,17 +25,9 @@ public class RepairTask : MinerTask {
         return building.life < building.lifeMax;
     }
 
-    public bool DoTask(float repairSpeed)
+    // Starts the associtated coroutine on the miner
+    public override void StartTaskCoroutine(Miner miner)
     {
-        BuildingBase targetBuilding = target.GetComponent<BuildingBase>();
-        if (targetBuilding.life < targetBuilding.lifeMax)
-        {
-            targetBuilding.AddLife(repairSpeed);
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        miner.StartCoroutine(miner.RepairTask(this.target.GetComponent<BuildingBase>()));
     }
 }

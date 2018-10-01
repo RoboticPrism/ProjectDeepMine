@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyBase {
 
-    public AttackTask attackTaskPrefab;
-    AttackTask attackTask = null;
-
 	// Use this for initialization
 	void Start () {
 		
@@ -24,36 +21,36 @@ public class MeleeEnemy : EnemyBase {
 
     void DoNextAction()
     {
-        if(attackTask != null)
+        if (needsNewTask)
         {
-            if(AttackTask())
-            {
-                attackTask = null;
-                
-            }
-        }
-        else
-        {
-            BuildingBase targetBuidling = EnemyManager.instance.GetNearestBuilding(this.transform.position);
-            if (targetBuidling)
-            {
-                attackTask = Instantiate(attackTaskPrefab, transform);
-                attackTask.Setup(targetBuidling);
-                MakePath(attackTask.TargetLocation());
-            }
+            StartCoroutine(MeleeAttackTask(EnemyManager.instance.GetNearestBuilding(this.transform.position)));
         }
     }
 
-    bool AttackTask()
+    public IEnumerator MeleeAttackTask(BuildingBase building)
     {
-        return
-             MoveAlongPathBehavior() &&
-             RotateTowardsTargetBehavior(attackTask) &&
-             attackTask.DoTask(damage, attackSpeed);
+        needsNewTask = false;
+        Vector3Int gridPos = GridUtilities.WorldToCell(TilemapManager.instance.wallTilemap, building.transform.position);
+        yield return StartCoroutine(MoveTo(gridPos));
+        yield return StartCoroutine(RotateTowards(building.transform.position));
+        yield return StartCoroutine(MeleeAttack(building));
+        needsNewTask = true;
     }
 
-    void DestroySelf()
+    public IEnumerator MeleeAttack(BuildingBase building)
     {
-        Destroy(this.gameObject);
+        while (building.life > 0)
+        {
+            if (attackCooldown >= attackCooldownMax)
+            {
+                building.AddLife(-damage);
+                attackCooldown = 0;
+            }
+            else
+            {
+                attackCooldown += attackSpeed;
+            }
+            yield return null;
+        }
     }
 }

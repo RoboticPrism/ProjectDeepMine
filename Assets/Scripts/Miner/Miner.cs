@@ -31,53 +31,16 @@ public class Miner : MoveableBase {
         {
             StartTask(MinerManager.instance.GrabNextTask());
         }
-        else if (currentTask != null)
-        {
-            if (currentTask is MineTask)
-            {
-                if (DoMineTask((MineTask)currentTask))
-                {
-                    CompleteTask();
-                }
-            }
-            else if (currentTask is BuildTask)
-            {
-                if (DoBuildTask((BuildTask)currentTask))
-                {
-                    CompleteTask();
-                }
-            }
-            else if (currentTask is RepairTask)
-            {
-                if (DoRepairTask((RepairTask)currentTask))
-                {
-                    CompleteTask();
-                }
-            }
-            else if (currentTask is DeconstructTask)
-            {
-                if (DoDeconstructTask((DeconstructTask)currentTask))
-                {
-                    CompleteTask();
-                }
-            }
-        }
     }
 
     public void StartTask(MinerTask newTask)
     {
-        if (newTask != null)
+        if (newTask != null && newTask.target)
         {
-            if (newTask.target && MakePath(newTask.TargetLocation()))
-            {
-                currentTask = newTask;
-                currentTask.owner = this;
-                EventManager.TriggerEvent("TaskStarted", currentTask.target);
-            }
-            else
-            {
-                CompleteTask();
-            }
+            newTask.StartTaskCoroutine(this);
+            currentTask = newTask;
+            currentTask.owner = this;
+            EventManager.TriggerEvent("TaskStarted", currentTask.target);
         }
     }
 
@@ -91,7 +54,7 @@ public class Miner : MoveableBase {
     public void UnqueueTask()
     {
         currentTask = null;
-        RemovePath();
+        StopAllCoroutines();
     }
 
     public void CompleteTask()
@@ -99,46 +62,82 @@ public class Miner : MoveableBase {
         MinerManager.instance.CompleteTask(currentTask);
         currentTask.DestroySelf();
         currentTask = null;
-        RemovePath();
+        StopAllCoroutines();
     }
 
     ///////////////////
     // TASK HANDLING //
     ///////////////////
 
-    // Handles moving towards and mining a wall
-    private bool DoMineTask(MineTask mineTask)
+    public IEnumerator MineTask(MineableWall mineableWall)
     {
-        return
-             MoveAlongPathBehavior() &&
-             RotateTowardsTargetBehavior(mineTask) &&
-             mineTask.DoTask(mineSpeed);
+        Vector3Int gridPos = GridUtilities.WorldToCell(TilemapManager.instance.wallTilemap, mineableWall.transform.position);
+        yield return StartCoroutine(MoveTo(gridPos));
+        yield return StartCoroutine(RotateTowards(mineableWall.transform.position));
+        yield return StartCoroutine(MineWall(mineableWall));
+        CompleteTask();
     }
 
-    // Handles moving towards and building a building
-    public bool DoBuildTask(BuildTask buildTask)
+    public IEnumerator BuildTask(BuildingBase building)
     {
-        return
-            MoveAlongPathBehavior() &&
-            RotateTowardsTargetBehavior(buildTask) &&
-            buildTask.DoTask(buildSpeed);
+        Vector3Int gridPos = GridUtilities.WorldToCell(TilemapManager.instance.wallTilemap, building.transform.position);
+        yield return StartCoroutine(MoveTo(gridPos));
+        yield return StartCoroutine(RotateTowards(building.transform.position));
+        yield return StartCoroutine(BuildBuilding(building));
+        CompleteTask();
     }
 
-    // Handles moving towards a building and then repairing it
-    public bool DoRepairTask(RepairTask repairTask)
+    public IEnumerator RepairTask(BuildingBase building)
     {
-        return
-            MoveAlongPathBehavior() &&
-            RotateTowardsTargetBehavior(repairTask) &&
-            repairTask.DoTask(buildSpeed);
+        Vector3Int gridPos = GridUtilities.WorldToCell(TilemapManager.instance.wallTilemap, building.transform.position);
+        yield return StartCoroutine(MoveTo(gridPos));
+        yield return StartCoroutine(RotateTowards(building.transform.position));
+        yield return StartCoroutine(RepairBuilding(building));
+        CompleteTask();
     }
 
-    // Handles moving towards a building and then deconstructing it
-    public bool DoDeconstructTask(DeconstructTask deconstructTask)
+    public IEnumerator DeconstructTask(BuildingBase building)
     {
-        return
-            MoveAlongPathBehavior() &&
-            RotateTowardsTargetBehavior(deconstructTask) &&
-            deconstructTask.DoTask(buildSpeed);
+        Vector3Int gridPos = GridUtilities.WorldToCell(TilemapManager.instance.wallTilemap, building.transform.position);
+        yield return StartCoroutine(MoveTo(gridPos));
+        yield return StartCoroutine(RotateTowards(building.transform.position));
+        yield return StartCoroutine(DeconstructBuilding(building));
+        CompleteTask();
+    }
+
+    public IEnumerator MineWall(MineableWall mineableWall)
+    {
+        while (mineableWall.life > 0)
+        {
+            mineableWall.MineWall(mineSpeed);
+            yield return null;
+        }
+    }
+
+    public IEnumerator BuildBuilding(BuildingBase building)
+    {
+        while (building.buildAmount < building.buildMax)
+        {
+            building.AddConstruction(buildSpeed);
+            yield return null;
+        }
+    }
+
+    public IEnumerator RepairBuilding(BuildingBase building)
+    {
+        while (building.life < building.lifeMax)
+        {
+            building.AddLife(buildSpeed);
+            yield return null;
+        }
+    }
+
+    public IEnumerator DeconstructBuilding(BuildingBase building)
+    {
+        while (building.buildAmount > 0)
+        {
+            building.AddConstruction(-buildSpeed);
+            yield return null;
+        }
     }
 }

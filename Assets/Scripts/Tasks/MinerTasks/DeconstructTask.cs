@@ -24,17 +24,9 @@ public class DeconstructTask : MinerTask {
         return building.built && !building.broken;
     }
 
-    public bool DoTask(float buildSpeed)
+    // Starts the associtated coroutine on the miner
+    public override void StartTaskCoroutine(Miner miner)
     {
-        BuildingBase targetBuilding = target.GetComponent<BuildingBase>();
-        if (targetBuilding)
-        {
-            targetBuilding.AddConstruction(-buildSpeed);
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        miner.StartCoroutine(miner.DeconstructTask(this.target.GetComponent<BuildingBase>()));
     }
 }

@@ -10,26 +10,9 @@ public class MineTask : MinerTask {
         return base.TaskAvailable();
     }
 
-    public bool DoTask(float mineSpeed)
+    // Starts the associtated coroutine on the miner
+    public override void StartTaskCoroutine(Miner miner)
     {
-        if (target)
-        {
-            MineableWall targetWall = target.GetComponent<MineableWall>();
-            if (targetWall)
-            {
-                targetWall.MineWall(mineSpeed);
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        else
-        {
-            return true;
-        }
+        miner.StartCoroutine(miner.MineTask(this.target.GetComponent<MineableWall>()));
     }
-
-    
 }

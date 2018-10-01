@@ -13,6 +13,12 @@ public class MinerTask : Task {
         return true;
     }
 
+    // Starts the associtated coroutine on the miner
+    public virtual void StartTaskCoroutine(Miner miner)
+    {
+        
+    }
+
     public virtual bool CanQueue()
     {
         return TaskAvailable() && !queued;
