@@ -10,6 +10,8 @@ public class ResourceManager : MonoBehaviour {
     public int powerCount = 0;
     public int powerMax = 3;
 
+    public int blueGemsCount = 0;
+
     public float seismicActivity = 0; // This effects how fast waves occur
 
     public Text oreText;
@@ -20,6 +22,7 @@ public class ResourceManager : MonoBehaviour {
     public PopupText textPopupPrefab;
     public Sprite oreSprite;
     public Sprite powerSprite;
+    public Sprite blueGemSprite;
 
     // Use this for initialization
     void Start () {
@@ -81,6 +84,13 @@ public class ResourceManager : MonoBehaviour {
     public int PowerAvailable()
     {
         return powerMax - powerCount;
+    }
+
+    public void AddBlueGems(int newGems, Vector3 location)
+    {
+        blueGemsCount += newGems;
+        EventManager.TriggerEvent("ResourcesChanged");
+        CreatePopupText(location, newGems, blueGemSprite);
     }
 
     public void AddSeismicActivity(float newSeismic)

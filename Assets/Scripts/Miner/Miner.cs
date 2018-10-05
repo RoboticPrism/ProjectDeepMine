@@ -55,6 +55,20 @@ public class Miner : MoveableBase {
     {
         currentTask = null;
         StopAllCoroutines();
+        DropHaulables();
+    }
+
+    public void DropHaulables()
+    {
+        HaulableBase haulable = GetComponentInChildren<HaulableBase>();
+        if (haulable)
+        {
+            haulable.transform.parent = null;
+            haulable.transform.position = new Vector2(
+
+                Mathf.Round(haulable.transform.position.x) + 0.5f,
+                Mathf.Round(haulable.transform.position.y) + 0.5f);
+        }
     }
 
     public void CompleteTask()
@@ -63,6 +77,7 @@ public class Miner : MoveableBase {
         currentTask.DestroySelf();
         currentTask = null;
         StopAllCoroutines();
+        DropHaulables();
     }
 
     ///////////////////
@@ -105,6 +120,23 @@ public class Miner : MoveableBase {
         CompleteTask();
     }
 
+    public IEnumerator HaulTask(HaulableBase haulable)
+    {
+        Vector3Int gridPos = GridUtilities.WorldToCell(TilemapManager.instance.wallTilemap, haulable.transform.position);
+        yield return StartCoroutine(MoveTo(gridPos));
+
+        // Pick up haulable
+        haulable.transform.parent = transform;
+        haulable.transform.position = transform.position;
+        haulable.currentTask.spriteRenderer.enabled = false;
+
+        Vector3Int corePos = GridUtilities.WorldToCell(TilemapManager.instance.wallTilemap, FindObjectOfType<Core>().transform.position);
+        yield return StartCoroutine(MoveTo(corePos));
+
+        // Drop off haulable
+        haulable.Deposite();
+    }
+
     public IEnumerator MineWall(MineableWall mineableWall)
     {
         while (mineableWall.life > 0)
@@ -140,4 +172,6 @@ public class Miner : MoveableBase {
             yield return null;
         }
     }
+
+    
 }

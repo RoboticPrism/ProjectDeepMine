@@ -15,6 +15,8 @@ public class HoverManager : MonoBehaviour {
     WallActionBar wallActionBarInstance;
     public FactoryActionBar factoryActionBarPrefab;
     FactoryActionBar factoryActionBarInstance;
+    public HaulableActionBar haulableActionBarPrefab;
+    HaulableActionBar haulableActionBarInstance;
 
     [Header("Instance Connections")]
     public GameObject selectedIcon;
@@ -48,6 +50,7 @@ public class HoverManager : MonoBehaviour {
         EventManager.StartListening("TaskDestroyed", updateListener);
         EventManager.StartListening("BuildingSold", destroyedListener);
         EventManager.StartListening("WallDestroyed", destroyedListener);
+        EventManager.StartListening("HaulableDeposited", destroyedListener);
     } 
 
     // Update is called once per frame
@@ -119,6 +122,10 @@ public class HoverManager : MonoBehaviour {
                 {
                     Destroy(factoryActionBarInstance.gameObject);
                 }
+                if (haulableActionBarInstance)
+                {
+                    Destroy(haulableActionBarInstance.gameObject);
+                }
             }
             else
             {
@@ -131,6 +138,7 @@ public class HoverManager : MonoBehaviour {
                 // refresh building and wall action bars
                 BuildingBase buildingObject = taskable.GetComponent<BuildingBase>();
                 WallBase wallObject = taskable.GetComponent<WallBase>();
+                HaulableBase haulObject = taskable.GetComponent<HaulableBase>();
                 if (buildingObject)
                 {
                     if (buildingActionBarInstance)
@@ -167,6 +175,18 @@ public class HoverManager : MonoBehaviour {
                         wallActionBarInstance.Setup(wallObject);
                     }
                 }
+                else if (haulObject)
+                {
+                    if(haulableActionBarInstance)
+                    {
+                        haulableActionBarInstance.RefreshUI();
+                    }
+                    else
+                    {
+                        haulableActionBarInstance = Instantiate(haulableActionBarPrefab, transform);
+                        haulableActionBarInstance.Setup(haulObject);
+                    }
+                }
             }
         }
     }
@@ -186,11 +206,13 @@ public class HoverManager : MonoBehaviour {
 
         selectedObject = tile;
         selectedIcon.SetActive(true);
+        selectedIcon.transform.parent = selectedObject.transform;
         selectedIcon.transform.position = selectedObject.transform.position;
 
         BuildingBase buildingObject = tile.GetComponent<BuildingBase>();
         WallBase wallObject = tile.GetComponent<WallBase>();
-        if(buildingObject)
+        HaulableBase haulObject = tile.GetComponent<HaulableBase>();
+        if (buildingObject)
         {
             if(buildingObject.currentTask)
             {
@@ -223,11 +245,25 @@ public class HoverManager : MonoBehaviour {
                 wallActionBarInstance.Setup(wallObject);
             }
         }
+        else if (haulObject)
+        {
+            if (haulObject.currentTask)
+            {
+                taskActionBarInstance = Instantiate(taskActionBarPrefab, transform);
+                taskActionBarInstance.Setup(haulObject);
+            }
+            else
+            {
+                haulableActionBarInstance = Instantiate(haulableActionBarPrefab, transform);
+                haulableActionBarInstance.Setup(haulObject);
+            }
+        }
     }
 
     public void DeselectTile()
     {
         selectedObject = null;
+        selectedIcon.transform.parent = null;
         selectedIcon.SetActive(false);
         if (taskActionBarInstance)
         {
@@ -244,6 +280,10 @@ public class HoverManager : MonoBehaviour {
         if(factoryActionBarInstance)
         {
             Destroy(factoryActionBarInstance.gameObject);
+        }
+        if (haulableActionBarInstance)
+        {
+            Destroy(haulableActionBarInstance.gameObject);
         }
     }
 

@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 4097232291000314}
   - component: {fileID: 114270042729632122}
   m_Layer: 0
-  m_Name: TaskActions
+  m_Name: TaskActionBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

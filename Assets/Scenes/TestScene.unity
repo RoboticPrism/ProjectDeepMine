@@ -3648,6 +3648,18 @@ Prefab:
       propertyPath: m_AnchorMin.y
       value: 0.444
       objectReference: {fileID: 0}
+    - target: {fileID: 114363932525992446, guid: 6d6d05cf7cce23243a78424c98bd6600,
+        type: 2}
+      propertyPath: haulableActionBarPrefab
+      value: 
+      objectReference: {fileID: 114405333340690812, guid: f7994630487548148910c70caa88bc12,
+        type: 2}
+    - target: {fileID: 114887954717922422, guid: 6d6d05cf7cce23243a78424c98bd6600,
+        type: 2}
+      propertyPath: blueGemSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: aaa1ea2415022df4e9e7224f208219c6,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d6d05cf7cce23243a78424c98bd6600, type: 2}
   m_IsPrefabAsset: 0
