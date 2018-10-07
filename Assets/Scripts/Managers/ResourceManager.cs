@@ -90,6 +90,7 @@ public class ResourceManager : MonoBehaviour {
     {
         blueGemsCount += newGems;
         EventManager.TriggerEvent("ResourcesChanged");
+        EventManager.TriggerEvent("BlueGemsChanged");
         CreatePopupText(location, newGems, blueGemSprite);
     }
 

@@ -19,6 +19,6 @@ public class Core : BuildingBase {
     // Called when a building has been damaged enough to no longer function
     public override void OnBreak()
     {
-        // trigger gameover
+        VictoryManager.instance.TriggerDefeat();
     }
 }
