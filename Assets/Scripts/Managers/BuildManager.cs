@@ -4,22 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BuildManager : MonoBehaviour {
-    
+    [Header("Prefab Connections")]
     public BuildingBlueprint blueprintPrefab;
-    public BuildingBlueprint instantiatedBlueprint;
+    BuildingBlueprint instantiatedBlueprint;
 
-    public RectTransform menuParent;
-    public BuildMenuItem menuItemPrefab;
+    [Header("Instance Connections")]
+    public List<BuildMenu> buildMenus;
 
-    public List<BuildingBase> buildings;
-
+    [HideInInspector]
     public static BuildManager instance;
 
 	// Use this for initialization
 	protected void Start () {
         instance = this;
-        CreateMenuItems();
-	}
+        foreach (BuildMenu menu in buildMenus)
+        {
+            menu.openButton.onClick.AddListener(() => OpenBuildMenu(menu));
+        }
+
+    }
 	
 	// Update is called once per frame
 	protected void Update () {
@@ -36,23 +39,25 @@ public class BuildManager : MonoBehaviour {
         instantiatedBlueprint.SetupBlueprint(building);
     }
 
-    // creates a new menu item
-    public BuildMenuItem CreateMenuItem (BuildingBase buildingBase)
+    public void OpenBuildMenu(BuildMenu selectedMenu)
     {
-        BuildMenuItem item = Instantiate(menuItemPrefab, menuParent);
-        item.SetupItem(buildingBase, SelectBuild);
-        return item;
-    }
-
-    public void CreateMenuItems ()
-    {
-        int i = 0;
-        foreach (BuildingBase buildingBase in buildings)
+        if(selectedMenu.open)
         {
-            RectTransform rt = CreateMenuItem(buildingBase).GetComponent<RectTransform>();
-            rt.anchoredPosition = new Vector2(0, -90 - (i * 170));
-            i++;
+            selectedMenu.CloseMenu();
         }
-        menuParent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 20 + (i * 170));
+        else
+        {
+            foreach (BuildMenu menu in buildMenus)
+            {
+                if (menu == selectedMenu)
+                {
+                    menu.OpenMenu();
+                }
+                else
+                {
+                    menu.CloseMenu();
+                }
+            }
+        }
     }
 }

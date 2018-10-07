@@ -46,7 +46,6 @@ public class BuildMenuItem : MonoBehaviour {
     {
         bool canBuild = true;
             
-        
         if (buildingBase.oreCost <= ResourceManager.instance.oreCount)
         {
             oreCost.color = buildColor;
