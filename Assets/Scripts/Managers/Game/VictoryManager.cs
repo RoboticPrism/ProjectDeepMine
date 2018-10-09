@@ -12,11 +12,13 @@ public class VictoryManager : MonoBehaviour {
     public GameObject victoryMenu;
     public GameObject defeatMenu;
     public GameObject objectivesMenu;
+    public RectTransform objectivesZone;
 
     public enum victoryChaining { ANY, ALL };
     [Header("Victory Requirements")]
     public victoryChaining victoryType;
-    public List<VictoryBase> victoryConditions;
+    public List<ObjectiveBase> objectives;
+    public List<ObjectiveStatus> objectiveStatuses = new List<ObjectiveStatus>();
 
     bool victory = false;
     bool defeat = false;
@@ -24,7 +26,15 @@ public class VictoryManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         instance = this;
-	}
+        // TODO: UI scaling with multiple objectives
+        foreach (ObjectiveBase objective in objectives)
+        {
+            ObjectiveStatus status = Instantiate(objective.objectiveStatusPrefab, objectivesZone.transform);
+            status.Setup(objective);
+            objectiveStatuses.Add(status);
+        }
+
+    }
 	
     // Checks if the conditions to win are met and if so, triggers victory
     public void CheckVictory()
@@ -34,9 +44,9 @@ public class VictoryManager : MonoBehaviour {
         if (victoryType == victoryChaining.ALL)
         {
             victory = true;
-            foreach(VictoryBase victoryBase in victoryConditions)
+            foreach(ObjectiveStatus status in objectiveStatuses)
             {
-                if(!victoryBase.RequirementsMet())
+                if(!status.RequirementsMet())
                 {
                     victory = false;
                     break;
@@ -46,9 +56,9 @@ public class VictoryManager : MonoBehaviour {
         else
         {
             victory = false;
-            foreach (VictoryBase victoryBase in victoryConditions)
+            foreach (ObjectiveStatus status in objectiveStatuses)
             {
-                if (victoryBase.RequirementsMet())
+                if (status.RequirementsMet())
                 {
                     victory = true;
                     break;
