@@ -82,7 +82,7 @@ public class MoveableBase : MonoBehaviour {
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
-        while (Quaternion.Angle(moveableBody.transform.rotation, targetRotation) < 5) {
+        while (Quaternion.Angle(moveableBody.transform.rotation, targetRotation) > 5) {
             // Update target rotation in the event the target is moving
             vectorToTarget = targetLocation - (Vector2)transform.position;
             angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;

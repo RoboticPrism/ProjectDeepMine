@@ -135,6 +135,7 @@ public class Miner : MoveableBase {
 
         // Drop off haulable
         haulable.Deposite();
+        CompleteTask();
     }
 
     public IEnumerator MineWall(MineableWall mineableWall)
