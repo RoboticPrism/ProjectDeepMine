@@ -298,13 +298,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 200
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1-1 Starting Off
+  m_Text: "1-1 \nGetting Started"
 --- !u!222 &264570317
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -754,8 +754,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.1}
   m_AnchorMax: {x: 1, y: 0.7}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.05}
+  m_SizeDelta: {x: 0, y: -0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &690037145
 GameObject:
@@ -1548,7 +1548,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -0.79999995, y: 0}
+  m_SizeDelta: {x: -0.9, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1731305406
 MonoBehaviour:

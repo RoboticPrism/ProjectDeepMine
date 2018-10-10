@@ -54,6 +54,6 @@ MonoBehaviour:
   levelName: 1-1 Getting Started
   levelDescription: 
   levelPreview: {fileID: 0}
-  sceneName: 
+  sceneName: Level1-1
   objectives:
   - {fileID: 114636905788025018, guid: b0c0f2aeb8b8dc44e9f6fbcb321affeb, type: 2}
