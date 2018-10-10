@@ -36,6 +36,10 @@ public class MiningDrill : BuildingBase {
                 if (floorBase.resourceType == FloorBase.resourceTypes.ORE) {
                     ResourceManager.instance.AddOre(floorBase.MineResources(), floorBase.transform.position);
                 }
+                else if (floorBase.resourceType == FloorBase.resourceTypes.ENERGY_CRYSTAL)
+                {
+                    ResourceManager.instance.AddEnergyCrystals(floorBase.MineResources(), floorBase.transform.position);
+                }
             }
             else
             {

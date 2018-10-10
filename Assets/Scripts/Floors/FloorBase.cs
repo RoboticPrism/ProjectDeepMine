@@ -7,7 +7,7 @@ public class FloorBase : MonoBehaviour {
     public int resourcesPerHaul = 5;
     public bool buildable = true;
 
-    public enum resourceTypes { NONE, ORE };
+    public enum resourceTypes { NONE, ORE, ENERGY_CRYSTAL };
     public resourceTypes resourceType;
 
 	// Use this for initialization

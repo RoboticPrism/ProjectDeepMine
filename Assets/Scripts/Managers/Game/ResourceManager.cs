@@ -6,50 +6,39 @@ using UnityEngine.Events;
 
 public class ResourceManager : MonoBehaviour {
 
-    public int oreCount = 0;
     public int powerCount = 0;
     public int powerMax = 3;
-
+    public int oreCount = 0;
+    public int energyCrystalCount = 0;
+    
     public int blueGemsCount = 0;
 
     public float seismicActivity = 0; // This effects how fast waves occur
 
-    public Text oreText;
     public Text powerText;
+    public Text oreText;
+    public Text energyCrystalText;
 
     public static ResourceManager instance;
 
     public PopupText textPopupPrefab;
-    public Sprite oreSprite;
     public Sprite powerSprite;
+    public Sprite oreSprite;
+    public Sprite energyCrystalSprite;
     public Sprite blueGemSprite;
 
     // Use this for initialization
     void Start () {
         instance = this;
-        SetOre(oreCount);
         SetPower(powerCount);
+        SetOre(oreCount);
+        SetEnergyCrystal(energyCrystalCount);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
-    public void SetOre(int newOreCount)
-    {
-        oreCount = newOreCount;
-        oreText.text = oreCount.ToString();
-        EventManager.TriggerEvent("ResourcesChanged");
-    }
-
-    public void AddOre(int newOre, Vector3 location)
-    {
-        oreCount += newOre;
-        oreText.text = oreCount.ToString();
-        EventManager.TriggerEvent("ResourcesChanged");
-        CreatePopupText(location, newOre, oreSprite);
-    }
 
     public void SetPower(int newPowerCount)
     {
@@ -84,6 +73,36 @@ public class ResourceManager : MonoBehaviour {
     public int PowerAvailable()
     {
         return powerMax - powerCount;
+    }
+
+    public void SetOre(int newOreCount)
+    {
+        oreCount = newOreCount;
+        oreText.text = oreCount.ToString();
+        EventManager.TriggerEvent("ResourcesChanged");
+    }
+
+    public void AddOre(int newOre, Vector3 location)
+    {
+        oreCount += newOre;
+        oreText.text = oreCount.ToString();
+        EventManager.TriggerEvent("ResourcesChanged");
+        CreatePopupText(location, newOre, oreSprite);
+    }
+
+    public void SetEnergyCrystal(int newCrystalCount)
+    {
+        energyCrystalCount = newCrystalCount;
+        energyCrystalText.text = energyCrystalCount.ToString();
+        EventManager.TriggerEvent("ResourcesChanged");
+    }
+
+    public void AddEnergyCrystals(int newCrystalCount, Vector3 location)
+    {
+        energyCrystalCount += newCrystalCount;
+        energyCrystalText.text = energyCrystalCount.ToString();
+        EventManager.TriggerEvent("ResourcesChanged");
+        CreatePopupText(location, newCrystalCount, energyCrystalSprite);
     }
 
     public void AddBlueGems(int newGems, Vector3 location)
