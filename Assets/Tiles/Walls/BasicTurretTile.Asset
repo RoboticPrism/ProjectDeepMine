@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d30ab45cfa87bd41ac03705c084b1ee, type: 3}
   m_Name: BasicTurretTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: eff179241b98513439967e68e55087ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d642e67d47d4ae4e8dbdacdda957beb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
