@@ -56,4 +56,9 @@ public class MinerTask : Task {
         owner = null;
         DestroySelf();
     }
+
+    public virtual bool CanMinerDo(Miner miner)
+    {
+        return true;
+    }
 }

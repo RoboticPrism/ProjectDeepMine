@@ -44,13 +44,13 @@ public class MinerManager : MonoBehaviour {
         return null;
     }
 
-    // Selects the next idle worker available nearest to the location
-    Miner NextAvailableMiner(Vector3 location)
+    // Selects the next idle worker available nearest to the location capable of performing the given task
+    Miner NextAvailableMinerForTask(Vector3 location, MinerTask task)
     {
         Miner retMiner = null;
         foreach (Miner miner in minerList)
         {
-            if (miner.currentTask == null)
+            if (miner.currentTask == null && task.CanMinerDo(miner))
             {
                 if (retMiner != null)
                 {
@@ -85,27 +85,30 @@ public class MinerManager : MonoBehaviour {
     }
 
     // Forcibly selects the miner closest to a location, even if its busy
-    Miner NextMiner(Vector3 location)
+    Miner NextMinerForTask(Vector3 location, MinerTask task)
     {
         Miner retMiner = null;
-        retMiner = NextAvailableMiner(location);
+        retMiner = NextAvailableMinerForTask(location, task);
         if (retMiner)
         {
             return retMiner;
         }
         foreach (Miner miner in minerList)
         {
-            if (retMiner != null)
+            if (task.CanMinerDo(miner))
             {
-                // TODO: experiment with using AStar distance calcs instead
-                if (Vector3.Distance(miner.transform.position, location) < Vector3.Distance(retMiner.transform.position, location))
+                if (retMiner != null)
+                {
+                    // TODO: experiment with using AStar distance calcs instead
+                    if (Vector3.Distance(miner.transform.position, location) < Vector3.Distance(retMiner.transform.position, location))
+                    {
+                        retMiner = miner;
+                    }
+                }
+                else
                 {
                     retMiner = miner;
                 }
-            }
-            else
-            {
-                retMiner = miner;
             }
         }
         return retMiner;
@@ -125,19 +128,26 @@ public class MinerManager : MonoBehaviour {
 
     public void ForceTask(MinerTask task, Miner miner)
     {
-        if (miner.currentTask)
+        if (miner)
         {
-            DeselectTask(miner.currentTask);
+            if (miner.currentTask)
+            {
+                DeselectTask(miner.currentTask);
+            }
+            task.Queue();
+            miner.SwapTask(task);
+            if (queuedTaskList.Contains(task))
+            {
+                queuedTaskList.Remove(task);
+            }
+            if (!selectedTaskList.Contains(task))
+            {
+                selectedTaskList.Add(task);
+            }
         }
-        task.Queue();
-        miner.SwapTask(task);
-        if (queuedTaskList.Contains(task))
+        else
         {
-            queuedTaskList.Remove(task);
-        }
-        if (!selectedTaskList.Contains(task))
-        {
-            selectedTaskList.Add(task);
+            //TODO: notify user that no workers can do this task
         }
     }
 
@@ -159,7 +169,7 @@ public class MinerManager : MonoBehaviour {
     // TODO select a unit to perform the task right now better
     public void DoTaskNow(MinerTask task)
     {
-        ForceTask(task, NextMiner(task.TargetLocation()));
+        ForceTask(task, NextMinerForTask(task.TargetLocation(), task));
     }
 
     // Forcible removes the task early
@@ -184,18 +194,18 @@ public class MinerManager : MonoBehaviour {
     }
 
     // Returns the next task and moves it from the queue to selected
-    public MinerTask GrabNextTask()
+    public MinerTask GrabNextTask(Miner miner)
     {
-        if (queuedTaskList.Count > 0)
+        foreach (MinerTask task in queuedTaskList)
         {
-            MinerTask nextTask = queuedTaskList[0];
-            queuedTaskList.Remove(nextTask);
-            selectedTaskList.Add(nextTask);
-            return nextTask;
+            if(task.CanMinerDo(miner))
+            {
+                MinerTask nextTask = queuedTaskList[0];
+                queuedTaskList.Remove(nextTask);
+                selectedTaskList.Add(nextTask);
+                return nextTask;
+            }
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
 }

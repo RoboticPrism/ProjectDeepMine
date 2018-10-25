@@ -15,4 +15,9 @@ public class MineTask : MinerTask {
     {
         miner.StartCoroutine(miner.MineTask(this.target.GetComponent<MineableWall>()));
     }
+
+    public override bool CanMinerDo(Miner miner)
+    {
+        return miner.mineableWallTypes.Contains(this.target.GetComponent<MineableWall>().type);
+    }
 }

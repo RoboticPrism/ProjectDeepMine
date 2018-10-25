@@ -10,6 +10,8 @@ public class Miner : MoveableBase {
 
     public MinerTask currentTask;
 
+    public List<MineableWall.wallType> mineableWallTypes;
+
     // Use this for initialization
     void Start () {
         MinerManager.instance.AddMiner(this);
@@ -29,7 +31,7 @@ public class Miner : MoveableBase {
     {
         if(currentTask == null)
         {
-            StartTask(MinerManager.instance.GrabNextTask());
+            StartTask(MinerManager.instance.GrabNextTask(this));
         }
     }
 
