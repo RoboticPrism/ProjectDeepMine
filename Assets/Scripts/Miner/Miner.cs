@@ -143,7 +143,7 @@ public class Miner : MoveableBase {
         while (mineableWall.life > 0)
         {
             mineableWall.MineWall(mineSpeed);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -152,7 +152,7 @@ public class Miner : MoveableBase {
         while (building.buildAmount < building.buildMax)
         {
             building.AddConstruction(buildSpeed);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -161,7 +161,7 @@ public class Miner : MoveableBase {
         while (building.life < building.lifeMax)
         {
             building.AddLife(buildSpeed);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -170,9 +170,7 @@ public class Miner : MoveableBase {
         while (building.buildAmount > 0)
         {
             building.AddConstruction(-buildSpeed);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
-
-    
 }

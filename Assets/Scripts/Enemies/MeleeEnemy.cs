@@ -50,7 +50,7 @@ public class MeleeEnemy : EnemyBase {
             {
                 attackCooldown += attackSpeed;
             }
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 }

@@ -69,7 +69,7 @@ public class MoveableBase : MonoBehaviour {
                     moveableBody.transform.rotation = targetRotation;
                 }
 
-                yield return null;
+                yield return new WaitForFixedUpdate();
             }
             transform.position = pathTargetLocation;
             pathToTarget.RemoveAt(0);
@@ -89,7 +89,7 @@ public class MoveableBase : MonoBehaviour {
             targetRotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
             moveableBody.transform.rotation = Quaternion.Slerp(moveableBody.transform.rotation, targetRotation, rotationSpeed);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         moveableBody.transform.rotation = targetRotation;
     }
