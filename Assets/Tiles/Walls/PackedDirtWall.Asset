@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d30ab45cfa87bd41ac03705c084b1ee, type: 3}
-  m_Name: IndestructibleWall
+  m_Name: PackedDirtWall
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 1c307ad2b0b26e543b232c5389a720c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4fcf10937d9e54c46ad691a05fe9dfd5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -30,9 +30,9 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 1345919295657736, guid: d3ee77a64bc800f41ad1f53a484e4808,
+  m_InstancedGameObject: {fileID: 1562638575803814, guid: 3558c5ef85d22334ca0c3b4f89d31b85,
     type: 2}
   m_Flags: 1
   m_ColliderType: 1
   PrefabLocalOffset: 0.5
-  prefabZOffset: 0
+  prefabZOffset: -1

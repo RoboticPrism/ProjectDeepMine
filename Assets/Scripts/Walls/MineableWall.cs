@@ -13,7 +13,7 @@ public class MineableWall : WallBase {
     public float life = 100f;
     public float lifeMax = 100f;
 
-    public enum wallType { dirt, stone };
+    public enum wallType { Dirt, PackedDirt, LooseStone, Stone };
     public wallType type;
 
     [Header("Prefab Connections")]
