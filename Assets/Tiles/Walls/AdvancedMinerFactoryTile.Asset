@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d30ab45cfa87bd41ac03705c084b1ee, type: 3}
-  m_Name: DirtWallTile
+  m_Name: AdvancedMinerFactoryTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 267cde338616b1a45b90549f5fca0b29, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 052ed19fa670cf7418845d5c6fc91e00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -30,9 +30,9 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 1426092684848844, guid: 9ec924a96d0da894fa717c3847c12f68,
+  m_InstancedGameObject: {fileID: 1922942883495994, guid: 90eb5179e729a2d4d87fe59b29df5ebb,
     type: 2}
   m_Flags: 1
-  m_ColliderType: 2
+  m_ColliderType: 1
   PrefabLocalOffset: 0.5
-  prefabZOffset: 0
+  prefabZOffset: -1

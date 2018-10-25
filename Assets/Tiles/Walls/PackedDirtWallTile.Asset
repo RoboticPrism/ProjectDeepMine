@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d30ab45cfa87bd41ac03705c084b1ee, type: 3}
-  m_Name: PackedDirtWall
+  m_Name: PackedDirtWallTile
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 4fcf10937d9e54c46ad691a05fe9dfd5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

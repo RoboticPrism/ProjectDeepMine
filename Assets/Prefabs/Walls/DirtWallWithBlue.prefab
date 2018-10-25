@@ -155,7 +155,7 @@ MonoBehaviour:
     type: 2}
   unknownSprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}
   innerCornerSprite: {fileID: 0}
-  wallSprite: {fileID: 21300000, guid: 7f7c8acd54d7ac04a9913a474d992d55, type: 3}
+  wallSprite: {fileID: 21300000, guid: 267cde338616b1a45b90549f5fca0b29, type: 3}
   outerCornerSprite: {fileID: 0}
   pillarSprite: {fileID: 0}
   isAlive: 1
@@ -214,7 +214,7 @@ SpriteRenderer:
   m_SortingLayerID: 1120871755
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7f7c8acd54d7ac04a9913a474d992d55, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 267cde338616b1a45b90549f5fca0b29, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
