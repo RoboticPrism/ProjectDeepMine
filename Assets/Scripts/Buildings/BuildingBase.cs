@@ -82,6 +82,7 @@ public abstract class BuildingBase : TaskableBase {
         {
             Debug.Log("sell");
             OnSell();
+            return;
         }
         UpdateBuildBar();
     }
