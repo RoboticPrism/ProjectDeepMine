@@ -13,6 +13,7 @@ public class BuildMenuItem : MonoBehaviour {
     public delegate void Action(BuildingBase buildingBase);
 
     public Text oreCost;
+    public Text crystalCost;
     public Text powerCost;
 
     public Color buildColor;
@@ -37,8 +38,30 @@ public class BuildMenuItem : MonoBehaviour {
         this.text.text = buildingBase.GetComponent<HoverInfo>().displayName;
         this.image.sprite = buildingBase.GetComponent<SpriteRenderer>().sprite;
         this.buildingBase = buildingBase;
-        this.oreCost.text = buildingBase.oreCost.ToString();
-        this.powerCost.text = buildingBase.powerCost.ToString();
+        if (buildingBase.oreCost == 0)
+        {
+            this.oreCost.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.oreCost.text = buildingBase.oreCost.ToString();
+        }
+        if (buildingBase.crystalCost == 0)
+        {
+            this.crystalCost.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.crystalCost.text = buildingBase.crystalCost.ToString();
+        }
+        if (buildingBase.powerCost == 0)
+        {
+            this.powerCost.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.powerCost.text = buildingBase.powerCost.ToString();
+        }
         this.button.onClick.AddListener(delegate { action(buildingBase); });
     }
 

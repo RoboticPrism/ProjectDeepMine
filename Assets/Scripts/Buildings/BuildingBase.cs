@@ -21,6 +21,7 @@ public abstract class BuildingBase : TaskableBase {
     
     [Header("Costs")]
     public int oreCost = 1;
+    public int crystalCost = 1;
     public int powerCost = 1;
     public float seismicOutput = 0f;
 

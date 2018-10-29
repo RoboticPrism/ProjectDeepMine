@@ -168,6 +168,7 @@ MonoBehaviour:
   broken: 0
   built: 0
   oreCost: 10
+  crystalCost: 0
   powerCost: 1
   seismicOutput: 0
   healthBarPrefab: {fileID: 114595616249524122, guid: 96df83764b49de344bff03ec513c1df7,

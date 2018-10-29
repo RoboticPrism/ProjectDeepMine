@@ -197,17 +197,7 @@ Prefab:
     - target: {fileID: 224704570217345780, guid: 6d6d05cf7cce23243a78424c98bd6600,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.53499997
-      objectReference: {fileID: 0}
-    - target: {fileID: 224470294427156734, guid: 6d6d05cf7cce23243a78424c98bd6600,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0.53499997
-      objectReference: {fileID: 0}
-    - target: {fileID: 114610892581045412, guid: 6d6d05cf7cce23243a78424c98bd6600,
-        type: 2}
-      propertyPath: waveTimeMax
-      value: 300
+      value: 0.566
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d6d05cf7cce23243a78424c98bd6600, type: 2}

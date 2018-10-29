@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d30ab45cfa87bd41ac03705c084b1ee, type: 3}
   m_Name: PowerPlantTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 052ed19fa670cf7418845d5c6fc91e00, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad593b44799875f448952a7e71548fb2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
