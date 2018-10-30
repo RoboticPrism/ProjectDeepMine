@@ -143,6 +143,8 @@ MonoBehaviour:
   mineSpeed: 1
   miningNeeded: 100
   currentMining: 0
+  outOfResourcesPrefab: {fileID: 114864347308390940, guid: 4d8f11a9968e67448aba958ca587ef41,
+    type: 2}
 --- !u!114 &114851519027809574
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -11,6 +11,11 @@ public class MiningDrill : BuildingBase {
     public float miningNeeded = 100f;
     public float currentMining = 0f;
 
+    [Header("Prefab Connections")]
+    [SerializeField]
+    OutOfResources outOfResourcesPrefab;
+    OutOfResources outOfResourcesInstance;
+
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
@@ -28,22 +33,34 @@ public class MiningDrill : BuildingBase {
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (!broken && built && floorBase && floorBase.resourceCount > 0)
+        if (!broken && built && floorBase)
         {
-            if(currentMining >= miningNeeded)
+            if (floorBase.HasResources())
             {
-                currentMining = 0;
-                if (floorBase.resourceType == FloorBase.resourceTypes.ORE) {
-                    ResourceManager.instance.AddOre(floorBase.MineResources(), floorBase.transform.position);
-                }
-                else if (floorBase.resourceType == FloorBase.resourceTypes.ENERGY_CRYSTAL)
+                if (currentMining >= miningNeeded)
                 {
-                    ResourceManager.instance.AddEnergyCrystals(floorBase.MineResources(), floorBase.transform.position);
+                    currentMining = 0;
+                    if (floorBase.resourceType == FloorBase.resourceTypes.ORE)
+                    {
+                        ResourceManager.instance.AddOre(floorBase.MineResources(), floorBase.transform.position);
+                    }
+                    else if (floorBase.resourceType == FloorBase.resourceTypes.ENERGY_CRYSTAL)
+                    {
+                        ResourceManager.instance.AddEnergyCrystals(floorBase.MineResources(), floorBase.transform.position);
+                    }
+                }
+                else
+                {
+                    currentMining += mineSpeed;
                 }
             }
             else
             {
-                currentMining += mineSpeed;
+                if(outOfResourcesInstance == null)
+                {
+                    outOfResourcesInstance = Instantiate(outOfResourcesPrefab, transform);
+                    outOfResourcesInstance.Setup(floorBase.resourceIcon);
+                }
             }
         }
     }
@@ -60,5 +77,11 @@ public class MiningDrill : BuildingBase {
         {
             return false;
         }
+    }
+
+    public override void OnDeconstruct()
+    {
+        base.OnDeconstruct();
+        outOfResourcesInstance.gameObject.SetActive(false);
     }
 }

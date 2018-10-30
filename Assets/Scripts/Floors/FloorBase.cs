@@ -10,6 +10,8 @@ public class FloorBase : MonoBehaviour {
     public enum resourceTypes { NONE, ORE, ENERGY_CRYSTAL };
     public resourceTypes resourceType;
 
+    public Sprite resourceIcon;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -36,5 +38,10 @@ public class FloorBase : MonoBehaviour {
         {
             return 0;
         }
+    }
+
+    public bool HasResources()
+    {
+        return resourceCount > 0;
     }
 }
