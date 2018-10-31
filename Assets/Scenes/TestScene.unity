@@ -194,10 +194,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 224704570217345780, guid: 6d6d05cf7cce23243a78424c98bd6600,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0.566
+    - target: {fileID: 1761063266145996, guid: 6d6d05cf7cce23243a78424c98bd6600, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d6d05cf7cce23243a78424c98bd6600, type: 2}

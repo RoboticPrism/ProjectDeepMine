@@ -25,9 +25,18 @@ public class HoverManager : MonoBehaviour {
     TaskableBase selectedObject;
 
     [Header("UI Connections")]
-    public Text itemName;
-    public Text itemDescription;
-    public Image itemImage;
+    [SerializeField]
+    Text itemName;
+    [SerializeField]
+    Text itemDescription;
+    [SerializeField]
+    Image itemImage;
+    [SerializeField]
+    GameObject resourcesPanel;
+    [SerializeField]
+    Image resourceIcon;
+    [SerializeField]
+    Text resourceText;
 
     public Sprite unknownSprite;
 
@@ -289,15 +298,35 @@ public class HoverManager : MonoBehaviour {
 
     private void UpdateDisplay()
     {
-        if(selectedObject)
+        GameObject displayObject = null;
+        if (selectedObject)
         {
-            HoverInfo hoveredInfo = selectedObject.GetComponent<HoverInfo>();
+            displayObject = selectedObject.gameObject;
+        } else if (hoveredObject)
+        {
+            displayObject = hoveredObject;
+        }
+
+        if (displayObject)
+        {
+            HoverInfo hoveredInfo = displayObject.GetComponent<HoverInfo>();
+            ResourcesHoverInfo resourcesHoverInfo = displayObject.GetComponent<ResourcesHoverInfo>();
 
             if (hoveredInfo && hoveredInfo.visible)
             {
                 itemName.text = hoveredInfo.displayName;
                 itemImage.sprite = hoveredInfo.sprite;
                 itemDescription.text = hoveredInfo.description;
+                if (resourcesHoverInfo != null)
+                {
+                    resourceIcon.sprite = resourcesHoverInfo.GetResourceIcon();
+                    resourceText.text = resourcesHoverInfo.GetResourceCount().ToString();
+                    resourcesPanel.SetActive(true);
+                }
+                else
+                {
+                    resourcesPanel.SetActive(false);
+                }
             }
             else
             {
@@ -306,22 +335,6 @@ public class HoverManager : MonoBehaviour {
                 itemDescription.text = "This area has yet to be discovered.";
             }
         }
-        else if (hoveredObject)
-        {
-            HoverInfo hoveredInfo = hoveredObject.GetComponent<HoverInfo>();
-
-            if (hoveredInfo && hoveredInfo.visible)
-            {
-                itemName.text = hoveredInfo.displayName;
-                itemImage.sprite = hoveredInfo.sprite;
-                itemDescription.text = hoveredInfo.description;
-            }
-            else
-            {
-                itemName.text = "Unknown";
-                itemImage.sprite = unknownSprite;
-                itemDescription.text = "This area has yet to be discovered.";
-            }
-        }
+        
     }
 }

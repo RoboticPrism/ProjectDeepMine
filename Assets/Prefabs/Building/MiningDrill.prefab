@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4947582870957704}
   - component: {fileID: 114772929080669658}
-  - component: {fileID: 114104902801072516}
+  - component: {fileID: 114114492981316036}
   - component: {fileID: 114851519027809574}
   - component: {fileID: 212709522468490226}
   - component: {fileID: 61943160024132320}
@@ -90,7 +90,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114104902801072516
+--- !u!114 &114114492981316036
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,13 +98,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1079215909892644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 76f54852f3ac0e849b215a809b7c29d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   visible: 1
   displayName: Mining Drill
   sprite: {fileID: 21300000, guid: 6a5943ae920e87c43a21e64ac5594d20, type: 3}
   description: Extracts ore from whatever it is built atop of.
+  resourceHolder: {fileID: 0}
 --- !u!114 &114772929080669658
 MonoBehaviour:
   m_ObjectHideFlags: 1

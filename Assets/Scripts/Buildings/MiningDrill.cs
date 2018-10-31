@@ -22,6 +22,7 @@ public class MiningDrill : BuildingBase {
         floorTilemap = FindObjectOfType<TilemapManager>().floorTilemap;
         Vector3Int tileLoc = floorTilemap.WorldToCell(this.transform.position);
         floorBase = floorTilemap.GetInstantiatedObject(tileLoc).GetComponent<FloorBase>();
+        GetComponent<ResourcesHoverInfo>().resourceHolder = floorBase.gameObject;
 	}
 	
 	// Update is called once per frame

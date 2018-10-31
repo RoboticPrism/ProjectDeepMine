@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4631830421857540}
   - component: {fileID: 114583939303147888}
-  - component: {fileID: 114476165559549272}
+  - component: {fileID: 114574917202472572}
   - component: {fileID: 212766713080606402}
   m_Layer: 0
   m_Name: OreFloor
@@ -42,7 +42,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114476165559549272
+--- !u!114 &114574917202472572
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,13 +50,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1006737955067496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 76f54852f3ac0e849b215a809b7c29d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   visible: 1
   displayName: Ore Floor
   sprite: {fileID: 21300000, guid: 4501ff4fddd92d944bf99f877a36de59, type: 3}
   description: Floor filled with ore.  Build a mining drill here to extract the ore.
+  resourceHolder: {fileID: 1006737955067496}
 --- !u!114 &114583939303147888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,6 +74,9 @@ MonoBehaviour:
   buildable: 1
   resourceType: 1
   resourceIcon: {fileID: 21300000, guid: 9dc4b7b28a302784b9e1465f9988e285, type: 3}
+  outOfResourcesSprite: {fileID: 21300000, guid: 018680f15b5db284d9626dd893162da1,
+    type: 3}
+  spriteRenderer: {fileID: 212766713080606402}
 --- !u!212 &212766713080606402
 SpriteRenderer:
   m_ObjectHideFlags: 1
