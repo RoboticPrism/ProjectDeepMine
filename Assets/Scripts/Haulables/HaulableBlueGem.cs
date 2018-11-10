@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HaulableBlueGem : HaulableBase {
-    public override void Deposite()
+    public override void Deposit()
     {
         ResourceManager.instance.AddBlueGems(value, this.transform.position);
-        base.Deposite();
+        base.Deposit();
     }
 }

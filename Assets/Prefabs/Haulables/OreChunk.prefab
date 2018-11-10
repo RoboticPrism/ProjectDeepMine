@@ -96,9 +96,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickable: 1
   currentTask: {fileID: 0}
+  value: 5
   haulTaskPrefab: {fileID: 114546155222861774, guid: 70c9b7fe2367b4242ab04aa52d7458dc,
     type: 2}
-  value: 5
+  spriteRenderer: {fileID: 212899417049517700}
 --- !u!212 &212899417049517700
 SpriteRenderer:
   m_ObjectHideFlags: 1

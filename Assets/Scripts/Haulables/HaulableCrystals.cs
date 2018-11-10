@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HaulableCrystals : HaulableBase {
-    public override void Deposite()
+    public override void Deposit()
     {
         ResourceManager.instance.AddEnergyCrystals(value, this.transform.position);
-        base.Deposite();
+        base.Deposit();
     }
 }

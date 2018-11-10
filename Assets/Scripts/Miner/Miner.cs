@@ -65,11 +65,7 @@ public class Miner : MoveableBase {
         HaulableBase haulable = GetComponentInChildren<HaulableBase>();
         if (haulable)
         {
-            haulable.transform.parent = null;
-            haulable.transform.position = new Vector2(
-
-                Mathf.Round(haulable.transform.position.x) + 0.5f,
-                Mathf.Round(haulable.transform.position.y) + 0.5f);
+            haulable.Drop();
         }
     }
 
@@ -128,15 +124,14 @@ public class Miner : MoveableBase {
         yield return StartCoroutine(MoveTo(gridPos));
 
         // Pick up haulable
-        haulable.transform.parent = transform;
-        haulable.transform.position = transform.position;
+        haulable.Pickup(this.gameObject);
         haulable.currentTask.spriteRenderer.enabled = false;
 
         Vector3Int corePos = GridUtilities.WorldToCell(TilemapManager.instance.wallTilemap, FindObjectOfType<Core>().transform.position);
         yield return StartCoroutine(MoveTo(corePos));
 
         // Drop off haulable
-        haulable.Deposite();
+        haulable.Deposit();
         CompleteTask();
     }
 

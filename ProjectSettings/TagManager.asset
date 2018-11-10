@@ -56,6 +56,9 @@ TagManager:
   - name: Actors
     uniqueID: 2347939307
     locked: 0
+  - name: Hauling
+    uniqueID: 2122577333
+    locked: 0
   - name: Diegetic UI
     uniqueID: 3066895571
     locked: 0
