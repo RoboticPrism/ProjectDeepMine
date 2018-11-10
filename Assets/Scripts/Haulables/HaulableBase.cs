@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HaulableBase : TaskableBase {
-
+    [SerializeField]
     public HaulTask haulTaskPrefab;
-    public int value = 5;
+    [SerializeField]
+    protected int value = 5;
 
-    public void Deposite()
+    public virtual void Deposite()
     {
-        ResourceManager.instance.AddBlueGems(value, this.transform.position);
         EventManager.TriggerEvent("HaulableDeposited", this);
         DestroySelf();
     }

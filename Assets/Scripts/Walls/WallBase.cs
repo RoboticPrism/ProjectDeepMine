@@ -126,10 +126,12 @@ public abstract class WallBase : TaskableBase {
         if (IsSurrounded(true))
         {
             spriteRenderer.sprite = unknownSprite;
+            spriteRenderer.sortingLayerName = "Hidden";
         }
         else
         {
             spriteRenderer.sprite = wallSprite;
+            spriteRenderer.sortingLayerName = "Wall";
         }
     }
 

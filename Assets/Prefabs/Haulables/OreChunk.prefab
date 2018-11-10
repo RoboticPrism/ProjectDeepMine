@@ -9,33 +9,33 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1843440204131446}
+  m_RootGameObject: {fileID: 1840104231642390}
   m_IsPrefabAsset: 1
---- !u!1 &1843440204131446
+--- !u!1 &1840104231642390
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4300834463925264}
-  - component: {fileID: 114724917233576160}
-  - component: {fileID: 114991378456216570}
-  - component: {fileID: 212350957498718618}
-  - component: {fileID: 61545388556206842}
+  - component: {fileID: 4870354441675646}
+  - component: {fileID: 114752620384615040}
+  - component: {fileID: 114688629385582748}
+  - component: {fileID: 212899417049517700}
+  - component: {fileID: 61988130820949230}
   m_Layer: 8
-  m_Name: BlueGem
+  m_Name: OreChunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4300834463925264
+--- !u!4 &4870354441675646
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1843440204131446}
+  m_GameObject: {fileID: 1840104231642390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -43,12 +43,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61545388556206842
+--- !u!61 &61988130820949230
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1843440204131446}
+  m_GameObject: {fileID: 1840104231642390}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -68,15 +68,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114724917233576160
+--- !u!114 &114688629385582748
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1843440204131446}
+  m_GameObject: {fileID: 1840104231642390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90b730df94eaadb43a2c4477e9bfc4f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 1
+  displayName: Ore Chunk
+  sprite: {fileID: 21300000, guid: 9a708f651076d664fb11db3acd135f36, type: 3}
+  description: A large chunk of ore.  Deposite to collect it immediately.
+--- !u!114 &114752620384615040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1840104231642390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4759f1cd5a6c92f4f8fe8f3921031d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clickable: 1
@@ -84,27 +99,12 @@ MonoBehaviour:
   haulTaskPrefab: {fileID: 114546155222861774, guid: 70c9b7fe2367b4242ab04aa52d7458dc,
     type: 2}
   value: 5
---- !u!114 &114991378456216570
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1843440204131446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5749a830d40b01142a7672970a3af9f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visible: 1
-  displayName: Blue Gem
-  sprite: {fileID: 21300000, guid: aaa1ea2415022df4e9e7224f208219c6, type: 3}
-  description: A big blue gem.  Haul it to your core to deposite it.
---- !u!212 &212350957498718618
+--- !u!212 &212899417049517700
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1843440204131446}
+  m_GameObject: {fileID: 1840104231642390}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -134,7 +134,7 @@ SpriteRenderer:
   m_SortingLayerID: 1120871755
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: aaa1ea2415022df4e9e7224f208219c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a708f651076d664fb11db3acd135f36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

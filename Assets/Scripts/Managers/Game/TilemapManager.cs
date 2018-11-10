@@ -7,6 +7,7 @@ public class TilemapManager : MonoBehaviour {
 
     public Tilemap wallTilemap;
     public Tilemap floorTilemap;
+    public Tilemap depositTilemap;
 
     public static TilemapManager instance;
 

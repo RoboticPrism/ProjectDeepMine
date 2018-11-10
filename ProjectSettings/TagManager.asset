@@ -47,6 +47,12 @@ TagManager:
   - name: Wall
     uniqueID: 1120871755
     locked: 0
+  - name: Deposit
+    uniqueID: 379161979
+    locked: 0
+  - name: Hidden
+    uniqueID: 3781487659
+    locked: 0
   - name: Actors
     uniqueID: 2347939307
     locked: 0

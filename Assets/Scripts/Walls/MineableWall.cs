@@ -64,7 +64,6 @@ public class MineableWall : WallBase {
 
     void OnWallDestroy()
     {
-        EventManager.TriggerEvent("WallDestroyed", this);
         if (dropObjectPrefab)
         {
             Instantiate(dropObjectPrefab, transform.position, Quaternion.Euler(Vector3.zero));
