@@ -30,7 +30,6 @@ public class DepositBase : MonoBehaviour {
 
     void DestroySelf()
     {
-        Debug.Log("destroy");
         Instantiate(chunkPrefab, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
     }
