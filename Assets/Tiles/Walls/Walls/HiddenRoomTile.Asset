@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -12,7 +13,7 @@ MonoBehaviour:
   m_Name: HiddenRoomTile
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 2c2f33bdd2bded04d9c365df6d0564cc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.42745098}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -31,7 +32,7 @@ MonoBehaviour:
     e32: 0
     e33: 1
   m_InstancedGameObject: {fileID: 1785513990241132, guid: 8a0a4068e99f95042a6fb20a113bdb21,
-    type: 2}
+    type: 3}
   m_Flags: 1
   m_ColliderType: 1
   PrefabLocalOffset: 0.5
